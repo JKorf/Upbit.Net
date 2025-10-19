@@ -1,0 +1,1605 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Upbit.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi">
+            <inheritdoc cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi" />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.Account">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.Trading">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.SharedClient">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiAccount">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetSymbolsAsync(System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetSymbolConfigAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi">
+            <summary>
+            Client providing access to the Upbit Spot websocket Api
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.#ctor(Microsoft.Extensions.Logging.ILogger,Upbit.Net.Objects.Options.UpbitSocketOptions)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SharedClient">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.UpbitRestClient">
+            <inheritdoc cref="T:Upbit.Net.Interfaces.Clients.IUpbitRestClient" />
+        </member>
+        <member name="P:Upbit.Net.Clients.UpbitRestClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitRestClient.#ctor(System.Action{Upbit.Net.Objects.Options.UpbitRestOptions})">
+            <summary>
+            Create a new instance of the UpbitRestClient using provided options
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Upbit.Net.Objects.Options.UpbitRestOptions})">
+            <summary>
+            Create a new instance of the UpbitRestClient using provided options
+            </summary>
+            <param name="options">Option configuration</param>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="httpClient">Http client for this client</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitRestClient.SetDefaultOptions(System.Action{Upbit.Net.Objects.Options.UpbitRestOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.UpbitSocketClient">
+            <inheritdoc cref="T:Upbit.Net.Interfaces.Clients.IUpbitSocketClient" />
+        </member>
+        <member name="P:Upbit.Net.Clients.UpbitSocketClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitSocketClient.#ctor(System.Action{Upbit.Net.Objects.Options.UpbitSocketOptions})">
+            <summary>
+            Create a new instance of UpbitSocketClient
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitSocketClient.#ctor(Microsoft.Extensions.Options.IOptions{Upbit.Net.Objects.Options.UpbitSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of UpbitSocketClient
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="options">Option configuration</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitSocketClient.SetDefaultOptions(System.Action{Upbit.Net.Objects.Options.UpbitSocketOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Clients.UpbitUserClientProvider">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.#ctor(System.Action{Upbit.Net.Objects.Options.UpbitOptions})">
+            <summary>
+            ctor
+            </summary>
+            <param name="optionsDelegate">Options to use for created clients</param>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Upbit.Net.Objects.Options.UpbitRestOptions},Microsoft.Extensions.Options.IOptions{Upbit.Net.Objects.Options.UpbitSocketOptions})">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.ClearUserClients(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.GetSocketClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Boolean">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Decimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.NullableDecimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.DateTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.NullableDateTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.ChangeSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.OrderSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.StreamType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SocketRequest">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SocketTicket">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitKline">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitKlineArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBook">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBookArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBookEntry">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBookEntryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbol">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbolArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbolAlerts">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbolConfig">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbolConfigArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitSymbolEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTicker">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTickerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTrade">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTradeUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Int32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.NullableInt32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Int32Array">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Int64">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.NullableInt64">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Object">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.ObjectArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.String">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.StringArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Default">
+            <summary>
+            The default <see cref="T:System.Text.Json.Serialization.JsonSerializerContext"/> associated with a default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.GeneratedSerializerOptions">
+            <summary>
+            The source-generated options associated with this context.
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Converters.UpbitSourceGenerationContext.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:Upbit.Net.Converters.UpbitSourceGenerationContext.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Upbit.Net.Converters.UpbitSourceGenerationContext.GetTypeInfo(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Upbit.Net.Enums.ChangeSide">
+            <summary>
+            Change side
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.ChangeSide.Rise">
+            <summary>
+            Rise
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.ChangeSide.Fall">
+            <summary>
+            Fall
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Enums.KlineInterval">
+            <summary>
+            Kline interval
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneSecond">
+            <summary>
+            One second
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneMinute">
+            <summary>
+            One minute
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.ThreeMinutes">
+            <summary>
+            Three minutes
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.FiveMinutes">
+            <summary>
+            Five minutes
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.TenMinutes">
+            <summary>
+            Ten minutes
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.FifteenMinutes">
+            <summary>
+            Fifteen minutes
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.ThirtyMinutes">
+            <summary>
+            Thirty minutes
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneHour">
+            <summary>
+            One hour
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.FourHours">
+            <summary>
+            Four hours
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneDay">
+            <summary>
+            One day
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneWeek">
+            <summary>
+            One week
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneMonth">
+            <summary>
+            One month
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.KlineInterval.OneYear">
+            <summary>
+            One year
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Enums.OrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.OrderSide.Buy">
+            <summary>
+            Buy
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.OrderSide.Sell">
+            <summary>
+            Sell
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Enums.StreamType">
+            <summary>
+            Stream type
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.StreamType.Snapshot">
+            <summary>
+            Snapshot
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.StreamType.Update">
+            <summary>
+            Update
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.ExtensionMethods.UpbitExtensionMethods">
+            <summary>
+            Extension methods specific to using the Upbit API
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.IUpbitRestClient">
+            <summary>
+            Client for accessing the Upbit Rest API. 
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.IUpbitRestClient.SpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi"/>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.IUpbitSocketClient">
+            <summary>
+            Client for accessing the Upbit websocket API
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.IUpbitSocketClient.SpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi"/>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider">
+            <summary>
+            Provider for clients with credentials for specific users
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <summary>
+            Initialize a client for the specified user identifier. This can be used so to initialize a client for a user so ApiCredentials do not need to be passed later.
+            </summary>
+            <param name="userIdentifier">The identifier for the user</param>
+            <param name="credentials">The credentials for the user</param>
+            <param name="environment">The environment to use</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.ClearUserClients(System.String)">
+            <summary>
+            Reset the cached clients for a user. This can be useful when a user changes API credentials.
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <summary>
+            Get the Rest client for a specific user. In case the client does not exist yet it will be created and the <paramref name="credentials"/> should be provided, unless <see cref="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)" /> has been called prior for this user.
+            </summary>
+            <param name="userIdentifier">The identifier for user</param>
+            <param name="credentials">The credentials for the user. Required the first time a client is requested for this user unless <see cref="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)" /> has been called prior for this user.</param>
+            <param name="environment">The environment to use</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.GetSocketClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)">
+            <summary>
+            Get the Socket client for a specific user. In case the client does not exist yet it will be created and the <paramref name="credentials"/> should be provided, unless <see cref="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)" /> has been called prior for this user.
+            </summary>
+            <param name="userIdentifier">The identifier for user</param>
+            <param name="credentials">The credentials for the user. Required the first time a client is requested for this user unless <see cref="M:Upbit.Net.Interfaces.Clients.IUpbitUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Upbit.Net.UpbitEnvironment)" /> has been called prior for this user.</param>
+            <param name="environment">The environment to use</param>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi">
+            <summary>
+            Upbit Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.Account">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiAccount" />
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData" />
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.Trading">
+            <summary>
+            Endpoints related to orders and trades
+            </summary>
+            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiTrading" />
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.SharedClient">
+            <summary>
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiAccount">
+            <summary>
+            Upbit Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData">
+            <summary>
+            Upbit Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            
+            <para><a href="XXX" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetSymbolsAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get list of supported symbols
+            <para><a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /></para>
+            </summary>
+            <param name="includeNotifications">Whether to include events</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get trade history
+            <para><a href="https://docs.upbit.com/kr/reference/list-pair-trades" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `USDT-ETH`</param>
+            <param name="endTime">Filter by endTime</param>
+            <param name="limit">Max number of results, max 500</param>
+            <param name="cursor">Page cursor</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get price ticker info
+            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get price ticker info
+            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            </summary>
+            <param name="quoteAssets">The quote asset, comma separated</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Get order book info
+            <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+            <param name="levels">Number of rows</param>
+            <param name="aggregation">Aggregation level</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get kline/candlestick data. Note that entries might be missing if there is no data for an entry
+            <para><a href="https://docs.upbit.com/kr/reference/list-candles-seconds" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `USDT-ETH`</param>
+            <param name="interval">Interval</param>
+            <param name="endTime">End time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetSymbolConfigAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get symbol config
+            <para><a href="https://docs.upbit.com/kr/reference/list-orderbook-instruments" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiShared">
+            <summary>
+            Shared interface for Spot rest API usage
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiTrading">
+            <summary>
+            Upbit Spot trading endpoints, placing and managing orders.
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi">
+            <summary>
+            Upbit Spot streams
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            
+            <para><a href="XXX" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SharedClient">
+            <summary>
+            Get the shared socket requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApiShared">
+            <summary>
+            Shared interface for Spot socket API usage
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.IUpbitOrderBookFactory">
+            <summary>
+            Upbit local order book factory
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Interfaces.IUpbitOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.IUpbitOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions})">
+            <summary>
+            Create a SymbolOrderBook for the symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="options">Book options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.IUpbitOrderBookFactory.CreateSpot(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions})">
+            <summary>
+            Create a new Spot local order book instance
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Interfaces.IUpbitTrackerFactory">
+            <summary>
+            Tracker factory
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitKline">
+            <summary>
+            Kline info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.OpenTime">
+            <summary>
+            Candle date time utc
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.OpenTimeKst">
+            <summary>
+            Candle date time kst
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.OpenPrice">
+            <summary>
+            Opening price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.HighPrice">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.LowPrice">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.ClosePrice">
+            <summary>
+            Close Price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.QuoteVolume">
+            <summary>
+            QuoteAssetVolume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKline.Volume">
+            <summary>
+            Base asset volume
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitOrderBook">
+            <summary>
+            Order book info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.TotalAskQuantity">
+            <summary>
+            Total ask quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.TotalBidQuantity">
+            <summary>
+            Total bid quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.Entries">
+            <summary>
+            Entries
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBook.Level">
+            <summary>
+            Level
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitOrderBookEntry">
+            <summary>
+            Order book entry
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookEntry.AskPrice">
+            <summary>
+            Ask price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookEntry.BidPrice">
+            <summary>
+            Bid price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookEntry.AskQuantity">
+            <summary>
+            Ask quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookEntry.BidQuantity">
+            <summary>
+            Bid quantity
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitSocketUpdate">
+            <summary>
+            Socket update
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSocketUpdate.EventType">
+            <summary>
+            Event type
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSocketUpdate.StreamType">
+            <summary>
+            Event type
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitSymbol">
+            <summary>
+            Trading symbol
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbol.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbol.NameKorean">
+            <summary>
+            Name in Korean
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbol.Name">
+            <summary>
+            Name in English
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbol.Event">
+            <summary>
+            Market event
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitSymbolEvent">
+            <summary>
+            Event
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolEvent.Warning">
+            <summary>
+            Whether the pair has been designated as an “Investment Caution” item under Upbit’s market alert system
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolEvent.Caution">
+            <summary>
+            Alert info
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitSymbolAlerts">
+            <summary>
+            Alerts
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolAlerts.PriceFluctuations">
+            <summary>
+            Price Surge/Drop Alert
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolAlerts.TradingVolumeSoaring">
+            <summary>
+            Trading Volume Surge Alert
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolAlerts.DepositQuantitySoaring">
+            <summary>
+            Deposit Volume Surge Alert
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolAlerts.GlobalPriceDifferences">
+            <summary>
+            Domestic and International Price Difference Alert
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolAlerts.ConcentrationOfSmallAccounts">
+            <summary>
+            Concentrated Trading by a Small Number of Accounts Alert
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitSymbolConfig">
+            <summary>
+            Symbol config
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolConfig.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolConfig.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolConfig.TickQuantity">
+            <summary>
+            Tick quantity/ price step
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitSymbolConfig.SupportedBookLevels">
+            <summary>
+            Supported book aggregate levels for KRW markets
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitTicker">
+            <summary>
+            Price ticker info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.TradeDate">
+            <summary>
+            Trade date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.TradeTime">
+            <summary>
+            Trade time
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.TradeDateKst">
+            <summary>
+            Trade date kst
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.TradeTimeKst">
+            <summary>
+            Trade time kst
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.TradeTimestamp">
+            <summary>
+            Trade timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.OpenPrice">
+            <summary>
+            Open price 24h ago
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.HighPrice">
+            <summary>
+            High price last 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.LowPrice">
+            <summary>
+            Low price last 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.PrevClosingPrice">
+            <summary>
+            Prev closing price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Change">
+            <summary>
+            Change
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.ChangePriceAbs">
+            <summary>
+            Price change
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.ChangeRateAbs">
+            <summary>
+            Absolute change rate since 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.ChangePrice">
+            <summary>
+            Change rate since 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.ChangeRate">
+            <summary>
+            Signed change rate
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.LastVolume">
+            <summary>
+            Last trade volume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradePrice">
+            <summary>
+            Accumulated trade amount since UTC 00:00
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradePrice24h">
+            <summary>
+            Accumulated trade amount over the past 24 hours.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradeVolume">
+            <summary>
+            Accumulated trade volume since UTC 00:00
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradeVolume24h">
+            <summary>
+            Accumulated trade volume over last 24 hours
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.HighPrice52Weeks">
+            <summary>
+            Highest price last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.HighPrice52WeeksDate">
+            <summary>
+            Highest price 52 week date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.LowPrice52Weeks">
+            <summary>
+            Lowest price last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.LowPrice52WeeksDate">
+            <summary>
+            Lowest price 52 week date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitTrade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.TimestampDate">
+            <summary>
+            Date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.TimestampTime">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.Quantity">
+            <summary>
+            Trade quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.PrevClosingPrice">
+            <summary>
+            Previous closing price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.ChangePrice">
+            <summary>
+            Change price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.OrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTrade.SequentialId">
+            <summary>
+            Sequential id
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitTradeUpdate">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.TradeTime">
+            <summary>
+            Trade timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.Quantity">
+            <summary>
+            Trade quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.PrevClosingPrice">
+            <summary>
+            Previous closing price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.ChangePrice">
+            <summary>
+            Change price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.ChangeSide">
+            <summary>
+            Change side
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.OrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.SequentialId">
+            <summary>
+            Sequential id
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.BestAskQuantity">
+            <summary>
+            Best ask quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTradeUpdate.BestAskPrice">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Options.UpbitOptions">
+            <summary>
+            Upbit options
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Options.UpbitOrderBookOptions">
+            <summary>
+            Options for the Upbit SymbolOrderBook
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitOrderBookOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitOrderBookOptions.Limit">
+            <summary>
+            The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitOrderBookOptions.InitialDataTimeout">
+            <summary>
+            After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Options.UpbitRestOptions">
+            <summary>
+            Options for the UpbitRestClient
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitRestOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Objects.Options.UpbitRestOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitRestOptions.SpotOptions">
+            <summary>
+            Spot API options
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Options.UpbitSocketOptions">
+            <summary>
+            Options for the UpbitSocketClient
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitSocketOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Objects.Options.UpbitSocketOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitSocketOptions.SpotOptions">
+            <summary>
+            Spot API options
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.Objects.UpbitApiAddresses">
+            <summary>
+            Api addresses
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.UpbitApiAddresses.RestClientAddress">
+            <summary>
+            The address used by the UpbitRestClient for the API
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.UpbitApiAddresses.SocketClientAddress">
+            <summary>
+            The address used by the UpbitSocketClient for the websocket API
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Objects.UpbitApiAddresses.Default">
+            <summary>
+            The default addresses to connect to the Upbit API
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory">
+            <summary>
+            Upbit order book factory
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="P:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions})">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.CreateSpot(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions})">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook">
+            <summary>
+            Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
+            Make sure to check the State property to see if the order book is synced.
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.#ctor(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions})">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.#ctor(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Upbit.Net.Interfaces.Clients.IUpbitRestClient,Upbit.Net.Interfaces.Clients.IUpbitSocketClient)">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="logger">Logger</param>
+            <param name="restClient">Rest client instance</param>
+            <param name="socketClient">Socket client instance</param>
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Upbit.Net.UpbitEnvironment">
+            <summary>
+            Upbit environments
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.RestClientAddress">
+            <summary>
+            Rest API address
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.SocketClientAddress">
+            <summary>
+            Socket API address
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.UpbitEnvironment.#ctor">
+            <summary>
+            ctor for DI, use <see cref="M:Upbit.Net.UpbitEnvironment.CreateCustom(System.String,System.String,System.String)"/> for creating a custom environment
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.UpbitEnvironment.GetEnvironmentByName(System.String)">
+            <summary>
+            Get the Upbit environment by name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.All">
+            <summary>
+            Available environment names
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.Live">
+            <summary>
+            Live environment
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.UpbitEnvironment.CreateCustom(System.String,System.String,System.String)">
+            <summary>
+            Create a custom environment
+            </summary>
+            <param name="name"></param>
+            <param name="spotRestAddress"></param>
+            <param name="spotSocketStreamsAddress"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Upbit.Net.UpbitExchange">
+            <summary>
+            Upbit exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.ExchangeName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.DisplayName">
+            <summary>
+            Display name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.ImageUrl">
+            <summary>
+            Url to exchange image
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.Type">
+            <summary>
+            Type of exchange
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.UpbitExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <summary>
+            Format a base and quote asset to an Upbit recognized symbol 
+            </summary>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="tradingMode">Trading mode</param>
+            <param name="deliverTime">Delivery time for delivery futures</param>
+            <returns></returns>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.RateLimiter">
+            <summary>
+            Rate limiter configuration for the Upbit API
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.UpbitRateLimiters">
+            <summary>
+            Rate limiter configuration for the Upbit API
+            </summary>
+        </member>
+        <member name="E:Upbit.Net.UpbitRateLimiters.RateLimitTriggered">
+            <summary>
+            Event for when a rate limit is triggered
+            </summary>
+        </member>
+        <member name="E:Upbit.Net.UpbitRateLimiters.RateLimitUpdated">
+            <summary>
+            Event when the rate limit is updated. Note that it's only updated when a request is send, so there are no specific updates when the current usage is decaying.
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.UpbitTrackerFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="T:CryptoExchange.Net.Interfaces.CryptoClientExtensions">
+            <summary>
+            Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
+            </summary>
+        </member>
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+            <summary>
+            Get the Upbit REST Api client
+            </summary>
+            <param name="baseClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+            <summary>
+            Get the Upbit Websocket Api client
+            </summary>
+            <param name="baseClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions">
+            <summary>
+            Extensions for DI
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddUpbit(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add services such as the IUpbitRestClient and IUpbitSocketClient. Configures the services based on the provided configuration.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="configuration">The configuration(section) containing the options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddUpbit(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Upbit.Net.Objects.Options.UpbitOptions})">
+            <summary>
+            Add services such as the IUpbitRestClient and IUpbitSocketClient. Services will be configured based on the provided options.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsDelegate">Set options for the Upbit services</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.Bind_UpbitOptions(Microsoft.Extensions.Configuration.IConfiguration,System.Object)">
+            <summary>Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.</summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.ValidateConfigurationKeys(System.Type,System.Lazy{System.Collections.Generic.HashSet{System.String}},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Configuration.BinderOptions)">
+            <summary>If required by the binder options, validates that there are no unknown keys in the input configuration object.</summary>
+        </member>
+    </members>
+</doc>

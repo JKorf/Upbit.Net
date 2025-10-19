@@ -1,0 +1,17 @@
+GET
+/v1/orderbook/instruments
+false
+[
+  {
+    "market": "KRW-BTC",
+    "quote_currency": "KRW",
+    "tick_size": 1000,
+    "supported_levels": ""
+  },
+  {
+    "market": "KRW-ETH",
+    "quote_currency": "KRW",
+    "tick_size": 1000,
+    "supported_levels": ""
+  }
+]

@@ -1,0 +1,17 @@
+GET
+/v1/trades/ticks
+false
+[
+  {
+    "market": "KRW-BTC",
+    "trade_date_utc": "2025-06-27",
+    "trade_time_utc": "23:59:59",
+    "timestamp": 1751068799336,
+    "trade_price": 147058000,
+    "trade_volume": 0.00006043,
+    "prev_closing_price": 146852000,
+    "change_price": 206000,
+    "ask_bid": "BID",
+    "sequential_id": 17510687993360000
+  }
+]
