@@ -6,12 +6,12 @@ namespace Upbit.Net.Objects.Models
     /// <summary>
     /// Order book info
     /// </summary>
-    public record UpbitOrderBook
+    public record UpbitOrderBookUpdate: UpbitSocketUpdate
     {
         /// <summary>
         /// Symbol name
         /// </summary>
-        [JsonPropertyName("market")]
+        [JsonPropertyName("code")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
@@ -39,33 +39,4 @@ namespace Upbit.Net.Objects.Models
         [JsonPropertyName("level")]
         public decimal Level { get; set; }
     }
-
-    /// <summary>
-    /// Order book entry
-    /// </summary>
-    public record UpbitOrderBookEntry
-    {
-        /// <summary>
-        /// Ask price
-        /// </summary>
-        [JsonPropertyName("ask_price")]
-        public decimal AskPrice { get; set; }
-        /// <summary>
-        /// Bid price
-        /// </summary>
-        [JsonPropertyName("bid_price")]
-        public decimal BidPrice { get; set; }
-        /// <summary>
-        /// Ask quantity
-        /// </summary>
-        [JsonPropertyName("ask_size")]
-        public decimal AskQuantity { get; set; }
-        /// <summary>
-        /// Bid quantity
-        /// </summary>
-        [JsonPropertyName("bid_size")]
-        public decimal BidQuantity { get; set; }
-    }
-
-
 }

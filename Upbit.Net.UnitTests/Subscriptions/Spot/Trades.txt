@@ -1,0 +1,22 @@
+> [{"ticket": "|1|"},{"type": "trade", "codes": ["KRW-BTC"]}]
+= 
+{
+  "type": "trade",
+  "code": "KRW-ETH",
+  "timestamp": 1696585056910,
+  "trade_date": "2023-10-06",
+  "trade_time": "09:37:36",
+  "trade_timestamp": 1696585056846,
+  "trade_price": 37625,
+  "trade_volume": 8.428e-05,
+  "ask_bid": "ASK",
+  "prev_closing_price": 37296,
+  "change": "RISE",
+  "change_price": 329,
+  "sequential_id": 1696585056846000,
+  "best_ask_price": 32293000,
+  "best_ask_size": 0.04414411,
+  "best_bid_price": 32291000,
+  "best_bid_size": 0.01202163,
+  "stream_type": "SNAPSHOT"
+}

@@ -31,12 +31,4 @@ app.MapGet("/{Symbol}", async ([FromServices] IUpbitRestClient client, string sy
 })
 .WithOpenApi();
 
-
-app.MapGet("/Balances", async ([FromServices] IUpbitRestClient client) =>
-{
-    var result = await client.SpotApi.Account.GetBalancesAsync();
-    return (object)(result.Success ? result.Data : result.Error!);
-})
-.WithOpenApi();
-
 app.Run();

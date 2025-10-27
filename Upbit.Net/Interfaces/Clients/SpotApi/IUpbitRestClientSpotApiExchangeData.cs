@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
@@ -12,14 +13,6 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
     /// </summary>
     public interface IUpbitRestClientSpotApiExchangeData
     {
-        /// <summary>
-        /// 
-        /// <para><a href="XXX" /></para>
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
-
         /// <summary>
         /// Get list of supported symbols
         /// <para><a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /></para>
@@ -43,27 +36,45 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// Get price ticker info
         /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+        /// <param name="symbol">The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTicker[]>> GetTickersAsync(string symbols, CancellationToken ct = default);
+        Task<WebCallResult<UpbitTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get price ticker info
         /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
         /// </summary>
-        /// <param name="quoteAssets">The quote asset, comma separated</param>
+        /// <param name="symbols">The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(string quoteAssets, CancellationToken ct = default);
+        Task<WebCallResult<UpbitTicker[]>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get price ticker info
+        /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+        /// </summary>
+        /// <param name="quoteAssets">The quote assets, for example `KRW`</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(IEnumerable<string> quoteAssets, CancellationToken ct = default);
 
         /// <summary>
         /// Get order book info
         /// <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+        /// <param name="symbol">The symbol, for example `KRW-ETH`</param>
         /// <param name="levels">Number of rows</param>
         /// <param name="aggregation">Aggregation level</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitOrderBook[]>> GetOrderBookAsync(string symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
+        Task<WebCallResult<UpbitOrderBook>> GetOrderBookAsync(string symbol, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get order book info
+        /// <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols, for example `KRW-ETH`</param>
+        /// <param name="levels">Number of rows</param>
+        /// <param name="aggregation">Aggregation level</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<UpbitOrderBook[]>> GetOrderBooksAsync(IEnumerable<string> symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get kline/candlestick data. Note that entries might be missing if there is no data for an entry

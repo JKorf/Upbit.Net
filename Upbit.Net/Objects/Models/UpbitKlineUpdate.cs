@@ -6,12 +6,12 @@ namespace Upbit.Net.Objects.Models
     /// <summary>
     /// Kline info
     /// </summary>
-    public record UpbitKline
+    public record UpbitKlineUpdate : UpbitSocketUpdate
     {
         /// <summary>
         /// Symbol name
         /// </summary>
-        [JsonPropertyName("market")]
+        [JsonPropertyName("code")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Candle date time utc

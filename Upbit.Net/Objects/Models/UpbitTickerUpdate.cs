@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using Upbit.Net.Enums;
 
 namespace Upbit.Net.Objects.Models
 {
     /// <summary>
     /// Price ticker info
     /// </summary>
-    public record UpbitTicker
+    public record UpbitTickerUpdate: UpbitSocketUpdate
     {
         /// <summary>
         /// Symbol name
         /// </summary>
-        [JsonPropertyName("market")]
+        [JsonPropertyName("code")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Trade date
@@ -23,16 +24,6 @@ namespace Upbit.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("trade_time")]
         public string TradeTime { get; set; } = string.Empty;
-        /// <summary>
-        /// Trade date kst
-        /// </summary>
-        [JsonPropertyName("trade_date_kst")]
-        public string TradeDateKst { get; set; } = string.Empty;
-        /// <summary>
-        /// Trade time kst
-        /// </summary>
-        [JsonPropertyName("trade_time_kst")]
-        public string TradeTimeKst { get; set; } = string.Empty;
         /// <summary>
         /// Trade timestamp
         /// </summary>
@@ -89,27 +80,37 @@ namespace Upbit.Net.Objects.Models
         [JsonPropertyName("signed_change_rate")]
         public decimal ChangeRate { get; set; }
         /// <summary>
+        /// Sell volume
+        /// </summary>
+        [JsonPropertyName("acc_bid_volume")]
+        public decimal SellVolume { get; set; }
+        /// <summary>
+        /// Buy volume
+        /// </summary>
+        [JsonPropertyName("acc_ask_volume")]
+        public decimal BuyVolume { get; set; }
+        /// <summary>
         /// Last trade volume
         /// </summary>
         [JsonPropertyName("trade_volume")]
         public decimal LastVolume { get; set; }
         /// <summary>
-        /// Accumulated trade volume in quote asset since UTC 00:00
+        /// Accumulated trade amount since UTC 00:00
         /// </summary>
         [JsonPropertyName("acc_trade_price")]
         public decimal QuoteVolume { get; set; }
         /// <summary>
-        /// Accumulated trade volume in quote asset over the past 24 hours.
+        /// Accumulated trade amount over the past 24 hours.
         /// </summary>
         [JsonPropertyName("acc_trade_price_24h")]
         public decimal QuoteVolume24h { get; set; }
         /// <summary>
-        /// Accumulated trade volume in base asset since UTC 00:00
+        /// Accumulated trade volume since UTC 00:00
         /// </summary>
         [JsonPropertyName("acc_trade_volume")]
         public decimal Volume { get; set; }
         /// <summary>
-        /// Accumulated trade volume in base asset over last 24 hours
+        /// Accumulated trade volume over last 24 hours
         /// </summary>
         [JsonPropertyName("acc_trade_volume_24h")]
         public decimal Volume24h { get; set; }
@@ -138,6 +139,22 @@ namespace Upbit.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Symbol status
+        /// </summary>
+        [JsonPropertyName("market_state")]
+        public SymbolStatus SymbolStatus { get; set; }
+        /// <summary>
+        /// Is trading suspended
+        /// </summary>
+        [JsonPropertyName("is_trading_suspended")]
+        public bool TradingSuspended { get; set; }
+        /// <summary>
+        /// Warning
+        /// </summary>
+        [JsonPropertyName("market_warning")]
+        public SymbolWarning Warning { get; set; }
+
     }
 
 

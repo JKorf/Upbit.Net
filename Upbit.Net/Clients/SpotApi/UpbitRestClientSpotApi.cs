@@ -1,4 +1,3 @@
-using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
@@ -14,6 +13,7 @@ using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.Converters.MessageParsing;
 
 namespace Upbit.Net.Clients.SpotApi
 {
@@ -24,15 +24,13 @@ namespace Upbit.Net.Clients.SpotApi
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
+
+        public new UpbitRestOptions ClientOptions => (UpbitRestOptions)base.ClientOptions;
         #endregion
 
         #region Api clients
         /// <inheritdoc />
-        public IUpbitRestClientSpotApiAccount Account { get; }
-        /// <inheritdoc />
         public IUpbitRestClientSpotApiExchangeData ExchangeData { get; }
-        /// <inheritdoc />
-        public IUpbitRestClientSpotApiTrading Trading { get; }
         /// <inheritdoc />
         public string ExchangeName => "Upbit";
         #endregion
@@ -41,9 +39,7 @@ namespace Upbit.Net.Clients.SpotApi
         internal UpbitRestClientSpotApi(ILogger logger, HttpClient? httpClient, UpbitRestOptions options)
             : base(logger, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
         {
-            Account = new UpbitRestClientSpotApiAccount(this);
             ExchangeData = new UpbitRestClientSpotApiExchangeData(logger, this);
-            Trading = new UpbitRestClientSpotApiTrading(logger, this);
         }
         #endregion
 
@@ -63,9 +59,6 @@ namespace Upbit.Net.Clients.SpotApi
         internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
             var result = await base.SendAsync(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-
-            // Optional response checking
-
             return result;
         }
 
@@ -75,25 +68,28 @@ namespace Upbit.Net.Clients.SpotApi
         internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-
-            // Optional response checking
-
             return result;
         }
 
-        protected override Error? TryParseError(RequestDefinition definition, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor) {
-#warning TODO if API returns errors on HttpStatus 200 this should return it for correct logging
-            return null;
-        }
+        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        {
+            if (!accessor.IsValid)
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception) {
-#warning TODO if API returns errors on HttpStatus != 200 this should parse them
-            return base.ParseErrorResponse(httpStatusCode, responseHeaders, accessor, exception);
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("error").Property("name"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("error").Property("message"));
+            if (msg == null)
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
+
+            if (code == null)
+                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
+
+            return new ServerError(code.Value, GetErrorInfo(code.Value, msg), exception);
         }
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-            => ExchangeData.GetServerTimeAsync();
+            => throw new NotImplementedException();
 
         /// <inheritdoc />
         public override TimeSyncInfo? GetTimeSyncInfo()

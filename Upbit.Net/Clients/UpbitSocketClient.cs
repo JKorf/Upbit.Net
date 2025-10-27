@@ -14,9 +14,6 @@ namespace Upbit.Net.Clients
     /// <inheritdoc cref="IUpbitSocketClient" />
     public class UpbitSocketClient : BaseSocketClient, IUpbitSocketClient
     {
-        #region fields
-        #endregion
-
         #region Api clients
                 
          /// <inheritdoc />

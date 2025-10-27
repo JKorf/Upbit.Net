@@ -1,11 +1,10 @@
 using CryptoExchange.Net;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Upbit.Net.Objects.Internal;
 using Upbit.Net.Objects.Models;
@@ -15,18 +14,35 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class UpbitSubscription<T> : Subscription<object, object> where T : UpbitSocketUpdate
     {
+        private readonly TimeSpan _waitForErrorTimeout;
+        private readonly SocketApiClient _client;
         private readonly Action<DataEvent<T>> _handler;
         private readonly string _topic;
         private readonly string[] _symbols;
+        private readonly string[] _codes;
+        private readonly decimal? _level;
 
         /// <summary>
         /// ctor
         /// </summary>
-        public UpbitSubscription(ILogger logger, string topic, string[] symbols, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
+        public UpbitSubscription(
+            ILogger logger,
+            SocketApiClient client,
+            string topic,
+            string[] symbols,
+            string[]? codes, 
+            decimal? level, 
+            Action<DataEvent<T>> handler,
+            bool auth,
+            TimeSpan waitForErrorTimeout) : base(logger, auth)
         {
+            _client = client;
             _handler = handler;
             _topic = topic;
             _symbols = symbols;
+            _codes = codes ?? symbols;
+            _level = level;
+            _waitForErrorTimeout = waitForErrorTimeout;
 
             MessageMatcher = MessageMatcher.Create<T>(_symbols.Select(x => _topic + x).ToArray(), DoHandleMessage);
         }
@@ -34,11 +50,12 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            return new UpbitQuery([new SocketTicket(ExchangeHelpers.NextId()), new SocketRequest
+            return new UpbitQuery(_client, [new SocketTicket(ExchangeHelpers.NextId()), new SocketRequest
             {
                 Topic = _topic,
-                Codes = _symbols
-            }], false);
+                Codes = _codes,
+                Level = _level,
+            }], false, _waitForErrorTimeout);
         }
 
         /// <inheritdoc />

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Net;
 using System.Net.Http;
 using Upbit.Net;
 using Upbit.Net.Clients;
@@ -111,7 +110,6 @@ namespace Microsoft.Extensions.DependencyInjection
                     x.GetRequiredService<IOptions<UpbitRestOptions>>(),
                     x.GetRequiredService<IOptions<UpbitSocketOptions>>()));
 
-#warning Update
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedClient);
 

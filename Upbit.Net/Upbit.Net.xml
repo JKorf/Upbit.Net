@@ -7,13 +7,7 @@
         <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi">
             <inheritdoc cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi" />
         </member>
-        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.Account">
-            <inheritdoc />
-        </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.ExchangeData">
-            <inheritdoc />
-        </member>
-        <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.Trading">
             <inheritdoc />
         </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.ExchangeName">
@@ -43,13 +37,7 @@
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.SharedClient">
             <inheritdoc />
         </member>
-        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiAccount">
-            <inheritdoc />
-        </member>
         <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData">
-            <inheritdoc />
-        </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetSymbolsAsync(System.Boolean,System.Threading.CancellationToken)">
@@ -58,22 +46,25 @@
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetOrderBooksAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiExchangeData.GetSymbolConfigAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApiTrading">
             <inheritdoc />
         </member>
         <member name="T:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi">
@@ -96,6 +87,27 @@
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -214,6 +226,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.DecimalArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.DateTime">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -239,6 +256,26 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SymbolStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SymbolWarning">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SocketError">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SocketErrorDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.SocketRequest">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -259,6 +296,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitKlineUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBook">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -275,6 +317,11 @@
             </summary>
         </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBookEntryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitOrderBookUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -319,6 +366,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTickerUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.UpbitTrade">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -340,11 +392,6 @@
             </summary>
         </member>
         <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.NullableInt32">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Upbit.Net.Converters.UpbitSourceGenerationContext.Int32Array">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -406,6 +453,11 @@
         <member name="F:Upbit.Net.Enums.ChangeSide.Rise">
             <summary>
             Rise
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.ChangeSide.Even">
+            <summary>
+            Even
             </summary>
         </member>
         <member name="F:Upbit.Net.Enums.ChangeSide.Fall">
@@ -513,6 +565,41 @@
             Update
             </summary>
         </member>
+        <member name="T:Upbit.Net.Enums.SymbolStatus">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.SymbolStatus.Preview">
+            <summary>
+            Preview
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.SymbolStatus.Active">
+            <summary>
+            Active
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.SymbolStatus.Delisted">
+            <summary>
+            Delisted
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Enums.SymbolWarning">
+            <summary>
+            Warning status
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.SymbolWarning.None">
+            <summary>
+            No warning
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Enums.SymbolWarning.Caution">
+            <summary>
+            Caution
+            </summary>
+        </member>
         <member name="T:Upbit.Net.ExtensionMethods.UpbitExtensionMethods">
             <summary>
             Extension methods specific to using the Upbit API
@@ -597,46 +684,21 @@
             Upbit Spot API endpoints
             </summary>
         </member>
-        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.Account">
-            <summary>
-            Endpoints related to account settings, info or actions
-            </summary>
-            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiAccount" />
-        </member>
         <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
             <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData" />
         </member>
-        <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.Trading">
-            <summary>
-            Endpoints related to orders and trades
-            </summary>
-            <see cref="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiTrading" />
-        </member>
         <member name="P:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApi.SharedClient">
             <summary>
             Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
-            </summary>
-        </member>
-        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiAccount">
-            <summary>
-            Upbit Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
             </summary>
         </member>
         <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData">
             <summary>
             Upbit Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
             </summary>
-        </member>
-        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
-            <summary>
-            
-            <para><a href="XXX" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
         </member>
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetSymbolsAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
@@ -657,20 +719,28 @@
             <param name="cursor">Page cursor</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get price ticker info
             <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
             </summary>
-            <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+            <param name="symbol">The symbols, for example `USDT-ETH`</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get price ticker info
             <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
             </summary>
-            <param name="quoteAssets">The quote asset, comma separated</param>
+            <param name="symbols">The symbols, for example `USDT-ETH`</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Get price ticker info
+            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            </summary>
+            <param name="quoteAssets">The quote assets, for example `KRW`</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
@@ -678,7 +748,17 @@
             Get order book info
             <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
             </summary>
-            <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
+            <param name="symbol">The symbol, for example `KRW-ETH`</param>
+            <param name="levels">Number of rows</param>
+            <param name="aggregation">Aggregation level</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetOrderBooksAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Get order book info
+            <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `KRW-ETH`</param>
             <param name="levels">Number of rows</param>
             <param name="aggregation">Aggregation level</param>
             <param name="ct">Cancellation token</param>
@@ -707,11 +787,6 @@
             Shared interface for Spot rest API usage
             </summary>
         </member>
-        <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiTrading">
-            <summary>
-            Upbit Spot trading endpoints, placing and managing orders.
-            </summary>
-        </member>
         <member name="T:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi">
             <summary>
             Upbit Spot streams
@@ -719,9 +794,86 @@
         </member>
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
             <summary>
-            
-            <para><a href="XXX" /></para>
+            Subscribe to live trade updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
             </summary>
+            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live trade updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live symbol ticker updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live symbol ticker updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live order book updates
+            <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
+            <param name="aggregation">Aggregation level</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live order book updates
+            <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
+            <param name="aggregation">Aggregation level</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live kline/candlestick updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="interval">Interval (max 4 hours)</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to live kline/candlestick updates
+            <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="interval">Interval (max 4 hours)</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -819,6 +971,61 @@
             Base asset volume
             </summary>
         </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitKlineUpdate">
+            <summary>
+            Kline info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.OpenTime">
+            <summary>
+            Candle date time utc
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.OpenTimeKst">
+            <summary>
+            Candle date time kst
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.OpenPrice">
+            <summary>
+            Opening price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.HighPrice">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.LowPrice">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.ClosePrice">
+            <summary>
+            Close Price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.QuoteVolume">
+            <summary>
+            QuoteAssetVolume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitKlineUpdate.Volume">
+            <summary>
+            Base asset volume
+            </summary>
+        </member>
         <member name="T:Upbit.Net.Objects.Models.UpbitOrderBook">
             <summary>
             Order book info
@@ -877,6 +1084,41 @@
         <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookEntry.BidQuantity">
             <summary>
             Bid quantity
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitOrderBookUpdate">
+            <summary>
+            Order book info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.TotalAskQuantity">
+            <summary>
+            Total ask quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.TotalBidQuantity">
+            <summary>
+            Total bid quantity
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.Entries">
+            <summary>
+            Entries
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitOrderBookUpdate.Level">
+            <summary>
+            Level
             </summary>
         </member>
         <member name="T:Upbit.Net.Objects.Models.UpbitSocketUpdate">
@@ -1079,24 +1321,24 @@
             Last trade volume
             </summary>
         </member>
-        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradePrice">
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.QuoteVolume">
             <summary>
-            Accumulated trade amount since UTC 00:00
+            Accumulated trade volume in quote asset since UTC 00:00
             </summary>
         </member>
-        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradePrice24h">
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.QuoteVolume24h">
             <summary>
-            Accumulated trade amount over the past 24 hours.
+            Accumulated trade volume in quote asset over the past 24 hours.
             </summary>
         </member>
-        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradeVolume">
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Volume">
             <summary>
-            Accumulated trade volume since UTC 00:00
+            Accumulated trade volume in base asset since UTC 00:00
             </summary>
         </member>
-        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.AccTradeVolume24h">
+        <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Volume24h">
             <summary>
-            Accumulated trade volume over last 24 hours
+            Accumulated trade volume in base asset over last 24 hours
             </summary>
         </member>
         <member name="P:Upbit.Net.Objects.Models.UpbitTicker.HighPrice52Weeks">
@@ -1122,6 +1364,156 @@
         <member name="P:Upbit.Net.Objects.Models.UpbitTicker.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="T:Upbit.Net.Objects.Models.UpbitTickerUpdate">
+            <summary>
+            Price ticker info
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.TradeDate">
+            <summary>
+            Trade date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.TradeTime">
+            <summary>
+            Trade time
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.TradeTimestamp">
+            <summary>
+            Trade timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.OpenPrice">
+            <summary>
+            Open price 24h ago
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.HighPrice">
+            <summary>
+            High price last 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.LowPrice">
+            <summary>
+            Low price last 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.PrevClosingPrice">
+            <summary>
+            Prev closing price
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Change">
+            <summary>
+            Change
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.ChangePriceAbs">
+            <summary>
+            Price change
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.ChangeRateAbs">
+            <summary>
+            Absolute change rate since 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.ChangePrice">
+            <summary>
+            Change rate since 24h
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.ChangeRate">
+            <summary>
+            Signed change rate
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.SellVolume">
+            <summary>
+            Sell volume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.BuyVolume">
+            <summary>
+            Buy volume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.LastVolume">
+            <summary>
+            Last trade volume
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.QuoteVolume">
+            <summary>
+            Accumulated trade amount since UTC 00:00
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.QuoteVolume24h">
+            <summary>
+            Accumulated trade amount over the past 24 hours.
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Volume">
+            <summary>
+            Accumulated trade volume since UTC 00:00
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Volume24h">
+            <summary>
+            Accumulated trade volume over last 24 hours
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.HighPrice52Weeks">
+            <summary>
+            Highest price last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.HighPrice52WeeksDate">
+            <summary>
+            Highest price 52 week date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.LowPrice52Weeks">
+            <summary>
+            Lowest price last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.LowPrice52WeeksDate">
+            <summary>
+            Lowest price 52 week date
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.SymbolStatus">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.TradingSuspended">
+            <summary>
+            Is trading suspended
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.Objects.Models.UpbitTickerUpdate.Warning">
+            <summary>
+            Warning
             </summary>
         </member>
         <member name="T:Upbit.Net.Objects.Models.UpbitTrade">
@@ -1314,6 +1706,13 @@
             ctor
             </summary>
         </member>
+        <member name="P:Upbit.Net.Objects.Options.UpbitSocketOptions.SubscribeMaxWaitForError">
+            <summary>
+            The server only replies with a message when there is an error in the subscription, not when it's successful. This timeout determines how
+            long to wait at max for an error message before the subscription is assumed successful. Note that when data is received on the subscription
+            before this timeout it is also deemed successful
+            </summary>
+        </member>
         <member name="P:Upbit.Net.Objects.Options.UpbitSocketOptions.SpotOptions">
             <summary>
             Spot API options
@@ -1327,16 +1726,10 @@
             ctor
             </summary>
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
-            <inheritdoc />
-        </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitPingSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
-            <inheritdoc />
-        </member>
         <member name="T:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,CryptoExchange.Net.Clients.SocketApiClient,System.String,System.String[],System.String[],System.Nullable{System.Decimal},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean,System.TimeSpan)">
             <summary>
             ctor
             </summary>
@@ -1367,7 +1760,22 @@
         </member>
         <member name="F:Upbit.Net.Objects.UpbitApiAddresses.Default">
             <summary>
-            The default addresses to connect to the Upbit API
+            The default addresses to connect to the Upbit South Korea API
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Objects.UpbitApiAddresses.Singapore">
+            <summary>
+            The default addresses to connect to the Upbit Singapore API
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Objects.UpbitApiAddresses.Indonesia">
+            <summary>
+            The default addresses to connect to the Upbit Indonesia API
+            </summary>
+        </member>
+        <member name="F:Upbit.Net.Objects.UpbitApiAddresses.Thailand">
+            <summary>
+            The default addresses to connect to the Upbit Thailand API
             </summary>
         </member>
         <member name="T:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory">
@@ -1403,14 +1811,13 @@
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.#ctor(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Upbit.Net.Interfaces.Clients.IUpbitRestClient,Upbit.Net.Interfaces.Clients.IUpbitSocketClient)">
+        <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.#ctor(System.String,System.Action{Upbit.Net.Objects.Options.UpbitOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Upbit.Net.Interfaces.Clients.IUpbitSocketClient)">
             <summary>
             Create a new order book instance
             </summary>
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
             <param name="logger">Logger</param>
-            <param name="restClient">Rest client instance</param>
             <param name="socketClient">Socket client instance</param>
         </member>
         <member name="M:Upbit.Net.SymbolOrderBooks.UpbitSpotSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">
@@ -1458,7 +1865,22 @@
         </member>
         <member name="P:Upbit.Net.UpbitEnvironment.Live">
             <summary>
-            Live environment
+            Live South Korea environment
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.Singapore">
+            <summary>
+            Live Singapore environment
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.Indonesia">
+            <summary>
+            Live Indonesia environment
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitEnvironment.Thailand">
+            <summary>
+            Live Thailand environment
             </summary>
         </member>
         <member name="M:Upbit.Net.UpbitEnvironment.CreateCustom(System.String,System.String,System.String)">
@@ -1548,6 +1970,12 @@
             ctor
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.CanCreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval)">
+            <inheritdoc />
+        </member>
+        <member name="M:Upbit.Net.UpbitTrackerFactory.CanCreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol)">
+            <inheritdoc />
         </member>
         <member name="M:Upbit.Net.UpbitTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />

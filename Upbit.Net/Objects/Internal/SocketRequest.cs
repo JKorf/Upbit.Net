@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Upbit.Net.Objects.Internal
 {
@@ -13,5 +8,7 @@ namespace Upbit.Net.Objects.Internal
         public string Topic { get; set; } = string.Empty;
         [JsonPropertyName("codes")]
         public string[] Codes { get; set; } = [];
+        [JsonPropertyName("level"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public decimal? Level { get; set; }
     }
 }

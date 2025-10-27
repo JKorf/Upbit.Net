@@ -5,25 +5,25 @@ using System.Text.Json.Serialization;
 namespace Upbit.Net.Enums
 {
     /// <summary>
-    /// Change side
+    /// Symbol status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<ChangeSide>))]
-    public enum ChangeSide
+    [JsonConverter(typeof(EnumConverter<SymbolStatus>))]
+    public enum SymbolStatus
     {
         /// <summary>
-        /// Rise
+        /// Preview
         /// </summary>
-        [Map("RISE")]
-        Rise,
+        [Map("PREVIEW")]
+        Preview,
         /// <summary>
-        /// Even
+        /// Active
         /// </summary>
-        [Map("EVEN")]
-        Even,
+        [Map("ACTIVE")]
+        Active,
         /// <summary>
-        /// Fall
+        /// Delisted
         /// </summary>
-        [Map("FALL")]
-        Fall
+        [Map("DELISTED")]
+        Delisted
     }
 }

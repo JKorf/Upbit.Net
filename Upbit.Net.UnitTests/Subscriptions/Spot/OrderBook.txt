@@ -1,0 +1,41 @@
+> [{"ticket": "|1|"},{"type": "orderbook", "codes": ["KRW-ETH"]}]
+= 
+{
+  "type": "orderbook",
+  "code": "KRW-ETH",
+  "timestamp": 1746601573804,
+  "total_ask_size": 4.79158413,
+  "total_bid_size": 2.65609625,
+  "orderbook_units": [
+    {
+      "ask_price": 137002000,
+      "bid_price": 137001000,
+      "ask_size": 0.10623869,
+      "bid_size": 0.03656812
+    },
+    {
+      "ask_price": 137023000,
+      "bid_price": 137000000,
+      "ask_size": 0.06144079,
+      "bid_size": 0.33543284
+    },
+    {
+      "ask_price": 137050000,
+      "bid_price": 136999000,
+      "ask_size": 0.0055433,
+      "bid_size": 0.00104379
+    },
+    {
+      "ask_price": 137052000,
+      "bid_price": 136980000,
+      "ask_size": 0.00452071,
+      "bid_size": 0.32709281
+    },
+    {
+      "ask_price": 137053000,
+      "bid_price": 136978000,
+      "ask_size": 0.12781487,
+      "bid_size": 0.00875219
+    }
+    ]
+}

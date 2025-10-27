@@ -4,10 +4,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.RateLimiting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.SharedApis;
-using System.Text.Json.Serialization;
 using Upbit.Net.Converters;
 using System.Text.Json;
 using CryptoExchange.Net.Converters.SystemTextJson;
@@ -33,7 +30,7 @@ namespace Upbit.Net
         /// <summary>
         /// Url to exchange image
         /// </summary>
-        public static string ImageUrl { get; } = "TODO";
+        public static string ImageUrl { get; } = "https://raw.githubusercontent.com/JKorf/Upbit.Net/main/Upbit.Net/Icon/icon.png";
 
         /// <summary>
         /// Url to the main website
@@ -44,7 +41,7 @@ namespace Upbit.Net
         /// Urls to the API documentation
         /// </summary>
         public static string[] ApiDocsUrl { get; } = new[] {
-            "https://docs.upbit.com/"
+            "https://global-docs.upbit.com/reference"
             };
 
         /// <summary>
@@ -96,13 +93,27 @@ namespace Upbit.Net
 
         private void Initialize()
         {
-            Upbit = new RateLimitGate("Upbit");
+            Upbit = new RateLimitGate("Endpoint");
+
+            RestTicker = new RateLimitGate("Ticker")
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+
+            Socket = new RateLimitGate("Socket")
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+
             Upbit.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             Upbit.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
+            RestTicker.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            RestTicker.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
+            Socket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            Socket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
         }
 
 
         internal IRateLimitGate Upbit { get; private set; }
+        internal IRateLimitGate Socket { get; private set; }
+        internal IRateLimitGate RestTicker { get; private set; }
 
     }
 }

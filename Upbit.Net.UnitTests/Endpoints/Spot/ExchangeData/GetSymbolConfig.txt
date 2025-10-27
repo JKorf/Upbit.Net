@@ -6,12 +6,12 @@ false
     "market": "KRW-BTC",
     "quote_currency": "KRW",
     "tick_size": 1000,
-    "supported_levels": ""
+    "supported_levels": ["1"]
   },
   {
     "market": "KRW-ETH",
     "quote_currency": "KRW",
     "tick_size": 1000,
-    "supported_levels": ""
+    "supported_levels": ["1"]
   }
 ]

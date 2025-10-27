@@ -43,6 +43,9 @@ namespace Upbit.Net
          => name switch
          {
              TradeEnvironmentNames.Live => Live,
+             "live-singapore" => Singapore,
+             "live-indonesia" => Indonesia,
+             "live-thailand" => Thailand,
              "" => Live,
              null => Live,
              _ => default
@@ -52,15 +55,39 @@ namespace Upbit.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name];
+        public static string[] All => [Live.Name, Singapore.Name, Indonesia.Name, Thailand.Name];
 
         /// <summary>
-        /// Live environment
+        /// Live South Korea environment
         /// </summary>
         public static UpbitEnvironment Live { get; }
             = new UpbitEnvironment(TradeEnvironmentNames.Live,
                                      UpbitApiAddresses.Default.RestClientAddress,
                                      UpbitApiAddresses.Default.SocketClientAddress);
+
+        /// <summary>
+        /// Live Singapore environment
+        /// </summary>
+        public static UpbitEnvironment Singapore { get; }
+            = new UpbitEnvironment("live-singapore",
+                                     UpbitApiAddresses.Singapore.RestClientAddress,
+                                     UpbitApiAddresses.Singapore.SocketClientAddress);
+
+        /// <summary>
+        /// Live Indonesia environment
+        /// </summary>
+        public static UpbitEnvironment Indonesia { get; }
+            = new UpbitEnvironment("live-indonesia",
+                                     UpbitApiAddresses.Indonesia.RestClientAddress,
+                                     UpbitApiAddresses.Indonesia.SocketClientAddress);
+
+        /// <summary>
+        /// Live Thailand environment
+        /// </summary>
+        public static UpbitEnvironment Thailand { get; }
+            = new UpbitEnvironment("live-thailand",
+                                     UpbitApiAddresses.Thailand.RestClientAddress,
+                                     UpbitApiAddresses.Thailand.SocketClientAddress);
 
         /// <summary>
         /// Create a custom environment

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Upbit.Net.Objects.Models
 {
@@ -31,7 +26,7 @@ namespace Upbit.Net.Objects.Models
         /// Supported book aggregate levels for KRW markets
         /// </summary>
         [JsonPropertyName("supported_levels")]
-        public int[] SupportedBookLevels { get; set; } = [];
+        public decimal[] SupportedBookLevels { get; set; } = [];
     }
 
 

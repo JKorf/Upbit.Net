@@ -1,18 +1,25 @@
-using Upbit.Net.Interfaces;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Spectre.Console;
 using System.Globalization;
+using Upbit.Net.Interfaces;
 
 var collection = new ServiceCollection();
 collection.AddUpbit();
+collection.AddLogging(x =>
+{
+    x.SetMinimumLevel(LogLevel.Trace);
+    x.AddProvider(new TraceLoggerProvider());
+});
 var provider = collection.BuildServiceProvider();
 
 var trackerFactory = provider.GetRequiredService<IUpbitTrackerFactory>();
 
 // Create and start the tracker, keep track of the last 10 minutes
-var tracker = trackerFactory.CreateTradeTracker(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), period: TimeSpan.FromMinutes(10));
-var result = await tracker.StartAsync();
+var tracker = trackerFactory.CreateTradeTracker(new SharedSymbol(TradingMode.Spot, "ETH", "KRW"), period: TimeSpan.FromMinutes(10));
+var result = await tracker.StartAsync(false);
 if (!result.Success)
 {
     Console.WriteLine(result);

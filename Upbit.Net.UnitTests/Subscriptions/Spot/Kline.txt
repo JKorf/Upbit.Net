@@ -1,0 +1,16 @@
+> [{"ticket": "|1|"},{"type": "candle.1m", "codes": ["KRW-ETH"]}]
+= 
+{
+  "type": "candle.1m",
+  "code": "KRW-ETH",
+  "candle_date_time_utc": "2025-01-02T04:28:05",
+  "candle_date_time_kst": "2025-01-02T13:28:05",
+  "opening_price": 142009000.00000000,
+  "high_price": 142009000.00000000,
+  "low_price": 142009000.00000000,
+  "trade_price": 142009000.00000000,
+  "candle_acc_trade_volume": 0.00606119,
+  "candle_acc_trade_price": 860743.5307100000000000,
+  "timestamp": 1735792085824,
+  "stream_type": "REALTIME"
+}

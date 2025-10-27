@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Upbit.Net.Enums;
 
 namespace Upbit.Net.Objects.Models
@@ -16,7 +12,7 @@ namespace Upbit.Net.Objects.Models
         /// <summary>
         /// Symbol name
         /// </summary>
-        [JsonPropertyName("market")]
+        [JsonPropertyName("code")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
@@ -7,6 +8,7 @@ using CryptoExchange.Net.OrderBook;
 using Microsoft.Extensions.Logging;
 using Upbit.Net.Clients;
 using Upbit.Net.Interfaces.Clients;
+using Upbit.Net.Objects.Models;
 using Upbit.Net.Objects.Options;
 
 namespace Upbit.Net.SymbolOrderBooks
@@ -18,7 +20,6 @@ namespace Upbit.Net.SymbolOrderBooks
     public class UpbitSpotSymbolOrderBook : SymbolOrderBook
     {
         private readonly bool _clientOwner;
-        private readonly IUpbitRestClient _restClient;
         private readonly IUpbitSocketClient _socketClient;
         private readonly TimeSpan _initialDataTimeout;
 
@@ -28,7 +29,7 @@ namespace Upbit.Net.SymbolOrderBooks
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public UpbitSpotSymbolOrderBook(string symbol, Action<UpbitOrderBookOptions>? optionsDelegate = null)
-            : this(symbol, optionsDelegate, null, null, null)
+            : this(symbol, optionsDelegate, null, null)
         {
             _clientOwner = true;
         }
@@ -39,13 +40,11 @@ namespace Upbit.Net.SymbolOrderBooks
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="optionsDelegate">Option configuration delegate</param>
         /// <param name="logger">Logger</param>
-        /// <param name="restClient">Rest client instance</param>
         /// <param name="socketClient">Socket client instance</param>
         public UpbitSpotSymbolOrderBook(
             string symbol,
             Action<UpbitOrderBookOptions>? optionsDelegate,
             ILoggerFactory? logger,
-            IUpbitRestClient? restClient,
             IUpbitSocketClient? socketClient) : base(logger, "Upbit", "Spot", symbol)
         {
             var options = UpbitOrderBookOptions.Default.Copy();
@@ -60,14 +59,29 @@ namespace Upbit.Net.SymbolOrderBooks
             _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
             _clientOwner = socketClient == null;
             _socketClient = socketClient ?? new UpbitSocketClient();
-            _restClient = restClient ?? new UpbitRestClient();
         }
 
         /// <inheritdoc />
         protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
         {
-            // XXX
-            throw new NotImplementedException();
+            var subResult = await _socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(Symbol, Levels ?? 15, HandleUpdate).ConfigureAwait(false);
+            if (!subResult)
+                return new CallResult<UpdateSubscription>(subResult.Error!);
+
+            Status = OrderBookStatus.Syncing;
+
+            var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
+            if (!setResult)
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+
+            return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
+        }
+
+        private void HandleUpdate(DataEvent<UpbitOrderBookUpdate> @event)
+        {
+            var bids = @event.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.BidPrice, Quantity = x.BidQuantity }).ToArray();
+            var asks = @event.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.AskPrice, Quantity = x.AskQuantity }).ToArray();
+            SetInitialOrderBook(@event.Data.Timestamp.Ticks, bids, asks);
         }
 
         /// <inheritdoc />
@@ -78,18 +92,14 @@ namespace Upbit.Net.SymbolOrderBooks
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            // XXX
-            throw new NotImplementedException();
+            return await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            if (_clientOwner)
-            {
-                _restClient?.Dispose();
+            if (_clientOwner)            
                 _socketClient?.Dispose();
-            }
 
             base.Dispose(disposing);
         }

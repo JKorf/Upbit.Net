@@ -2,7 +2,7 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Upbit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Upbit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Upbit.Net?style=for-the-badge)
 
-Upbit.Net is a client library for accessing the [Upbit REST and Websocket API](Upbit). 
+Upbit.Net is a client library for accessing the [Upbit REST and Websocket API](https://global-docs.upbit.com/reference/api-overview). 
 
 ## Features
 * Response data is mapped to descriptive models
@@ -32,9 +32,9 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ## Install the library
 
 ### NuGet 
-[![NuGet version](https://img.shields.io/nuget/v/Upbit.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Upbit.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Upbit.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Upbit.Net)
+[![NuGet version](https://img.shields.io/nuget/v/JKorf.Upbit.net.svg?style=for-the-badge)](https://www.nuget.org/packages/JKorf.Upbit.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/JKorf.Upbit.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/JKorf.Upbit.Net)
 
-	dotnet add package Upbit.Net
+	dotnet add package JKorf.Upbit.Net
 	
 ### GitHub packages
 Upbit.Net is available on [GitHub packages](https://github.com/JKorf/Upbit.Net/pkgs/nuget/Upbit.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
@@ -49,14 +49,14 @@ The NuGet package files are added along side the source with the latest GitHub r
 	```csharp
 	// Get the ETH/USDT ticker via rest request
 	var restClient = new UpbitRestClient();
-	var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+	var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
 	var lastPrice = tickerResult.Data.LastPrice;
 	```
 * Websocket streams
 	```csharp
 	// Subscribe to ETH/USDT ticker updates via the websocket API
 	var socketClient = new UpbitSocketClient();
-	var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
+	var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsync("USDT-ETH", (update) => 
 	{
 	  var lastPrice = update.Data.LastPrice;
 	});
@@ -105,14 +105,17 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ## Supported functionality
 
-### Spot
+### REST API
 |API|Supported|Location|
 |--|--:|--|
-|TODO|✓|`restClient.SpotApi.Account`|
-### Futures
+|Quotation API|✓|`restClient.SpotApi.ExchangeData`|
+|Exchange API|X||
+
+### Websocket API
 |API|Supported|Location|
 |--|--:|--|
-|TODO|✓|`restClient.FuturesApi.ExchangeData`|
+|Public API|✓|`socketClient.SpotApi`|
+|Private API|X||
 
 ## Support the project
 Any support is greatly appreciated.

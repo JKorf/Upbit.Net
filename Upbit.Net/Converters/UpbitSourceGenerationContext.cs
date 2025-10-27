@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 using Upbit.Net.Objects.Internal;
 using Upbit.Net.Objects.Models;
@@ -9,7 +7,11 @@ namespace Upbit.Net.Converters
 {
     [JsonSerializable(typeof(SocketTicket))]
     [JsonSerializable(typeof(SocketRequest))]
+    [JsonSerializable(typeof(SocketError))]
     [JsonSerializable(typeof(UpbitTradeUpdate))]
+    [JsonSerializable(typeof(UpbitTickerUpdate))]
+    [JsonSerializable(typeof(UpbitOrderBookUpdate))]
+    [JsonSerializable(typeof(UpbitKlineUpdate))]
 
     [JsonSerializable(typeof(UpbitSymbol[]))]
     [JsonSerializable(typeof(UpbitTrade[]))]

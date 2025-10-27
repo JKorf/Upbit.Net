@@ -27,11 +27,9 @@ namespace Upbit.Net.SymbolOrderBooks
             
             Spot = new OrderBookFactory<UpbitOrderBookOptions>(CreateSpot, Create);
         }
-
         
          /// <inheritdoc />
         public IOrderBookFactory<UpbitOrderBookOptions> Spot { get; }
-
 
         /// <inheritdoc />
         public ISymbolOrderBook Create(SharedSymbol symbol, Action<UpbitOrderBookOptions>? options = null)
@@ -39,13 +37,11 @@ namespace Upbit.Net.SymbolOrderBooks
             var symbolName = symbol.GetSymbol(UpbitExchange.FormatSymbol);
             return CreateSpot(symbolName, options);
         }
-
-        
+                
          /// <inheritdoc />
         public ISymbolOrderBook CreateSpot(string symbol, Action<UpbitOrderBookOptions>? options = null)
             => new UpbitSpotSymbolOrderBook(symbol, options, 
                                                           _serviceProvider.GetRequiredService<ILoggerFactory>(),
-                                                          _serviceProvider.GetRequiredService<IUpbitRestClient>(),
                                                           _serviceProvider.GetRequiredService<IUpbitSocketClient>());
 
 
