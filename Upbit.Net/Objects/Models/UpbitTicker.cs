@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using Upbit.Net.Enums;
 
 namespace Upbit.Net.Objects.Models
 {
@@ -17,57 +18,57 @@ namespace Upbit.Net.Objects.Models
         /// Trade date
         /// </summary>
         [JsonPropertyName("trade_date")]
-        public string TradeDate { get; set; } = string.Empty;
+        public string? TradeDate { get; set; }
         /// <summary>
         /// Trade time
         /// </summary>
         [JsonPropertyName("trade_time")]
-        public string TradeTime { get; set; } = string.Empty;
+        public string? TradeTime { get; set; }
         /// <summary>
         /// Trade date kst
         /// </summary>
         [JsonPropertyName("trade_date_kst")]
-        public string TradeDateKst { get; set; } = string.Empty;
+        public string? TradeDateKst { get; set; }
         /// <summary>
         /// Trade time kst
         /// </summary>
         [JsonPropertyName("trade_time_kst")]
-        public string TradeTimeKst { get; set; } = string.Empty;
+        public string? TradeTimeKst { get; set; }
         /// <summary>
         /// Trade timestamp
         /// </summary>
         [JsonPropertyName("trade_timestamp")]
-        public DateTime TradeTimestamp { get; set; }
+        public DateTime? TradeTimestamp { get; set; }
         /// <summary>
         /// Open price 24h ago
         /// </summary>
         [JsonPropertyName("opening_price")]
-        public decimal OpenPrice { get; set; }
+        public decimal? OpenPrice { get; set; }
         /// <summary>
         /// High price last 24h
         /// </summary>
         [JsonPropertyName("high_price")]
-        public decimal HighPrice { get; set; }
+        public decimal? HighPrice { get; set; }
         /// <summary>
         /// Low price last 24h
         /// </summary>
         [JsonPropertyName("low_price")]
-        public decimal LowPrice { get; set; }
+        public decimal? LowPrice { get; set; }
         /// <summary>
         /// Last trade price
         /// </summary>
         [JsonPropertyName("trade_price")]
-        public decimal LastPrice { get; set; }
+        public decimal? LastPrice { get; set; }
         /// <summary>
         /// Prev closing price
         /// </summary>
         [JsonPropertyName("prev_closing_price")]
-        public decimal PrevClosingPrice { get; set; }
+        public decimal? PrevClosingPrice { get; set; }
         /// <summary>
         /// Change
         /// </summary>
         [JsonPropertyName("change")]
-        public string Change { get; set; } = string.Empty;
+        public ChangeSide Change { get; set; }
         /// <summary>
         /// Price change
         /// </summary>
@@ -92,7 +93,7 @@ namespace Upbit.Net.Objects.Models
         /// Last trade volume
         /// </summary>
         [JsonPropertyName("trade_volume")]
-        public decimal LastVolume { get; set; }
+        public decimal? LastVolume { get; set; }
         /// <summary>
         /// Accumulated trade volume in quote asset since UTC 00:00
         /// </summary>
@@ -117,22 +118,22 @@ namespace Upbit.Net.Objects.Models
         /// Highest price last 52 weeks
         /// </summary>
         [JsonPropertyName("highest_52_week_price")]
-        public decimal HighPrice52Weeks { get; set; }
+        public decimal? HighPrice52Weeks { get; set; }
         /// <summary>
         /// Highest price 52 week date
         /// </summary>
         [JsonPropertyName("highest_52_week_date")]
-        public string HighPrice52WeeksDate { get; set; } = string.Empty;
+        public string? HighPrice52WeeksDate { get; set; }
         /// <summary>
         /// Lowest price last 52 weeks
         /// </summary>
         [JsonPropertyName("lowest_52_week_price")]
-        public decimal LowPrice52Weeks { get; set; }
+        public decimal? LowPrice52Weeks { get; set; }
         /// <summary>
         /// Lowest price 52 week date
         /// </summary>
         [JsonPropertyName("lowest_52_week_date")]
-        public string LowPrice52WeeksDate { get; set; } = string.Empty;
+        public string? LowPrice52WeeksDate { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
