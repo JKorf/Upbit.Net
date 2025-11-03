@@ -45,7 +45,7 @@ namespace Upbit.Net
         /// <inheritdoc />
         public bool CanCreateTradeTracker(SharedSymbol symbol)
         {
-            return symbol.TradingMode != TradingMode.Spot;
+            return symbol.TradingMode == TradingMode.Spot;
         }
 
         /// <inheritdoc />
