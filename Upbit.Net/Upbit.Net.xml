@@ -1927,6 +1927,11 @@
             Type of exchange
             </summary>
         </member>
+        <member name="P:Upbit.Net.UpbitExchange.AssetAliases">
+            <summary>
+            Aliases for Upbit assets
+            </summary>
+        </member>
         <member name="M:Upbit.Net.UpbitExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to an Upbit recognized symbol 
