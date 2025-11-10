@@ -17,6 +17,9 @@ namespace Upbit.Net.SymbolOrderBooks
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <inheritdoc />
+        public string ExchangeName => UpbitExchange.ExchangeName;
+
         /// <summary>
         /// ctor
         /// </summary>

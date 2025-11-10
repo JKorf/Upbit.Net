@@ -8,7 +8,7 @@ namespace Upbit.Net.Interfaces
     /// <summary>
     /// Upbit local order book factory
     /// </summary>
-    public interface IUpbitOrderBookFactory
+    public interface IUpbitOrderBookFactory : IExchangeService
     {
         /// <summary>
         /// Spot order book factory methods

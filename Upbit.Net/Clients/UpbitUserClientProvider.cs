@@ -20,6 +20,9 @@ namespace Upbit.Net.Clients
         private readonly HttpClient _httpClient;
         private readonly ILoggerFactory? _loggerFactory;
 
+        /// <inheritdoc />
+        public string ExchangeName => UpbitExchange.ExchangeName;
+
         /// <summary>
         /// ctor
         /// </summary>

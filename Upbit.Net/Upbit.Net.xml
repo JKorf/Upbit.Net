@@ -188,6 +188,9 @@
         <member name="T:Upbit.Net.Clients.UpbitUserClientProvider">
             <inheritdoc />
         </member>
+        <member name="P:Upbit.Net.Clients.UpbitUserClientProvider.ExchangeName">
+            <inheritdoc />
+        </member>
         <member name="M:Upbit.Net.Clients.UpbitUserClientProvider.#ctor(System.Action{Upbit.Net.Objects.Options.UpbitOptions})">
             <summary>
             ctor
@@ -1782,6 +1785,9 @@
             <summary>
             Upbit order book factory
             </summary>
+        </member>
+        <member name="P:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.ExchangeName">
+            <inheritdoc />
         </member>
         <member name="M:Upbit.Net.SymbolOrderBooks.UpbitOrderBookFactory.#ctor(System.IServiceProvider)">
             <summary>
