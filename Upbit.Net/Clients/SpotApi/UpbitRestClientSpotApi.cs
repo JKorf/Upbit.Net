@@ -14,6 +14,9 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Converters.MessageParsing;
+using System.Net.Http.Headers;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using Upbit.Net.Clients.MessageHandlers;
 
 namespace Upbit.Net.Clients.SpotApi
 {
@@ -24,7 +27,7 @@ namespace Upbit.Net.Clients.SpotApi
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
-
+        protected override IRestMessageHandler MessageHandler { get; } = new UpbitRestMessageHandler(UpbitErrors.Errors);
         public new UpbitRestOptions ClientOptions => (UpbitRestOptions)base.ClientOptions;
         #endregion
 
@@ -71,7 +74,7 @@ namespace Upbit.Net.Clients.SpotApi
             return result;
         }
 
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
                 return new ServerError(ErrorInfo.Unknown, exception: exception);

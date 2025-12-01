@@ -12,14 +12,17 @@ namespace Upbit.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [Test]
-        public async Task ValidateSpotExchangeDataSubscriptions()
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotExchangeDataSubscriptions(bool useUpdatedDeserialization)
         {
             var factory = new LoggerFactory();
             factory.AddProvider(new TraceLoggerProvider());
 
             var client = new UpbitSocketClient(Options.Create(new Objects.Options.UpbitSocketOptions
             {
+                UseUpdatedDeserialization = useUpdatedDeserialization,
                 ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
             }), factory);
             var tester = new SocketSubscriptionValidator<UpbitSocketClient>(client, "Subscriptions/Spot", "wss://api.upbit.com");

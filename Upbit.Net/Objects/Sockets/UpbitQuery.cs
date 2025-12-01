@@ -20,11 +20,12 @@ namespace Upbit.Net.Objects.Sockets
             TimeoutBehavior = TimeoutBehavior.Succeed;
 
             MessageMatcher = MessageMatcher.Create<SocketError>("error", HandleError);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<SocketError>("error", HandleError);
         }
 
-        private CallResult HandleError(SocketConnection connection, DataEvent<SocketError> @event)
+        private CallResult HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, SocketError @event)
         {
-            return new CallResult(new ServerError(@event.Data.Error.Name, _client.GetErrorInfo(@event.Data.Error.Name, @event.Data.Error.Message)));
+            return new CallResult(new ServerError(@event.Error.Name, _client.GetErrorInfo(@event.Error.Name, @event.Error.Message)));
         }
     }
 }
