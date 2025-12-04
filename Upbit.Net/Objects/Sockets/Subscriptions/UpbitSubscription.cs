@@ -12,7 +12,7 @@ using Upbit.Net.Objects.Models;
 namespace Upbit.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class UpbitSubscription<T> : Subscription<object, object> where T : UpbitSocketUpdate
+    internal class UpbitSubscription<T> : Subscription where T : UpbitSocketUpdate
     {
         private readonly TimeSpan _waitForErrorTimeout;
         private readonly SocketApiClient _client;
