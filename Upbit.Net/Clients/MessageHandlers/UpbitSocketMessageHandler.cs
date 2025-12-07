@@ -18,25 +18,22 @@ namespace Upbit.Net.Clients.MessageHandlers
             AddTopicMapping<UpbitTradeUpdate>(x => x.Symbol);
         }
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [ 
-            new MessageEvaluator {
-                Priority = 1,
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [ 
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("type"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("type")!
+                TypeIdentifierCallback = x => x.FieldValue("type")!
             },
 
-             new MessageEvaluator {
-                Priority = 2,
+             new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("status"),
                 ],
                 StaticIdentifier = "status"
             },
 
-             new MessageEvaluator {
-                Priority = 3,
+             new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("name") { Depth = 2 },
                 ],

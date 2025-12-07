@@ -6,13 +6,13 @@ using NUnit.Framework;
 using System.Threading.Tasks;
 using Upbit.Net.Clients;
 using Upbit.Net.Objects.Models;
+using Upbit.Net.Objects.Options;
 
 namespace Upbit.Net.UnitTests
 {
     [TestFixture]
     public class SocketSubscriptionTests
     {
-
         [TestCase(false)]
         [TestCase(true)]
         public async Task ValidateSpotExchangeDataSubscriptions(bool useUpdatedDeserialization)
