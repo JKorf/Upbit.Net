@@ -1,5 +1,5 @@
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
 using Upbit.Net.Interfaces.Clients.SpotApi;
 
 namespace Upbit.Net.Interfaces.Clients

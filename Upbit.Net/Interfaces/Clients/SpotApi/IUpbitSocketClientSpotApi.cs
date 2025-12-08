@@ -2,11 +2,11 @@ using CryptoExchange.Net.Objects;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using Upbit.Net.Objects.Models;
 using System.Collections.Generic;
 using Upbit.Net.Enums;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Upbit.Net.Interfaces.Clients.SpotApi
 {

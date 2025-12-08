@@ -113,7 +113,7 @@
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SharedClient">
@@ -1737,13 +1737,13 @@
             ctor
             </summary>
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,`0)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,`0)">
             <inheritdoc />
         </member>
         <member name="T:Upbit.Net.Objects.UpbitApiAddresses">
@@ -1999,14 +1999,14 @@
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.Clients.ICryptoRestClient)">
             <summary>
             Get the Upbit REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.Clients.ICryptoSocketClient)">
             <summary>
             Get the Upbit Websocket Api client
             </summary>
