@@ -11,15 +11,12 @@ namespace Upbit.Net.UnitTests
     [TestFixture]
     public class RestRequestTests
     {
-
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateExchangeDataAccountCalls(bool useUpdatedDeserialization)
+        [Test]
+        public async Task ValidateExchangeDataAccountCalls()
         {
             var client = new UpbitRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.UseUpdatedDeserialization = useUpdatedDeserialization;
             });
             var tester = new RestRequestValidator<UpbitRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.upbit.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetTradeHistoryAsync("123"), "GetTradeHistory");

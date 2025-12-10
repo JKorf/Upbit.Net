@@ -10,7 +10,7 @@
     <PackageVersion>1.2.0</PackageVersion>
     <AssemblyVersion>1.2.0</AssemblyVersion>
     <FileVersion>1.2.0</FileVersion>
-    <Description>JKorf.Upbit.Net is a client library for accessing the Upbit REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
+    <Description>JKorf.Upbit.Net is a high performance client library for accessing the Upbit REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Upbit;Upbit.Net;Upbit.com;Upbit Client;Upbit API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net</PackageTags>
     <RepositoryType>git</RepositoryType>

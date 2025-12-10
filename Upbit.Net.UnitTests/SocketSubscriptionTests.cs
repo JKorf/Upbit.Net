@@ -23,7 +23,6 @@ namespace Upbit.Net.UnitTests
             var client = new UpbitSocketClient(Options.Create(new Objects.Options.UpbitSocketOptions
             {
                 UseUpdatedDeserialization = useUpdatedDeserialization,
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
             }), factory);
             var tester = new SocketSubscriptionValidator<UpbitSocketClient>(client, "Subscriptions/Spot", "wss://api.upbit.com");
             await tester.ValidateAsync<UpbitTradeUpdate>((client, handler) => client.SpotApi.SubscribeToTradeUpdatesAsync("KRW-ETH", handler), "Trades", ignoreProperties: ["trade_date", "trade_time"]);
