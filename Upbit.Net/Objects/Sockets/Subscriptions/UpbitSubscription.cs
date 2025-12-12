@@ -44,6 +44,8 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
             _level = level;
             _waitForErrorTimeout = waitForErrorTimeout;
 
+            IndividualSubscriptionCount = symbols.Length;
+
             MessageMatcher = MessageMatcher.Create<T>(_symbols.Select(x => _topic + x).ToArray(), DoHandleMessage);
             MessageRouter = MessageRouter.CreateWithTopicFilters<T>(_topic, _symbols, DoHandleMessage);
         }
