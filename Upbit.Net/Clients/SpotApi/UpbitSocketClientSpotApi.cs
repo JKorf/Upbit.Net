@@ -81,7 +81,7 @@ namespace Upbit.Net.Clients.SpotApi
             var internalHandler = new Action<DateTime, string?, UpbitTradeUpdate>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<UpbitTradeUpdate>(data, receiveTime, originalData)
+                    new DataEvent<UpbitTradeUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithDataTimestamp(data.Timestamp)
                         .WithStreamId("trade")
@@ -103,7 +103,7 @@ namespace Upbit.Net.Clients.SpotApi
             var internalHandler = new Action<DateTime, string?, UpbitTickerUpdate>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<UpbitTickerUpdate>(data, receiveTime, originalData)
+                    new DataEvent<UpbitTickerUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithDataTimestamp(data.Timestamp)
                         .WithStreamId("ticker")
@@ -125,7 +125,7 @@ namespace Upbit.Net.Clients.SpotApi
             var internalHandler = new Action<DateTime, string?, UpbitOrderBookUpdate>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<UpbitOrderBookUpdate>(data, receiveTime, originalData)
+                    new DataEvent<UpbitOrderBookUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithDataTimestamp(data.Timestamp)
                         .WithStreamId("orderbook")
@@ -147,7 +147,7 @@ namespace Upbit.Net.Clients.SpotApi
             var internalHandler = new Action<DateTime, string?, UpbitKlineUpdate>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<UpbitKlineUpdate>(data, receiveTime, originalData)
+                    new DataEvent<UpbitKlineUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithDataTimestamp(data.Timestamp)
                         .WithStreamId("candle." + EnumConverter.GetString(interval))
