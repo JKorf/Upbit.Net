@@ -583,6 +583,11 @@
             Active
             </summary>
         </member>
+        <member name="F:Upbit.Net.Enums.SymbolStatus.PreDelisting">
+            <summary>
+            Pre delisting
+            </summary>
+        </member>
         <member name="F:Upbit.Net.Enums.SymbolStatus.Delisted">
             <summary>
             Delisted
