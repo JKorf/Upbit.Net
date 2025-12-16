@@ -71,7 +71,6 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
         {
             _handler.Invoke(receiveTime, originalData, message);
-            //_handler.Invoke(message.As(message.Data!, _topic, null, message.Data.StreamType == Enums.StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             return new CallResult(null);
         }
     }
