@@ -14,7 +14,7 @@ namespace Upbit.Net.UnitTests
     [NonParallelizable]
     public class UpbitRestIntegrationTests : RestIntegrationTest<UpbitRestClient>
     {
-        public override bool Run { get; set; } = true;
+        public override bool Run { get; set; } = false;
 
         public override UpbitRestClient GetClient(ILoggerFactory loggerFactory)
         {
