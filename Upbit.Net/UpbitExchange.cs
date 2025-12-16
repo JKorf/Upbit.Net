@@ -113,8 +113,8 @@ namespace Upbit.Net
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
 
             Socket = new RateLimitGate("Socket")
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 4, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 4, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
 
             Upbit.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             Upbit.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);

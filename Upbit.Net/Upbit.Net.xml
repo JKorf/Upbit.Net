@@ -113,7 +113,7 @@
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SharedClient">
@@ -583,6 +583,11 @@
             Active
             </summary>
         </member>
+        <member name="F:Upbit.Net.Enums.SymbolStatus.PreDelisting">
+            <summary>
+            Pre delisting
+            </summary>
+        </member>
         <member name="F:Upbit.Net.Enums.SymbolStatus.Delisted">
             <summary>
             Delisted
@@ -800,7 +805,7 @@
             Subscribe to live trade updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -810,7 +815,7 @@
             Subscribe to live trade updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -820,7 +825,7 @@
             Subscribe to live symbol ticker updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -830,7 +835,7 @@
             Subscribe to live symbol ticker updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -840,7 +845,7 @@
             Subscribe to live order book updates
             <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
             <param name="aggregation">Aggregation level</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -852,7 +857,7 @@
             Subscribe to live order book updates
             <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
             <param name="aggregation">Aggregation level</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -864,7 +869,7 @@
             Subscribe to live kline/candlestick updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe, for example `ETH-KRW`</param>
+            <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="interval">Interval (max 4 hours)</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -875,7 +880,7 @@
             Subscribe to live kline/candlestick updates
             <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe, for example `ETH-KRW`</param>
+            <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="interval">Interval (max 4 hours)</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -1732,18 +1737,18 @@
         <member name="T:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,CryptoExchange.Net.Clients.SocketApiClient,System.String,System.String[],System.String[],System.Nullable{System.Decimal},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean,System.TimeSpan)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,CryptoExchange.Net.Clients.SocketApiClient,System.String,System.String[],System.String[],System.Nullable{System.Decimal},System.Action{System.DateTime,System.String,`0},System.Boolean,System.TimeSpan)">
             <summary>
             ctor
             </summary>
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{`0})">
+        <member name="M:Upbit.Net.Objects.Sockets.Subscriptions.UpbitSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,`0)">
             <inheritdoc />
         </member>
         <member name="T:Upbit.Net.Objects.UpbitApiAddresses">
@@ -1999,14 +2004,14 @@
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.Clients.ICryptoRestClient)">
             <summary>
             Get the Upbit REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Upbit(CryptoExchange.Net.Interfaces.Clients.ICryptoSocketClient)">
             <summary>
             Get the Upbit Websocket Api client
             </summary>
@@ -2036,6 +2041,9 @@
         </member>
         <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.Bind_UpbitOptions(Microsoft.Extensions.Configuration.IConfiguration,System.Object)">
             <summary>Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.</summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.TryGetConfigurationValue(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String@)">
+            <summary>Tries to get the configuration value for the specified key.</summary>
         </member>
         <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.ValidateConfigurationKeys(System.Type,System.Lazy{System.Collections.Generic.HashSet{System.String}},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Configuration.BinderOptions)">
             <summary>If required by the binder options, validates that there are no unknown keys in the input configuration object.</summary>

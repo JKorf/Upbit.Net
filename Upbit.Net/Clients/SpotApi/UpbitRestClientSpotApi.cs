@@ -2,7 +2,6 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +13,9 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Converters.MessageParsing;
+using System.Net.Http.Headers;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using Upbit.Net.Clients.MessageHandlers;
 
 namespace Upbit.Net.Clients.SpotApi
 {
@@ -24,7 +26,7 @@ namespace Upbit.Net.Clients.SpotApi
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
-
+        protected override IRestMessageHandler MessageHandler { get; } = new UpbitRestMessageHandler(UpbitErrors.Errors);
         public new UpbitRestOptions ClientOptions => (UpbitRestOptions)base.ClientOptions;
         #endregion
 
@@ -69,22 +71,6 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             return result;
-        }
-
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("error").Property("name"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("error").Property("message"));
-            if (msg == null)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            if (code == null)
-                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
-
-            return new ServerError(code.Value, GetErrorInfo(code.Value, msg), exception);
         }
 
         /// <inheritdoc />

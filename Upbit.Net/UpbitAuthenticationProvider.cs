@@ -6,6 +6,8 @@ namespace Upbit.Net
 {
     internal class UpbitAuthenticationProvider : AuthenticationProvider
     {
+        public override ApiCredentialsType[] SupportedCredentialTypes => [];
+
         public UpbitAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }

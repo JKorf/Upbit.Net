@@ -2,6 +2,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -9,6 +10,7 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Upbit.Net.Clients.MessageHandlers;
 using Upbit.Net.Enums;
 using Upbit.Net.Interfaces.Clients.SpotApi;
 using Upbit.Net.Objects.Models;
@@ -61,6 +64,8 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(UpbitExchange._serializerContext);
 
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new UpbitSocketMessageHandler();
+
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new UpbitAuthenticationProvider(credentials);
@@ -73,7 +78,18 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new UpbitSubscription<UpbitTradeUpdate>(_logger, this, "trade", symbols.ToArray(), null, null, onMessage, false, _waitForErrorTimeout);
+            var internalHandler = new Action<DateTime, string?, UpbitTradeUpdate>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<UpbitTradeUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
+                        .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(data.Timestamp)
+                        .WithStreamId("trade")
+                        .WithSymbol(data.Symbol)
+                    );
+            });
+
+            var subscription = new UpbitSubscription<UpbitTradeUpdate>(_logger, this, "trade", symbols.ToArray(), null, null, internalHandler, false, _waitForErrorTimeout);
             return await SubscribeAsync(BaseAddress.AppendPath("websocket/v1"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -84,7 +100,18 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTickerUpdate>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new UpbitSubscription<UpbitTickerUpdate>(_logger, this, "ticker", symbols.ToArray(), null, null, onMessage, false, _waitForErrorTimeout);
+            var internalHandler = new Action<DateTime, string?, UpbitTickerUpdate>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<UpbitTickerUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
+                        .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(data.Timestamp)
+                        .WithStreamId("ticker")
+                        .WithSymbol(data.Symbol)
+                    );
+            });
+
+            var subscription = new UpbitSubscription<UpbitTickerUpdate>(_logger, this, "ticker", symbols.ToArray(), null, null, internalHandler, false, _waitForErrorTimeout);
             return await SubscribeAsync(BaseAddress.AppendPath("websocket/v1"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -95,7 +122,18 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int levels, Action<DataEvent<UpbitOrderBookUpdate>> onMessage, decimal? aggregation = null, CancellationToken ct = default)
         {
-            var subscription = new UpbitSubscription<UpbitOrderBookUpdate>(_logger, this, "orderbook", symbols.ToArray(), symbols.Select(x => x + "." + levels).ToArray(), aggregation, onMessage, false, _waitForErrorTimeout);
+            var internalHandler = new Action<DateTime, string?, UpbitOrderBookUpdate>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<UpbitOrderBookUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
+                        .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(data.Timestamp)
+                        .WithStreamId("orderbook")
+                        .WithSymbol(data.Symbol)
+                    );
+            });
+
+            var subscription = new UpbitSubscription<UpbitOrderBookUpdate>(_logger, this, "orderbook", symbols.ToArray(), symbols.Select(x => x + "." + levels).ToArray(), aggregation, internalHandler, false, _waitForErrorTimeout);
             return await SubscribeAsync(BaseAddress.AppendPath("websocket/v1"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -106,7 +144,18 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<UpbitKlineUpdate>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new UpbitSubscription<UpbitKlineUpdate>(_logger, this, "candle." + EnumConverter.GetString(interval), symbols.ToArray(), null, null, onMessage, false, _waitForErrorTimeout);
+            var internalHandler = new Action<DateTime, string?, UpbitKlineUpdate>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<UpbitKlineUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
+                        .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(data.Timestamp)
+                        .WithStreamId("candle." + EnumConverter.GetString(interval))
+                        .WithSymbol(data.Symbol)
+                    );
+            });
+
+            var subscription = new UpbitSubscription<UpbitKlineUpdate>(_logger, this, "candle." + EnumConverter.GetString(interval), symbols.ToArray(), null, null, internalHandler, false, _waitForErrorTimeout);
             return await SubscribeAsync(BaseAddress.AppendPath("websocket/v1"), subscription, ct).ConfigureAwait(false);
         }
 

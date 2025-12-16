@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Interfaces.Clients;
 using Upbit.Net.Clients;
 using Upbit.Net.Interfaces.Clients;
 

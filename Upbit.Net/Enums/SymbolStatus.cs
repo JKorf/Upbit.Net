@@ -21,6 +21,11 @@ namespace Upbit.Net.Enums
         [Map("ACTIVE")]
         Active,
         /// <summary>
+        /// Pre delisting
+        /// </summary>
+        [Map("PREDELISTING")]
+        PreDelisting,
+        /// <summary>
         /// Delisted
         /// </summary>
         [Map("DELISTED")]

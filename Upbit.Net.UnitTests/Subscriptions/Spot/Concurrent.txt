@@ -1,0 +1,6 @@
+>1 [{"ticket": "|1|"},{"type": "candle.5m", "codes": ["KRW-ETH"]}]
+>2 [{"ticket": "|1|"},{"type": "candle.60m", "codes": ["KRW-ETH"]}]
+=1 { "type": "candle.5m", "code": "KRW-ETH" }
+=2 { "type": "candle.60m", "code": "KRW-ETH" }
+
+
