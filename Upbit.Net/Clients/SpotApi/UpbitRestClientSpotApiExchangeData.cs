@@ -153,7 +153,7 @@ namespace Upbit.Net.Clients.SpotApi
             var parameters = new ParameterCollection();
             parameters.Add("market", symbol);
             parameters.AddOptional("count", limit);
-            parameters.AddOptional("to", endTime?.ToString("yyyy-MM-ddThh:mm:ssZ"));
+            parameters.AddOptional("to", endTime?.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             var urlPath = "v1/candles/";
             var intInterval = (int)interval;
             if (interval == KlineInterval.OneSecond)
