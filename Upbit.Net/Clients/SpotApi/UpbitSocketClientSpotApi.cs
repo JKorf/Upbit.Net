@@ -80,10 +80,12 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var internalHandler = new Action<DateTime, string?, UpbitTradeUpdate>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<UpbitTradeUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                         .WithStreamId("trade")
                         .WithSymbol(data.Symbol)
                     );
@@ -102,10 +104,12 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var internalHandler = new Action<DateTime, string?, UpbitTickerUpdate>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<UpbitTickerUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                         .WithStreamId("ticker")
                         .WithSymbol(data.Symbol)
                     );
@@ -124,10 +128,12 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var internalHandler = new Action<DateTime, string?, UpbitOrderBookUpdate>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<UpbitOrderBookUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                         .WithStreamId("orderbook")
                         .WithSymbol(data.Symbol)
                     );
@@ -146,10 +152,12 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var internalHandler = new Action<DateTime, string?, UpbitKlineUpdate>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<UpbitKlineUpdate>(UpbitExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(data.StreamType == StreamType.Snapshot ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                         .WithStreamId("candle." + EnumConverter.GetString(interval))
                         .WithSymbol(data.Symbol)
                     );
@@ -178,9 +186,6 @@ namespace Upbit.Net.Clients.SpotApi
 
             return type + symbol;
         }
-
-        /// <inheritdoc />
-        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
 
         /// <inheritdoc />
         public IUpbitSocketClientSpotApiShared SharedClient => this;

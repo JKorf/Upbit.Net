@@ -25,12 +25,6 @@
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetServerTimestampAsync">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>

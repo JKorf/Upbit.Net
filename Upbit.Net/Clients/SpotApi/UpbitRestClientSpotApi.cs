@@ -23,8 +23,6 @@ namespace Upbit.Net.Clients.SpotApi
     internal partial class UpbitRestClientSpotApi : RestApiClient, IUpbitRestClientSpotApi
     {
         #region fields 
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
-
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
         protected override IRestMessageHandler MessageHandler { get; } = new UpbitRestMessageHandler(UpbitErrors.Errors);
         public new UpbitRestOptions ClientOptions => (UpbitRestOptions)base.ClientOptions;
@@ -76,14 +74,6 @@ namespace Upbit.Net.Clients.SpotApi
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp, ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval, _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null) 

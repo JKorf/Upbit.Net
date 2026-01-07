@@ -81,7 +81,7 @@ namespace Upbit.Net.SymbolOrderBooks
         {
             var bids = @event.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.BidPrice, Quantity = x.BidQuantity }).ToArray();
             var asks = @event.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.AskPrice, Quantity = x.AskQuantity }).ToArray();
-            SetInitialOrderBook(@event.Data.Timestamp.Ticks, bids, asks);
+            SetInitialOrderBook(@event.Data.Timestamp.Ticks, bids, asks, @event.DataTime, @event.DataTimeLocal);
         }
 
         /// <inheritdoc />
