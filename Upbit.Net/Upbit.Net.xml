@@ -107,9 +107,6 @@
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
-            <inheritdoc />
-        </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SharedClient">
             <inheritdoc />
         </member>
