@@ -18,6 +18,19 @@ namespace Upbit.Net
     public static class UpbitExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "Upbit",
+                "Upbit",
+                "https://raw.githubusercontent.com/JKorf/Upbit.Net/main/Upbit.Net/Icon/icon.png",
+                "https://www.upbit.com",
+                ["https://global-docs.upbit.com/reference"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "Upbit";

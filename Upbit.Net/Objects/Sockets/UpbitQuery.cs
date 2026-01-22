@@ -19,7 +19,6 @@ namespace Upbit.Net.Objects.Sockets
             RequestTimeout = waitForErrorTimeout;
             TimeoutBehavior = TimeoutBehavior.Succeed;
 
-            MessageMatcher = MessageMatcher.Create<SocketError>("error", HandleError);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<SocketError>("error", HandleError);
         }
 

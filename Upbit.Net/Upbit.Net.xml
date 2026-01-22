@@ -13,9 +13,6 @@
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.ExchangeName">
             <inheritdoc />
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.CreateAccessor">
-            <inheritdoc />
-        </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitRestClientSpotApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -71,9 +68,6 @@
             ctor
             </summary>
         </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
-        </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -102,9 +96,6 @@
             <inheritdoc />
         </member>
         <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="P:Upbit.Net.Clients.SpotApi.UpbitSocketClientSpotApi.SharedClient">
@@ -1897,6 +1888,11 @@
         <member name="T:Upbit.Net.UpbitExchange">
             <summary>
             Upbit exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:Upbit.Net.UpbitExchange.Metadata">
+            <summary>
+            Platform metadata
             </summary>
         </member>
         <member name="P:Upbit.Net.UpbitExchange.ExchangeName">

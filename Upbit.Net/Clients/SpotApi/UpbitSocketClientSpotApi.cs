@@ -33,11 +33,6 @@ namespace Upbit.Net.Clients.SpotApi
     internal partial class UpbitSocketClientSpotApi : SocketApiClient, IUpbitSocketClientSpotApi
     {
         #region fields
-        private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
-        private static readonly MessagePath _symbolPath = MessagePath.Get().Property("code");
-        private static readonly MessagePath _errorPath = MessagePath.Get().Property("error").Property("name");
-        private static readonly MessagePath _statusPath = MessagePath.Get().Property("status");
-
         private readonly TimeSpan _waitForErrorTimeout;
 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
@@ -59,8 +54,6 @@ namespace Upbit.Net.Clients.SpotApi
         }
         #endregion
 
-        /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(UpbitExchange._serializerContext);
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(UpbitExchange._serializerContext);
 
@@ -165,26 +158,6 @@ namespace Upbit.Net.Clients.SpotApi
 
             var subscription = new UpbitSubscription<UpbitKlineUpdate>(_logger, this, "candle." + EnumConverter.GetString(interval), symbols.ToArray(), null, null, internalHandler, false, _waitForErrorTimeout);
             return await SubscribeAsync(BaseAddress.AppendPath("websocket/v1"), subscription, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var type = message.GetValue<string>(_typePath);
-            var symbol = message.GetValue<string>(_symbolPath);
-
-            if (type == null)
-            {
-                var status = message.GetValue<string>(_statusPath);
-                if (status != null)
-                    return "status";
-
-                var error = message.GetValue<string>(_errorPath);
-                if (error != null)
-                    return "error";
-            }
-
-            return type + symbol;
         }
 
         /// <inheritdoc />

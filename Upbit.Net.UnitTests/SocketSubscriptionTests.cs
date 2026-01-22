@@ -13,16 +13,14 @@ namespace Upbit.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateSpotExchangeDataSubscriptions(bool useUpdatedDeserialization)
+        [Test]
+        public async Task ValidateSpotExchangeDataSubscriptions()
         {
             var factory = new LoggerFactory();
             factory.AddProvider(new TraceLoggerProvider());
 
             var client = new UpbitSocketClient(Options.Create(new Objects.Options.UpbitSocketOptions
             {
-                UseUpdatedDeserialization = useUpdatedDeserialization,
             }), factory);
             var tester = new SocketSubscriptionValidator<UpbitSocketClient>(client, "Subscriptions/Spot", "wss://api.upbit.com");
             await tester.ValidateAsync<UpbitTradeUpdate>((client, handler) => client.SpotApi.SubscribeToTradeUpdatesAsync("KRW-ETH", handler), "Trades", ignoreProperties: ["trade_date", "trade_time"]);

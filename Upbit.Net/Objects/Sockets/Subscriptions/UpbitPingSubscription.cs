@@ -12,7 +12,6 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
         /// </summary>
         public UpbitPingSubscription(ILogger logger) : base(logger, false)
         {
-            MessageMatcher = MessageMatcher.Create<object>("status");
             MessageRouter = MessageRouter.CreateWithoutHandler<object>("status");
         }
     }
