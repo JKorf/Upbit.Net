@@ -64,7 +64,7 @@ namespace Upbit.Net.Clients
         /// <inheritdoc />
         public IUpbitRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, UpbitEnvironment? environment = null)
         {
-            if (!_restClients.TryGetValue(userIdentifier, out var client))
+            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
 
             return client;
@@ -73,7 +73,7 @@ namespace Upbit.Net.Clients
         /// <inheritdoc />
         public IUpbitSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, UpbitEnvironment? environment = null)
         {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client))
+            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
 
             return client;
