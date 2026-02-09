@@ -12,8 +12,8 @@ namespace Upbit.Net.Clients
     /// <inheritdoc />
     public class UpbitUserClientProvider : IUpbitUserClientProvider
     {
-        private static ConcurrentDictionary<string, IUpbitRestClient> _restClients = new ConcurrentDictionary<string, IUpbitRestClient>();
-        private static ConcurrentDictionary<string, IUpbitSocketClient> _socketClients = new ConcurrentDictionary<string, IUpbitSocketClient>();
+        private ConcurrentDictionary<string, IUpbitRestClient> _restClients = new ConcurrentDictionary<string, IUpbitRestClient>();
+        private ConcurrentDictionary<string, IUpbitSocketClient> _socketClients = new ConcurrentDictionary<string, IUpbitSocketClient>();
         
         private readonly IOptions<UpbitRestOptions> _restOptions;
         private readonly IOptions<UpbitSocketOptions> _socketOptions;
