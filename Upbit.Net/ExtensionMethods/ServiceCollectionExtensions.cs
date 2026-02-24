@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
+using System.Threading;
 using Upbit.Net;
 using Upbit.Net.Clients;
 using Upbit.Net.Interfaces;
@@ -95,8 +96,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new UpbitRestClient(client, serviceProvider.GetRequiredService<ILoggerFactory>(), serviceProvider.GetRequiredService<IOptions<UpbitRestOptions>>());
             }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
                 var options = serviceProvider.GetRequiredService<IOptions<UpbitRestOptions>>().Value;
-                return LibraryHelpers.CreateHttpClientMessageHandler(options.Proxy, options.HttpKeepAliveInterval);
-            });
+                return LibraryHelpers.CreateHttpClientMessageHandler(options);
+            }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
             services.Add(new ServiceDescriptor(typeof(IUpbitSocketClient), x => { return new UpbitSocketClient(x.GetRequiredService<IOptions<UpbitSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
@@ -106,7 +107,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IUpbitTrackerFactory, UpbitTrackerFactory>();
             services.AddSingleton<IUpbitUserClientProvider, UpbitUserClientProvider>(x =>
                 new UpbitUserClientProvider(
-                    x.GetRequiredService<HttpClient>(),
+                    x.GetRequiredService<IHttpClientFactory>().CreateClient(typeof(IUpbitRestClient).Name),
                     x.GetRequiredService<ILoggerFactory>(),
                     x.GetRequiredService<IOptions<UpbitRestOptions>>(),
                     x.GetRequiredService<IOptions<UpbitSocketOptions>>()));
