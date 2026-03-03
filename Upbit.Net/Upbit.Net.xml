@@ -693,7 +693,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetSymbolsAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Get list of supported symbols
-            <para><a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /><br />
+            Endpoint:<br />
+            GET /v1/market/all
+            </para>
             </summary>
             <param name="includeNotifications">Whether to include events</param>
             <param name="ct">Cancellation token</param>
@@ -701,7 +706,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             Get trade history
-            <para><a href="https://docs.upbit.com/kr/reference/list-pair-trades" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-pair-trades" /><br />
+            Endpoint:<br />
+            GET /v1/trades/ticks
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `USDT-ETH`</param>
             <param name="endTime">Filter by endTime</param>
@@ -712,7 +722,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get price ticker info
-            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+            Endpoint:<br />
+            GET /v1/ticker
+            </para>
             </summary>
             <param name="symbol">The symbols, for example `USDT-ETH`</param>
             <param name="ct">Cancellation token</param>
@@ -720,7 +735,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get price ticker info
-            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+            Endpoint:<br />
+            GET /v1/ticker
+            </para>
             </summary>
             <param name="symbols">The symbols, for example `USDT-ETH`</param>
             <param name="ct">Cancellation token</param>
@@ -728,7 +748,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetTickersByQuoteAssetsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get price ticker info
-            <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+            Endpoint:<br />
+            GET /v1/ticker/all
+            </para>
             </summary>
             <param name="quoteAssets">The quote assets, for example `KRW`</param>
             <param name="ct">Cancellation token</param>
@@ -736,7 +761,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Get order book info
-            <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-orderbooks" /><br />
+            Endpoint:<br />
+            GET /v1/orderbook
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `KRW-ETH`</param>
             <param name="levels">Number of rows</param>
@@ -746,7 +776,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetOrderBooksAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Get order book info
-            <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-orderbooks" /><br />
+            Endpoint:<br />
+            GET /v1/orderbook
+            </para>
             </summary>
             <param name="symbols">The symbols, for example `KRW-ETH`</param>
             <param name="levels">Number of rows</param>
@@ -756,7 +791,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get kline/candlestick data. Note that entries might be missing if there is no data for an entry
-            <para><a href="https://docs.upbit.com/kr/reference/list-candles-seconds" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-candles-seconds" /><br />
+            Endpoint:<br />
+            GET /v1/candles/[seconds|minutes/{{unit}}|days|weeks|months|years]
+            </para>
             </summary>
             <param name="symbol">Symbol, for example `USDT-ETH`</param>
             <param name="interval">Interval</param>
@@ -767,7 +807,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitRestClientSpotApiExchangeData.GetSymbolConfigAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get symbol config
-            <para><a href="https://docs.upbit.com/kr/reference/list-orderbook-instruments" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/list-orderbook-instruments" /><br />
+            Endpoint:<br />
+            GET /v1/orderbook/instruments
+            </para>
             </summary>
             <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
             <param name="ct">Cancellation token</param>
@@ -785,7 +830,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live trade updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-trade" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: trade)
+            </para>
             </summary>
             <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -795,7 +845,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTradeUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live trade updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-trade" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: trade)
+            </para>
             </summary>
             <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -805,7 +860,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live symbol ticker updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-ticker" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: ticker)
+            </para>
             </summary>
             <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -815,7 +875,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitTickerUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live symbol ticker updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-ticker" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: ticker)
+            </para>
             </summary>
             <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -825,7 +890,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live order book updates
-            <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: orderbook)
+            </para>
             </summary>
             <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
@@ -837,7 +907,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitOrderBookUpdate}},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live order book updates
-            <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: orderbook)
+            </para>
             </summary>
             <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
@@ -849,7 +924,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live kline/candlestick updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-candle" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: candle.{interval})
+            </para>
             </summary>
             <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
             <param name="interval">Interval (max 4 hours)</param>
@@ -860,7 +940,12 @@
         <member name="M:Upbit.Net.Interfaces.Clients.SpotApi.IUpbitSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Upbit.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Upbit.Net.Objects.Models.UpbitKlineUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to live kline/candlestick updates
-            <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://global-docs.upbit.com/reference/websocket-candle" /><br />
+            Endpoint:<br />
+            WS /websocket/v1 (type: candle.{interval})
+            </para>
             </summary>
             <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
             <param name="interval">Interval (max 4 hours)</param>
