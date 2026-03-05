@@ -15,7 +15,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Get list of supported symbols
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-trading-pairs" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/market/all
+        /// </para>
         /// </summary>
         /// <param name="includeNotifications">Whether to include events</param>
         /// <param name="ct">Cancellation token</param>
@@ -23,7 +28,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get trade history
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-pair-trades" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-pair-trades" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/trades/ticks
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `USDT-ETH`</param>
         /// <param name="endTime">Filter by endTime</param>
@@ -34,7 +44,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price ticker info
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -42,7 +57,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price ticker info
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -50,7 +70,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price ticker info
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-tickers" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-tickers" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/ticker/all
+        /// </para>
         /// </summary>
         /// <param name="quoteAssets">The quote assets, for example `KRW`</param>
         /// <param name="ct">Cancellation token</param>
@@ -58,7 +83,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get order book info
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-orderbooks" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/orderbook
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `KRW-ETH`</param>
         /// <param name="levels">Number of rows</param>
@@ -68,7 +98,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get order book info
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-orderbooks" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-orderbooks" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/orderbook
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `KRW-ETH`</param>
         /// <param name="levels">Number of rows</param>
@@ -78,7 +113,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get kline/candlestick data. Note that entries might be missing if there is no data for an entry
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-candles-seconds" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-candles-seconds" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/candles/[seconds|minutes/{{unit}}|days|weeks|months|years]
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `USDT-ETH`</param>
         /// <param name="interval">Interval</param>
@@ -89,7 +129,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get symbol config
-        /// <para><a href="https://docs.upbit.com/kr/reference/list-orderbook-instruments" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/list-orderbook-instruments" /><br />
+        /// Endpoint:<br />
+        /// GET /v1/orderbook/instruments
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `USDT-ETH`, comma separated</param>
         /// <param name="ct">Cancellation token</param>

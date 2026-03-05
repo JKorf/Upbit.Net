@@ -17,7 +17,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Subscribe to live trade updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-trade" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: trade)
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -27,7 +32,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live trade updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-trade" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: trade)
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -37,7 +47,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live symbol ticker updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-ticker" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: ticker)
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -47,7 +62,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live symbol ticker updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-ticker" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: ticker)
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -57,7 +77,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live order book updates
-        /// <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: orderbook)
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
         /// <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
@@ -69,7 +94,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live order book updates
-        /// <para><a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.upbit.com/kr/reference/websocket-orderbook" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: orderbook)
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
         /// <param name="levels">Order book levels to push, 1, 5, 15 or 30</param>
@@ -81,7 +111,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live kline/candlestick updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-candle" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: candle.{interval})
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe, for example `KRW-ETH`</param>
         /// <param name="interval">Interval (max 4 hours)</param>
@@ -92,7 +127,12 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to live kline/candlestick updates
-        /// <para><a href="https://global-docs.upbit.com/reference/websocket-candle" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://global-docs.upbit.com/reference/websocket-candle" /><br />
+        /// Endpoint:<br />
+        /// WS /websocket/v1 (type: candle.{interval})
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe, for example `KRW-ETH`</param>
         /// <param name="interval">Interval (max 4 hours)</param>
