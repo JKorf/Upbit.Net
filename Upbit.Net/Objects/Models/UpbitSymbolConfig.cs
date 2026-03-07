@@ -8,22 +8,22 @@ namespace Upbit.Net.Objects.Models
     public record UpbitSymbolConfig
     {
         /// <summary>
-        /// Symbol name
+        /// ["<c>market</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("market")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quote_currency</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quote_currency")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Tick quantity/ price step
+        /// ["<c>tick_size</c>"] Tick quantity/ price step
         /// </summary>
         [JsonPropertyName("tick_size")]
         public decimal TickQuantity { get; set; }
         /// <summary>
-        /// Supported book aggregate levels for KRW markets
+        /// ["<c>supported_levels</c>"] Supported book aggregate levels for KRW markets
         /// </summary>
         [JsonPropertyName("supported_levels")]
         public decimal[] SupportedBookLevels { get; set; } = [];

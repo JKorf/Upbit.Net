@@ -9,12 +9,12 @@ namespace Upbit.Net.Objects.Models
     public record UpbitSocketUpdate
     {
         /// <summary>
-        /// Event type
+        /// ["<c>type</c>"] Event type
         /// </summary>
         [JsonPropertyName("type")]
         public string EventType { get; set; } = string.Empty;
         /// <summary>
-        /// Event type
+        /// ["<c>stream_type</c>"] Event type
         /// </summary>
         [JsonPropertyName("stream_type")]
         public StreamType StreamType { get; set; }

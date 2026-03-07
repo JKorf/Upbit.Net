@@ -8,22 +8,22 @@ namespace Upbit.Net.Objects.Models
     public record UpbitSymbol
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>market</c>"] Symbol
         /// </summary>
         [JsonPropertyName("market")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Name in Korean
+        /// ["<c>korean_name</c>"] Name in Korean
         /// </summary>
         [JsonPropertyName("korean_name")]
         public string NameKorean { get; set; } = string.Empty;
         /// <summary>
-        /// Name in English
+        /// ["<c>english_name</c>"] Name in English
         /// </summary>
         [JsonPropertyName("english_name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Market event
+        /// ["<c>market_event</c>"] Market event
         /// </summary>
         [JsonPropertyName("market_event")]
         public UpbitSymbolEvent? Event { get; set; }
@@ -35,12 +35,12 @@ namespace Upbit.Net.Objects.Models
     public record UpbitSymbolEvent
     {
         /// <summary>
-        /// Whether the pair has been designated as an “Investment Caution” item under Upbit’s market alert system
+        /// ["<c>warning</c>"] Whether the pair has been designated as an “Investment Caution” item under Upbit’s market alert system
         /// </summary>
         [JsonPropertyName("warning")]
         public bool Warning { get; set; }
         /// <summary>
-        /// Alert info
+        /// ["<c>caution</c>"] Alert info
         /// </summary>
         [JsonPropertyName("caution")]
         public UpbitSymbolAlerts Caution { get; set; } = null!;
@@ -52,27 +52,27 @@ namespace Upbit.Net.Objects.Models
     public record UpbitSymbolAlerts
     {
         /// <summary>
-        /// Price Surge/Drop Alert
+        /// ["<c>PRICE_FLUCTUATIONS</c>"] Price Surge/Drop Alert
         /// </summary>
         [JsonPropertyName("PRICE_FLUCTUATIONS")]
         public bool PriceFluctuations { get; set; }
         /// <summary>
-        /// Trading Volume Surge Alert
+        /// ["<c>TRADING_VOLUME_SOARING</c>"] Trading Volume Surge Alert
         /// </summary>
         [JsonPropertyName("TRADING_VOLUME_SOARING")]
         public bool TradingVolumeSoaring { get; set; }
         /// <summary>
-        /// Deposit Volume Surge Alert
+        /// ["<c>DEPOSIT_AMOUNT_SOARING</c>"] Deposit Volume Surge Alert
         /// </summary>
         [JsonPropertyName("DEPOSIT_AMOUNT_SOARING")]
         public bool DepositQuantitySoaring { get; set; }
         /// <summary>
-        /// Domestic and International Price Difference Alert
+        /// ["<c>GLOBAL_PRICE_DIFFERENCES</c>"] Domestic and International Price Difference Alert
         /// </summary>
         [JsonPropertyName("GLOBAL_PRICE_DIFFERENCES")]
         public bool GlobalPriceDifferences { get; set; }
         /// <summary>
-        /// Concentrated Trading by a Small Number of Accounts Alert
+        /// ["<c>CONCENTRATION_OF_SMALL_ACCOUNTS</c>"] Concentrated Trading by a Small Number of Accounts Alert
         /// </summary>
         [JsonPropertyName("CONCENTRATION_OF_SMALL_ACCOUNTS")]
         public bool ConcentrationOfSmallAccounts { get; set; }

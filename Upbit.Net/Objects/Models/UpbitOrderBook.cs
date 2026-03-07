@@ -9,32 +9,32 @@ namespace Upbit.Net.Objects.Models
     public record UpbitOrderBook
     {
         /// <summary>
-        /// Symbol name
+        /// ["<c>market</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("market")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>timestamp</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Total ask quantity
+        /// ["<c>total_ask_size</c>"] Total ask quantity
         /// </summary>
         [JsonPropertyName("total_ask_size")]
         public decimal TotalAskQuantity { get; set; }
         /// <summary>
-        /// Total bid quantity
+        /// ["<c>total_bid_size</c>"] Total bid quantity
         /// </summary>
         [JsonPropertyName("total_bid_size")]
         public decimal TotalBidQuantity { get; set; }
         /// <summary>
-        /// Entries
+        /// ["<c>orderbook_units</c>"] Entries
         /// </summary>
         [JsonPropertyName("orderbook_units")]
         public UpbitOrderBookEntry[] Entries { get; set; } = [];
         /// <summary>
-        /// Level
+        /// ["<c>level</c>"] Level
         /// </summary>
         [JsonPropertyName("level")]
         public decimal Level { get; set; }
@@ -46,22 +46,22 @@ namespace Upbit.Net.Objects.Models
     public record UpbitOrderBookEntry
     {
         /// <summary>
-        /// Ask price
+        /// ["<c>ask_price</c>"] Ask price
         /// </summary>
         [JsonPropertyName("ask_price")]
         public decimal AskPrice { get; set; }
         /// <summary>
-        /// Bid price
+        /// ["<c>bid_price</c>"] Bid price
         /// </summary>
         [JsonPropertyName("bid_price")]
         public decimal BidPrice { get; set; }
         /// <summary>
-        /// Ask quantity
+        /// ["<c>ask_size</c>"] Ask quantity
         /// </summary>
         [JsonPropertyName("ask_size")]
         public decimal AskQuantity { get; set; }
         /// <summary>
-        /// Bid quantity
+        /// ["<c>bid_size</c>"] Bid quantity
         /// </summary>
         [JsonPropertyName("bid_size")]
         public decimal BidQuantity { get; set; }

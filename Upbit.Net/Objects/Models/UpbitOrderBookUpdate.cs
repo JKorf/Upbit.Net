@@ -9,32 +9,32 @@ namespace Upbit.Net.Objects.Models
     public record UpbitOrderBookUpdate: UpbitSocketUpdate
     {
         /// <summary>
-        /// Symbol name
+        /// ["<c>code</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("code")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>timestamp</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Total ask quantity
+        /// ["<c>total_ask_size</c>"] Total ask quantity
         /// </summary>
         [JsonPropertyName("total_ask_size")]
         public decimal TotalAskQuantity { get; set; }
         /// <summary>
-        /// Total bid quantity
+        /// ["<c>total_bid_size</c>"] Total bid quantity
         /// </summary>
         [JsonPropertyName("total_bid_size")]
         public decimal TotalBidQuantity { get; set; }
         /// <summary>
-        /// Entries
+        /// ["<c>orderbook_units</c>"] Entries
         /// </summary>
         [JsonPropertyName("orderbook_units")]
         public UpbitOrderBookEntry[] Entries { get; set; } = [];
         /// <summary>
-        /// Level
+        /// ["<c>level</c>"] Level
         /// </summary>
         [JsonPropertyName("level")]
         public decimal Level { get; set; }
