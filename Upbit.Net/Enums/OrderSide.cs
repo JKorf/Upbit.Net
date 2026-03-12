@@ -11,12 +11,12 @@ namespace Upbit.Net.Enums
     public enum OrderSide
     {
         /// <summary>
-        /// Buy
+        /// ["<c>BID</c>"] Buy
         /// </summary>
         [Map("BID")]
         Buy,
         /// <summary>
-        /// Sell
+        /// ["<c>ASK</c>"] Sell
         /// </summary>
         [Map("ASK")]
         Sell

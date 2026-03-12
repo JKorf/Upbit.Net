@@ -11,22 +11,22 @@ namespace Upbit.Net.Enums
     public enum SymbolStatus
     {
         /// <summary>
-        /// Preview
+        /// ["<c>PREVIEW</c>"] Preview
         /// </summary>
         [Map("PREVIEW")]
         Preview,
         /// <summary>
-        /// Active
+        /// ["<c>ACTIVE</c>"] Active
         /// </summary>
         [Map("ACTIVE")]
         Active,
         /// <summary>
-        /// Pre delisting
+        /// ["<c>PREDELISTING</c>"] Pre delisting
         /// </summary>
         [Map("PREDELISTING")]
         PreDelisting,
         /// <summary>
-        /// Delisted
+        /// ["<c>DELISTED</c>"] Delisted
         /// </summary>
         [Map("DELISTED")]
         Delisted

@@ -11,12 +11,12 @@ namespace Upbit.Net.Enums
     public enum SymbolWarning
     {
         /// <summary>
-        /// No warning
+        /// ["<c>NONE</c>"] No warning
         /// </summary>
         [Map("NONE")]
         None,
         /// <summary>
-        /// Caution
+        /// ["<c>CAUTION</c>"] Caution
         /// </summary>
         [Map("CAUTION")]
         Caution

@@ -11,17 +11,17 @@ namespace Upbit.Net.Enums
     public enum ChangeSide
     {
         /// <summary>
-        /// Rise
+        /// ["<c>RISE</c>"] Rise
         /// </summary>
         [Map("RISE")]
         Rise,
         /// <summary>
-        /// Even
+        /// ["<c>EVEN</c>"] Even
         /// </summary>
         [Map("EVEN")]
         Even,
         /// <summary>
-        /// Fall
+        /// ["<c>FALL</c>"] Fall
         /// </summary>
         [Map("FALL")]
         Fall

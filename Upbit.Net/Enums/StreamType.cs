@@ -11,12 +11,12 @@ namespace Upbit.Net.Enums
     public enum StreamType
     {
         /// <summary>
-        /// Snapshot
+        /// ["<c>SNAPSHOT</c>"] Snapshot
         /// </summary>
         [Map("SNAPSHOT")]
         Snapshot,
         /// <summary>
-        /// Update
+        /// ["<c>REALTIME</c>"] Update
         /// </summary>
         [Map("REALTIME")]
         Update
