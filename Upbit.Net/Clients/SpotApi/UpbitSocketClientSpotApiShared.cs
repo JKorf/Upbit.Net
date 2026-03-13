@@ -15,6 +15,7 @@ namespace Upbit.Net.Clients.SpotApi
     {
         private const string _topicId = "UpbitSpot";
         public string Exchange => "Upbit";
+        public bool Authenticated => false;
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 

@@ -6,7 +6,7 @@ namespace Upbit.Net.Objects.Options
     /// <summary>
     /// Upbit options
     /// </summary>
-    public class UpbitOptions : LibraryOptions<UpbitRestOptions, UpbitSocketOptions, ApiCredentials, UpbitEnvironment>
+    public class UpbitOptions : LibraryOptions<UpbitRestOptions, UpbitSocketOptions, UpbitEnvironment>
     {
     }
 }

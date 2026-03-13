@@ -25,8 +25,7 @@ namespace Upbit.Net.UnitTests
             return new UpbitRestClient(null, loggerFactory, Options.Create(new UpbitRestOptions
             {
                 AutoTimestamp = false,
-                OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+                OutputOriginalData = true
             }));
         }
 

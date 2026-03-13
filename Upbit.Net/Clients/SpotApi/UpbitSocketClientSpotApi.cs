@@ -59,10 +59,6 @@ namespace Upbit.Net.Clients.SpotApi
 
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new UpbitSocketMessageHandler();
 
-        /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new UpbitAuthenticationProvider(credentials);
-
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
