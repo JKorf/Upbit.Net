@@ -37,7 +37,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
-            configuration.Bind(options);
+
+            try
+            {
+                configuration.Bind(options);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("Invalid configuration provided", ex);
+            }
 
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
