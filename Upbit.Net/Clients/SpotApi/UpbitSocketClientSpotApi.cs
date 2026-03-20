@@ -30,7 +30,7 @@ namespace Upbit.Net.Clients.SpotApi
     /// <summary>
     /// Client providing access to the Upbit Spot websocket Api
     /// </summary>
-    internal partial class UpbitSocketClientSpotApi : SocketApiClient, IUpbitSocketClientSpotApi
+    internal partial class UpbitSocketClientSpotApi : SocketApiClient<UpbitEnvironment>, IUpbitSocketClientSpotApi
     {
         #region fields
         private readonly TimeSpan _waitForErrorTimeout;

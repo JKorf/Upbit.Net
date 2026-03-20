@@ -20,7 +20,7 @@ using Upbit.Net.Clients.MessageHandlers;
 namespace Upbit.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IUpbitRestClientSpotApi" />
-    internal partial class UpbitRestClientSpotApi : RestApiClient, IUpbitRestClientSpotApi
+    internal partial class UpbitRestClientSpotApi : RestApiClient<UpbitEnvironment>, IUpbitRestClientSpotApi
     {
         #region fields 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
