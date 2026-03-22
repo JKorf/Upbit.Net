@@ -105,8 +105,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
             services.Add(new ServiceDescriptor(typeof(IUpbitSocketClient), x => { return new UpbitSocketClient(x.GetRequiredService<IOptions<UpbitSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
-            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
-            services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IUpbitOrderBookFactory, UpbitOrderBookFactory>();
             services.AddTransient<ITrackerFactory, UpbitTrackerFactory>();
             services.AddTransient<IUpbitTrackerFactory, UpbitTrackerFactory>();
