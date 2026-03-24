@@ -46,22 +46,23 @@ Upbit.Net is available on [GitHub packages](https://github.com/JKorf/Upbit.Net/p
 The NuGet package files are added along side the source with the latest GitHub release which can found [here](https://github.com/JKorf/Upbit.Net/releases).
 
 ## How to use
-* REST Endpoints
-	```csharp
-	// Get the ETH/USDT ticker via rest request
-	var restClient = new UpbitRestClient();
-	var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
-	var lastPrice = tickerResult.Data.LastPrice;
-	```
-* Websocket streams
-	```csharp
-	// Subscribe to ETH/USDT ticker updates via the websocket API
-	var socketClient = new UpbitSocketClient();
-	var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsync("USDT-ETH", (update) => 
-	{
-	  var lastPrice = update.Data.LastPrice;
-	});
-	```
+*Basic request:* 
+```csharp
+// Get the ETH/USDT ticker via rest request
+var restClient = new UpbitRestClient();
+var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+var lastPrice = tickerResult.Data.LastPrice;
+```
+
+*WebSocket subscription:* 
+```csharp
+// Subscribe to ETH/USDT ticker updates via the websocket API
+var socketClient = new UpbitSocketClient();
+var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsync("USDT-ETH", (update) => 
+{
+  var lastPrice = update.Data.LastPrice;
+});
+```
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://cryptoexchange.jkorf.dev/client-libs/getting-started), or have a look at the examples [here](https://github.com/JKorf/Upbit.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
