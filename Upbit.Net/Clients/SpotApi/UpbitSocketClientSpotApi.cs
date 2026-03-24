@@ -30,7 +30,7 @@ namespace Upbit.Net.Clients.SpotApi
     /// <summary>
     /// Client providing access to the Upbit Spot websocket Api
     /// </summary>
-    internal partial class UpbitSocketClientSpotApi : SocketApiClient, IUpbitSocketClientSpotApi
+    internal partial class UpbitSocketClientSpotApi : SocketApiClient<UpbitEnvironment>, IUpbitSocketClientSpotApi
     {
         #region fields
         private readonly TimeSpan _waitForErrorTimeout;
@@ -58,10 +58,6 @@ namespace Upbit.Net.Clients.SpotApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(UpbitExchange._serializerContext);
 
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new UpbitSocketMessageHandler();
-
-        /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new UpbitAuthenticationProvider(credentials);
 
 
         /// <inheritdoc />

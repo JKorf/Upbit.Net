@@ -45,12 +45,6 @@ namespace Upbit.Net.Clients
         }
         #endregion
 
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            SpotApi.SetOptions(options);
-        }
-
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -58,12 +52,6 @@ namespace Upbit.Net.Clients
         public static void SetDefaultOptions(Action<UpbitSocketOptions> optionsDelegate)
         {
             UpbitSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {            
-            SpotApi.SetApiCredentials(credentials);
         }
     }
 }

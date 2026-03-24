@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
 
         /// <summary>
-        /// Add services such as the IUpbitRestClient and IUpbitSocketClient. Configures the services based on the provided configuration.
+        /// Add services such as the IUpbitRestClient and IUpbitSocketClient. Configures the services based on the provided configuration.<br />
+        /// See <see href="https://github.com/JKorf/Upbit.Net/blob/main/Examples/example-config.json" /> for an example of how to set up the configuration.
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="configuration">The configuration(section) containing the options</param>
@@ -37,7 +38,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
-            configuration.Bind(options);
+
+            try
+            {
+                configuration.Bind(options);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("Invalid configuration provided", ex);
+            }
 
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
@@ -45,9 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? UpbitEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? UpbitEnvironment.Live.Name;
             options.Rest.Environment = UpbitEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
             options.Socket.Environment = UpbitEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
 
             services.AddSingleton(x => Options.Options.Create(options.Rest));
@@ -75,9 +82,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentException("Options null");
 
             options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? UpbitEnvironment.Live;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? UpbitEnvironment.Live;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
             services.AddSingleton(x => Options.Options.Create(options.Rest));
             services.AddSingleton(x => Options.Options.Create(options.Socket));
@@ -100,17 +105,9 @@ namespace Microsoft.Extensions.DependencyInjection
             }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
             services.Add(new ServiceDescriptor(typeof(IUpbitSocketClient), x => { return new UpbitSocketClient(x.GetRequiredService<IOptions<UpbitSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
-            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
-            services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IUpbitOrderBookFactory, UpbitOrderBookFactory>();
             services.AddTransient<ITrackerFactory, UpbitTrackerFactory>();
             services.AddTransient<IUpbitTrackerFactory, UpbitTrackerFactory>();
-            services.AddSingleton<IUpbitUserClientProvider, UpbitUserClientProvider>(x =>
-                new UpbitUserClientProvider(
-                    x.GetRequiredService<IHttpClientFactory>().CreateClient(typeof(IUpbitRestClient).Name),
-                    x.GetRequiredService<ILoggerFactory>(),
-                    x.GetRequiredService<IOptions<UpbitRestOptions>>(),
-                    x.GetRequiredService<IOptions<UpbitSocketOptions>>()));
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedClient);
