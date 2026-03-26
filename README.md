@@ -135,6 +135,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 2.9.1 - 26 Mar 2026
+    * Updated CryptoExchange.Net to version 11.0.2, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Fixed missing SetOptions on Upbit clients
+
 * Version 2.9.0 - 24 Mar 2026
     * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Updated Shared order status parsing to default to Unknown value if not parsable
