@@ -1,0 +1,98 @@
+---
+description: Conventions for using Upbit.Net when working with public Upbit cryptocurrency market data in C#/.NET. Apply when generating code that interacts with the Upbit API.
+globs:
+  - "**/*.cs"
+  - "**/*.csproj"
+alwaysApply: false
+---
+
+# Upbit.Net Conventions
+
+This codebase uses **Upbit.Net** for Upbit public Spot quotation API access. Do not write raw `HttpClient` calls to Upbit endpoints.
+
+## Client Setup Pattern
+
+```csharp
+using Upbit.Net.Clients;
+
+var restClient = new UpbitRestClient();
+var socketClient = new UpbitSocketClient();
+```
+
+Do not configure API credentials. Current Upbit.Net exposes public market-data APIs only.
+
+## Result Pattern
+
+REST methods return `WebCallResult<T>` and WebSocket subscription methods return `CallResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`:
+
+```csharp
+var ticker = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+if (!ticker.Success) { /* ticker.Error */ return; }
+var price = ticker.Data.LastPrice;
+```
+
+## API Surface
+
+- `restClient.SpotApi.ExchangeData`: symbols, tickers, trades, order books, candles, symbol config
+- `restClient.SpotApi.SharedClient`: shared REST market-data interfaces
+- `socketClient.SpotApi`: ticker, trade, order book, and kline WebSocket subscriptions
+- `socketClient.SpotApi.SharedClient`: shared socket market-data interfaces
+
+There is no `SpotApi.Account`, `SpotApi.Trading`, futures API, margin API, wallet API, or private stream API.
+
+## Symbols
+
+Use Upbit native `QUOTE-BASE` symbols:
+
+```csharp
+await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+await restClient.SpotApi.ExchangeData.GetOrderBookAsync("KRW-BTC");
+```
+
+For SharedApis, use:
+
+```csharp
+var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
+```
+
+## WebSocket Pattern
+
+```csharp
+var socketClient = new UpbitSocketClient();
+var sub = await socketClient.SpotApi.SubscribeToTickerUpdatesAsync(
+    "USDT-ETH",
+    update => { /* update.Data.LastPrice */ });
+if (!sub.Success) { /* sub.Error */ return; }
+
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+## Multi-Exchange Code
+
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis`:
+
+```csharp
+using CryptoExchange.Net.SharedApis;
+
+var shared = new UpbitRestClient().SpotApi.SharedClient;
+var ticker = await shared.GetSpotTickerAsync(
+    new GetTickerRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT")));
+```
+
+## Hard Rules
+
+- Never write raw `HttpClient` calls to Upbit endpoints
+- Never generate authenticated/account/trading/wallet code for Upbit.Net
+- Never use `.Result` or `.Wait()`; async-only
+- Never instantiate clients per request; reuse via DI
+- Never skip checking `.Success`
+- Never use Binance-style concatenated symbols like `ETHUSDT`
+- Always store WebSocket subscriptions and unsubscribe on shutdown
+- Always use the concrete socket client for `UnsubscribeAsync(sub.Data)`
+
+## Reference
+
+- Skill: `CLAUDE.md` in repo root has fuller examples
+- `llms.txt` and `llms-full.txt` in repo root for AI context
+- API map: `docs/ai-api-map.md`
+- Examples: `Examples/ai-friendly/`

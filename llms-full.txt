@@ -1,0 +1,548 @@
+# Upbit.Net Full LLM Context
+
+> Detailed AI/LLM reference for generating correct C#/.NET code with Upbit.Net. Use this file when `llms.txt` is too brief and the task needs concrete examples, endpoint routing guidance, or anti-hallucination rules.
+
+Upbit.Net is a strongly typed .NET client library for Upbit public REST and WebSocket quotation APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket patterns as the other JKorf exchange libraries.
+
+Current package version in this repository: 2.9.2.
+CryptoExchange.Net dependency: 11.1.0.
+Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Native AOT: supported on compatible .NET targets.
+
+Primary documentation:
+- README.md: overview, installation, feature table, release notes, basic examples
+- docs site: https://cryptoexchange.jkorf.dev/Upbit.Net/
+- API quick map: `docs/ai-api-map.md`
+- source interfaces: `Upbit.Net/Interfaces/Clients/**`
+- AI examples: `Examples/ai-friendly/`
+
+## Golden Rules For AI Code Generation
+
+- Use `UpbitRestClient` for REST and `UpbitSocketClient` for WebSocket. Do not generate raw `HttpClient` calls to Upbit endpoints.
+- Do not configure credentials. Current Upbit.Net does not expose authenticated endpoints and credentials are not part of the options surface.
+- Do not generate order placement, order querying, balances, deposits, withdrawals, private streams, margin, or futures code. This library exposes public Spot quotation data only.
+- Always check `.Success` before reading `.Data`.
+- REST methods return `WebCallResult<T>`.
+- WebSocket subscription methods return `CallResult<UpdateSubscription>`.
+- Reuse clients. Do not instantiate a REST or socket client per request in production code.
+- Prefer dependency injection for long-running services.
+- Store WebSocket subscriptions and unsubscribe during shutdown.
+- Do not call `.Result` or `.Wait()` on async methods.
+- Do not invent endpoint names. If unsure, inspect `Upbit.Net/Interfaces/Clients/**`.
+- Use Upbit symbol format `QUOTE-BASE`, for example `USDT-ETH` or `KRW-BTC`.
+- For multi-exchange market-data code, use `CryptoExchange.Net.SharedApis` interfaces from `.SharedClient`.
+
+## Installation
+
+```bash
+dotnet add package JKorf.Upbit.Net
+```
+
+## Required Usings
+
+Typical REST code:
+
+```csharp
+using Upbit.Net.Clients;
+using Upbit.Net.Enums;
+```
+
+Environment setup:
+
+```csharp
+using Upbit.Net;
+using Upbit.Net.Clients;
+```
+
+Shared API code:
+
+```csharp
+using Upbit.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+```
+
+Retry/error helper code may also need:
+
+```csharp
+using CryptoExchange.Net.Objects;
+```
+
+Dependency injection setup:
+
+```csharp
+using Microsoft.Extensions.DependencyInjection;
+using Upbit.Net;
+```
+
+## Client Setup
+
+Public market data:
+
+```csharp
+var client = new UpbitRestClient();
+
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine(ticker.Data.LastPrice);
+```
+
+Socket client:
+
+```csharp
+var socketClient = new UpbitSocketClient();
+```
+
+Regional environments:
+
+```csharp
+var korea = new UpbitRestClient(options => options.Environment = UpbitEnvironment.Live);
+var singapore = new UpbitRestClient(options => options.Environment = UpbitEnvironment.Singapore);
+var indonesia = new UpbitRestClient(options => options.Environment = UpbitEnvironment.Indonesia);
+var thailand = new UpbitRestClient(options => options.Environment = UpbitEnvironment.Thailand);
+```
+
+Available environment names are exposed by `UpbitEnvironment.All`. `UpbitEnvironment.CreateCustom(...)` can create a custom REST/socket address pair.
+
+## Dependency Injection
+
+Current DI shape:
+
+```csharp
+services.AddUpbit(options =>
+{
+    options.Environment = UpbitEnvironment.Singapore;
+});
+```
+
+Inject:
+
+```csharp
+public class MyService
+{
+    private readonly IUpbitRestClient _restClient;
+    private readonly IUpbitSocketClient _socketClient;
+
+    public MyService(IUpbitRestClient restClient, IUpbitSocketClient socketClient)
+    {
+        _restClient = restClient;
+        _socketClient = socketClient;
+    }
+}
+```
+
+Interface namespaces:
+
+```csharp
+using Upbit.Net.Interfaces.Clients;
+```
+
+DI also registers shared interfaces, `IUpbitOrderBookFactory`, `IUpbitTrackerFactory`, and the base `ITrackerFactory`.
+
+## Result Handling Pattern
+
+Always branch on `.Success`.
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+if (!result.Success)
+{
+    Console.WriteLine($"Code: {result.Error?.Code}");
+    Console.WriteLine($"Message: {result.Error?.Message}");
+    return;
+}
+
+var price = result.Data.LastPrice;
+```
+
+For retry logic, only retry transient errors:
+
+```csharp
+async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+{
+    WebCallResult<T> last = default!;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++)
+    {
+        last = await call();
+        if (last.Success)
+            return last;
+
+        if (last.Error?.IsTransient != true)
+            return last;
+
+        await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
+    }
+
+    return last;
+}
+```
+
+## Main API Surface
+
+REST:
+
+```text
+UpbitRestClient
+  .SpotApi
+    .ExchangeData
+      .GetSymbolsAsync(...)
+      .GetTickerAsync(...)
+      .GetTickersAsync(...)
+      .GetTickersByQuoteAssetsAsync(...)
+      .GetTradeHistoryAsync(...)
+      .GetOrderBookAsync(...)
+      .GetOrderBooksAsync(...)
+      .GetKlinesAsync(...)
+      .GetSymbolConfigAsync(...)
+    .SharedClient
+```
+
+WebSocket:
+
+```text
+UpbitSocketClient
+  .SpotApi
+    .SubscribeToTickerUpdatesAsync(...)
+    .SubscribeToTradeUpdatesAsync(...)
+    .SubscribeToOrderBookUpdatesAsync(...)
+    .SubscribeToKlineUpdatesAsync(...)
+    .SharedClient
+```
+
+Important: there is no `SpotApi.Account`, `SpotApi.Trading`, futures API, margin API, wallet API, or authenticated user data stream in this library.
+
+## Intent To Method Map
+
+For a broader quick reference, see `docs/ai-api-map.md`.
+
+Common REST tasks:
+
+```text
+Get supported symbols -> client.SpotApi.ExchangeData.GetSymbolsAsync(includeNotifications: true)
+Get one ticker -> client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH")
+Get multiple tickers -> client.SpotApi.ExchangeData.GetTickersAsync(new[] { "USDT-ETH", "USDT-BTC" })
+Get all tickers for quote assets -> client.SpotApi.ExchangeData.GetTickersByQuoteAssetsAsync(new[] { "USDT", "BTC" })
+Get recent trades -> client.SpotApi.ExchangeData.GetTradeHistoryAsync("USDT-ETH", limit: 100)
+Get order book -> client.SpotApi.ExchangeData.GetOrderBookAsync("USDT-ETH", levels: 15)
+Get multiple order books -> client.SpotApi.ExchangeData.GetOrderBooksAsync(new[] { "USDT-ETH", "USDT-BTC" }, levels: 15)
+Get klines/candles -> client.SpotApi.ExchangeData.GetKlinesAsync("USDT-ETH", KlineInterval.OneMinute, limit: 100)
+Get symbol config -> client.SpotApi.ExchangeData.GetSymbolConfigAsync("USDT-ETH")
+```
+
+Common WebSocket tasks:
+
+```text
+Subscribe ticker -> socketClient.SpotApi.SubscribeToTickerUpdatesAsync("USDT-ETH", handler)
+Subscribe many tickers -> socketClient.SpotApi.SubscribeToTickerUpdatesAsync(new[] { "USDT-ETH", "USDT-BTC" }, handler)
+Subscribe trades -> socketClient.SpotApi.SubscribeToTradeUpdatesAsync("USDT-ETH", handler)
+Subscribe order book -> socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync("USDT-ETH", 15, handler)
+Subscribe klines -> socketClient.SpotApi.SubscribeToKlineUpdatesAsync("USDT-ETH", KlineInterval.OneMinute, handler)
+```
+
+## Spot Market Data Example
+
+```csharp
+using Upbit.Net.Clients;
+using Upbit.Net.Enums;
+
+var client = new UpbitRestClient();
+
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine($"USDT-ETH last price: {ticker.Data.LastPrice}");
+
+var candles = await client.SpotApi.ExchangeData.GetKlinesAsync(
+    "USDT-ETH",
+    KlineInterval.OneMinute,
+    limit: 10);
+
+if (!candles.Success)
+{
+    Console.WriteLine(candles.Error);
+    return;
+}
+
+foreach (var candle in candles.Data)
+    Console.WriteLine($"{candle.OpenTime:u} O={candle.OpenPrice} H={candle.HighPrice} L={candle.LowPrice} C={candle.ClosePrice}");
+```
+
+## WebSocket Subscription Example
+
+```csharp
+using Upbit.Net.Clients;
+using Upbit.Net.Enums;
+
+var socketClient = new UpbitSocketClient();
+
+var tickerSub = await socketClient.SpotApi.SubscribeToTickerUpdatesAsync(
+    "USDT-ETH",
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!tickerSub.Success)
+{
+    Console.WriteLine(tickerSub.Error);
+    return;
+}
+
+var klineSub = await socketClient.SpotApi.SubscribeToKlineUpdatesAsync(
+    "USDT-ETH",
+    KlineInterval.OneMinute,
+    update => Console.WriteLine(update.Data.ClosePrice));
+
+if (!klineSub.Success)
+{
+    await socketClient.UnsubscribeAsync(tickerSub.Data);
+    Console.WriteLine(klineSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(tickerSub.Data);
+await socketClient.UnsubscribeAsync(klineSub.Data);
+```
+
+Upbit socket options contain `SubscribeMaxWaitForError`, because the server replies only when a subscription has an error and a subscription is assumed successful after the configured wait.
+
+## SharedApis Multi-Exchange Pattern
+
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Upbit and other exchanges.
+
+```csharp
+using Upbit.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+
+ISpotTickerRestClient tickerClient = new UpbitRestClient().SpotApi.SharedClient;
+var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
+
+var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine(ticker.Data.LastPrice);
+```
+
+Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For shared interface variables, unsubscribe through the concrete socket client:
+
+```csharp
+var socketClient = new UpbitSocketClient();
+ITickerSocketClient tickerSocket = socketClient.SpotApi.SharedClient;
+
+var sub = await tickerSocket.SubscribeToTickerUpdatesAsync(
+    new SubscribeTickerRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT")),
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!sub.Success)
+{
+    Console.WriteLine(sub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
+
+## Symbol And Region Handling
+
+Upbit native symbol format is `QUOTE-BASE`.
+
+```text
+Korea live examples:      KRW-BTC, KRW-ETH, BTC-ETH, USDT-BTC
+Singapore live examples:  SGD-BTC, SGD-ETH, BTC-ETH, USDT-BTC
+Indonesia live examples:  IDR-BTC, IDR-ETH, BTC-ETH, USDT-BTC
+Thailand live examples:   THB-BTC, THB-ETH, BTC-ETH, USDT-BTC
+```
+
+Do not use Binance-style concatenated symbols such as `ETHUSDT`. For SharedApis, use `new SharedSymbol(TradingMode.Spot, "ETH", "USDT")`; the library formats the symbol as `USDT-ETH`.
+
+For all tickers, use quote assets that fit the selected environment:
+
+```csharp
+var koreaTickers = await client.SpotApi.ExchangeData.GetTickersByQuoteAssetsAsync(new[] { "KRW", "BTC", "USDT" });
+```
+
+The shared REST client uses environment-aware quote assets for `GetSpotTickersAsync`: Korea uses `KRW`, Singapore `SGD`, Indonesia `IDR`, Thailand `THB`, plus `BTC` and `USDT`.
+
+## Local Order Book
+
+Use `IUpbitOrderBookFactory` for maintained local order books:
+
+```csharp
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.DependencyInjection;
+using Upbit.Net.Interfaces;
+
+var services = new ServiceCollection();
+services.AddUpbit();
+var provider = services.BuildServiceProvider();
+
+var factory = provider.GetRequiredService<IUpbitOrderBookFactory>();
+var book = factory.Create(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"));
+var started = await book.StartAsync();
+if (!started.Success)
+{
+    Console.WriteLine(started.Error);
+    return;
+}
+
+var snapshot = book.Book;
+```
+
+## Error Handling Notes
+
+Upbit.Net returns API/network/rate-limit errors through `.Error` on result objects. It generally does not throw for normal API failures. Exceptions are for misconfiguration, disposal, cancellation, or programming errors.
+
+Common Upbit.Net error categories:
+
+```text
+Network or server errors: usually transient; retry with backoff if result.Error.IsTransient is true.
+Rate limiting: transient; the library has client-side rate limiting, but server-side limits can still be hit.
+Invalid symbol: permanent; fix symbol format and verify with GetSymbolsAsync(true).
+Invalid interval: permanent; use Upbit.Net.Enums.KlineInterval values.
+Unsupported authenticated feature: permanent; this library does not expose private APIs.
+Wrong environment/quote asset: permanent until the quote asset or environment is changed.
+```
+
+## AI-Friendly Examples
+
+Use these examples when generating code:
+
+```text
+Examples/ai-friendly/01-spot-quickstart.cs
+  Client setup, public ticker, supported symbols, candles, order book, success checks.
+
+Examples/ai-friendly/02-market-data.cs
+  Symbols, regional quote assets, tickers, trades, klines, order books, symbol config.
+
+Examples/ai-friendly/03-websocket.cs
+  Public ticker stream, trade stream, order book stream, kline stream, success checks, teardown.
+
+Examples/ai-friendly/04-multi-exchange.cs
+  CryptoExchange.Net.SharedApis REST and socket market-data patterns.
+
+Examples/ai-friendly/05-error-handling.cs
+  WebCallResult pattern, transient retry, Upbit-specific mistakes, symbol validation.
+```
+
+These files are intended to be copied into a console `Program.cs` after `dotnet add package JKorf.Upbit.Net`.
+
+## Anti-Hallucination Checklist
+
+Before finalizing generated code:
+
+- Does it compile with the current package?
+- Does it use `UpbitRestClient` / `UpbitSocketClient`?
+- Does every REST/socket result check `.Success` before `.Data`?
+- Does it avoid raw Upbit URLs and manual JSON parsing?
+- Does it avoid credentials and private API code?
+- Does it avoid nonexistent `SpotApi.Trading`, `SpotApi.Account`, futures, margin, wallet, and user-stream branches?
+- Does it use Upbit `QUOTE-BASE` symbols or `SharedSymbol` for shared code?
+- Does it avoid `.Result` and `.Wait()`?
+- Are WebSocket subscriptions unsubscribed on shutdown?
+- For shared socket interfaces, does it keep the concrete socket client for `UnsubscribeAsync(sub.Data)`?
+- Does the environment match the quote asset being requested?
+
+## Source Of Truth For Method Names
+
+When unsure, inspect these files instead of guessing:
+
+```text
+Upbit.Net/Interfaces/Clients/IUpbitRestClient.cs
+Upbit.Net/Interfaces/Clients/IUpbitSocketClient.cs
+Upbit.Net/Interfaces/Clients/SpotApi/IUpbitRestClientSpotApi.cs
+Upbit.Net/Interfaces/Clients/SpotApi/IUpbitRestClientSpotApiExchangeData.cs
+Upbit.Net/Interfaces/Clients/SpotApi/IUpbitSocketClientSpotApi.cs
+Upbit.Net/Interfaces/Clients/SpotApi/IUpbitRestClientSpotApiShared.cs
+Upbit.Net/Interfaces/Clients/SpotApi/IUpbitSocketClientSpotApiShared.cs
+Upbit.Net/UpbitEnvironment.cs
+Upbit.Net/Objects/Options/UpbitRestOptions.cs
+Upbit.Net/Objects/Options/UpbitSocketOptions.cs
+```
+
+Prefer the interface files over memory when generating endpoint names, parameters, callback names, and return types.
+
+## Common Wrong Patterns To Avoid
+
+Wrong:
+
+```csharp
+options.ApiCredentials = new ApiCredentials("key", "secret");
+```
+
+Use:
+
+```csharp
+var client = new UpbitRestClient();
+```
+
+Wrong:
+
+```csharp
+await client.SpotApi.Trading.PlaceOrderAsync(...);
+```
+
+Use:
+
+```csharp
+// Upbit.Net does not expose order placement.
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+```
+
+Wrong:
+
+```csharp
+await client.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+```
+
+Use:
+
+```csharp
+await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+```
+
+Wrong:
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Use:
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Wrong:
+
+```csharp
+await sharedTickerSocket.UnsubscribeAsync(sub.Data);
+```
+
+Use:
+
+```csharp
+await socketClient.UnsubscribeAsync(sub.Data);
+```

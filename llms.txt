@@ -1,0 +1,46 @@
+# Upbit.Net
+
+> Strongly typed .NET client library for the public Upbit REST and WebSocket quotation APIs. Supports Spot symbols, tickers, candles, trades, order books, regional live environments, local order books, trade trackers, and CryptoExchange.Net SharedApis. Part of the CryptoExchange.Net ecosystem.
+
+Upbit.Net is a C# client for Upbit public market data with typed REST/WebSocket models, automatic WebSocket reconnection, client-side rate limiting, local order book support, native AOT support, and unified shared interfaces for multi-exchange market-data code. Current version in this repository: 2.9.2. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+
+Important scope: this repository currently supports public Spot quotation APIs only. It does not expose authenticated account, wallet, deposit, withdrawal, private stream, or order placement endpoints.
+
+## Documentation
+
+- [README](https://github.com/JKorf/Upbit.Net/blob/main/README.md): Overview, installation, supported features, basic usage examples, release notes
+- [Documentation Site](https://cryptoexchange.jkorf.dev/Upbit.Net/): Full documentation hub including client reference, WebSocket subscriptions, dependency injection, and shared interfaces
+- [AI API Quick Map](https://github.com/JKorf/Upbit.Net/blob/main/docs/ai-api-map.md): Quick intent-to-method map for routing common user requests to the correct client member
+- [Full LLM Context](https://github.com/JKorf/Upbit.Net/blob/main/llms-full.txt): Detailed AI/LLM guide with code patterns, endpoint map, common mistakes, and anti-hallucination rules
+
+## Examples
+
+- [AI-friendly examples directory](https://github.com/JKorf/Upbit.Net/tree/main/Examples/ai-friendly): Compact, fully runnable examples optimized for AI assistants and quick onboarding
+- [Spot Quickstart](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/01-spot-quickstart.cs): Client setup, ticker, symbols, candles, and order book
+- [Market Data](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/02-market-data.cs): Symbols, regional quote assets, tickers, trades, klines, order books, symbol config
+- [WebSocket Streams](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/03-websocket.cs): Ticker, trade, order book, and kline subscriptions with proper teardown
+- [Multi-Exchange Pattern](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/04-multi-exchange.cs): Using CryptoExchange.Net SharedApis for exchange-agnostic market data
+- [Error Handling](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/05-error-handling.cs): WebCallResult pattern, retry logic, common Upbit.Net pitfalls
+- [Full Examples Repository](https://github.com/JKorf/Upbit.Net/tree/main/Examples): Console, minimal API, order book, and trade tracker examples
+
+## Critical Usage Rules
+
+- Use `UpbitRestClient` for REST and `UpbitSocketClient` for WebSocket. Do not generate raw `HttpClient` calls.
+- Do not configure API credentials. Authentication is not available in the current Upbit.Net API surface.
+- Do not generate account, wallet, withdrawal, deposit, or order placement code. There is no `SpotApi.Account` or `SpotApi.Trading`.
+- Upbit symbols use `QUOTE-BASE`, for example `USDT-ETH`, `KRW-BTC`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC`.
+- Always check `.Success` before reading `.Data`.
+- Use regional environments from `UpbitEnvironment`: `Live`, `Singapore`, `Indonesia`, `Thailand`.
+
+## Reference
+
+- [CryptoExchange.Net base library](https://github.com/JKorf/CryptoExchange.Net): Base abstractions used by Upbit.Net and other exchange libraries
+- [CryptoClients.Net](https://github.com/JKorf/CryptoClients.Net): Bundle package providing unified access to all exchange libraries
+- [NuGet Package](https://www.nuget.org/packages/JKorf.Upbit.Net): Latest stable release on NuGet
+
+## Optional
+
+- [Changelog](https://github.com/JKorf/Upbit.Net/blob/main/README.md#release-notes): Version history
+- [Discord Community](https://discord.gg/MSpeEtSY8t): Maintainer-supported Discord for questions and discussion
+- [GitHub Issues](https://github.com/JKorf/Upbit.Net/issues): Bug reports and feature requests
+- [GitHub Sponsors](https://github.com/sponsors/JKorf): Support the maintainer
