@@ -63,22 +63,22 @@ namespace Upbit.Net.Objects.Models
         /// ["<c>best_bid_size</c>"] Best bid quantity
         /// </summary>
         [JsonPropertyName("best_bid_size")]
-        public decimal BestBidQuantity { get; set; }
+        public decimal? BestBidQuantity { get; set; }
         /// <summary>
         /// ["<c>best_bid_price</c>"] Best bid price
         /// </summary>
         [JsonPropertyName("best_bid_price")]
-        public decimal BestBidPrice { get; set; }
+        public decimal? BestBidPrice { get; set; }
         /// <summary>
         /// ["<c>best_ask_size</c>"] Best ask quantity
         /// </summary>
         [JsonPropertyName("best_ask_size")]
-        public decimal BestAskQuantity { get; set; }
+        public decimal? BestAskQuantity { get; set; }
         /// <summary>
         /// ["<c>best_ask_price</c>"] Best ask price
         /// </summary>
         [JsonPropertyName("best_ask_price")]
-        public decimal BestAskPrice { get; set; }
+        public decimal? BestAskPrice { get; set; }
     }
 
 
