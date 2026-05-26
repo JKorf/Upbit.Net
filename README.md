@@ -150,6 +150,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 2.10.0 - 26 May 2026
+    * Updated CryptoExchange.Net to version 11.2.0
+
 * Version 2.9.3 - 12 May 2026
     * Fixed UpbitTradeUpdate model deserialization when best bid or ask contains null
 
