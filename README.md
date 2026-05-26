@@ -153,6 +153,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 * Version 2.10.0 - 26 May 2026
     * Updated CryptoExchange.Net to version 11.2.0
 
+* Version 2.10.0 - 26 May 2026
+    * Updated CryptoExchange.Net to version 11.2.0
+
 * Version 2.9.3 - 12 May 2026
     * Fixed UpbitTradeUpdate model deserialization when best bid or ask contains null
 
