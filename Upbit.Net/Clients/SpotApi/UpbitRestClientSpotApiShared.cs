@@ -2,6 +2,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -84,13 +85,23 @@ namespace Upbit.Net.Clients.SpotApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
-            var resultConfig = await ExchangeData.GetSymbolConfigAsync(string.Join(",", result.Data.Select(x => x.Symbol)), ct: ct).ConfigureAwait(false);
-            if (!resultConfig)
-                return resultConfig.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
+            // Need to request in multiple request or the server returns an error for too long URI
+            var batchSize = 500;
+            var batches = Math.Ceiling(result.Data.Length / (decimal)batchSize);
+            var resultConfigs = new List<UpbitSymbolConfig>();
+            for(var batch = 0; batch < batches; batch++)
+            {
+                var batchSymbols = result.Data.Skip(batch * batchSize).Take(batchSize).Select(x => x.Symbol).ToArray();
+                var batchResultConfig = await ExchangeData.GetSymbolConfigAsync(string.Join(",", batchSymbols), ct: ct).ConfigureAwait(false);
+                if (!batchResultConfig)
+                    return batchResultConfig.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
+
+                resultConfigs.AddRange(batchResultConfig.Data);
+            }
 
             var resultData = result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(s => {
                 var split = s.Symbol.Split('-');
-                var config = resultConfig.Data.SingleOrDefault(x => x.Symbol == s.Symbol);
+                var config = resultConfigs.SingleOrDefault(x => x.Symbol == s.Symbol);
                 return new SharedSpotSymbol(split[1], split[0], s.Symbol, true)
                 {
                     PriceStep = config?.TickQuantity
