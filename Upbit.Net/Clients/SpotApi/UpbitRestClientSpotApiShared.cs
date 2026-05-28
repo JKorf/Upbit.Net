@@ -86,7 +86,7 @@ namespace Upbit.Net.Clients.SpotApi
 
             var resultConfig = await ExchangeData.GetSymbolConfigAsync(string.Join(",", result.Data.Select(x => x.Symbol)), ct: ct).ConfigureAwait(false);
             if (!resultConfig)
-                return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
+                return resultConfig.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
             var resultData = result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(s => {
                 var split = s.Symbol.Split('-');
