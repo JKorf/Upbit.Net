@@ -1,6 +1,7 @@
 # ![Upbit.Net](https://raw.githubusercontent.com/JKorf/Upbit.Net/main/Upbit.Net/Icon/icon.png) Upbit.Net  
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Upbit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Upbit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Upbit.Net?style=for-the-badge)
+![Since](https://img.shields.io/badge/since-2025-brightgreen?style=for-the-badge)
 
 Upbit.Net is a client library for accessing the [Upbit REST and Websocket API](https://global-docs.upbit.com/reference/api-overview). 
 
