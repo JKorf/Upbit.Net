@@ -4,8 +4,8 @@
 
 Upbit.Net is a strongly typed .NET client library for Upbit public REST and WebSocket quotation APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 2.9.2.
-CryptoExchange.Net dependency: 11.1.0.
+Current package version in this repository: 2.10.1.
+CryptoExchange.Net dependency: 11.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
