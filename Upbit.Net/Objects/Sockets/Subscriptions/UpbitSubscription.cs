@@ -47,7 +47,7 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = symbols.Length;
 
-            MessageRouter = MessageRouter.CreateWithTopicFilters<T>(_topic, _symbols, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateForEvent<T>(_topic, _symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />
@@ -71,7 +71,7 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
         {
             _handler.Invoke(receiveTime, originalData, message);
-            return new CallResult(null);
+            return CallResult.Ok();
         }
     }
 }

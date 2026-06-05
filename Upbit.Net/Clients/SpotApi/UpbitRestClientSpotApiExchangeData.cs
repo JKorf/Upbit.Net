@@ -28,9 +28,9 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitSymbol[]>> GetSymbolsAsync(bool includeNotifications, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitSymbol[]>> GetSymbolsAsync(bool includeNotifications, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("is_details", includeNotifications);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/market/all", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
@@ -43,14 +43,14 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Trade History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitTrade[]>> GetTradeHistoryAsync(
+        public async Task<HttpResult<UpbitTrade[]>> GetTradeHistoryAsync(
             string symbol,
             DateTime? endTime = null,
             int? limit = null, 
             string? cursor = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("market", symbol);
             if (endTime != null)
             {
@@ -59,8 +59,8 @@ namespace Upbit.Net.Clients.SpotApi
                 parameters.Add("to", time);
                 parameters.Add("days_ago", daysAgo);
             }
-            parameters.AddOptional("count", limit);
-            parameters.AddOptional("cursor", cursor);
+            parameters.Add("count", limit);
+            parameters.Add("cursor", cursor);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/trades/ticks", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitTrade[]>(request, parameters, ct).ConfigureAwait(false);
@@ -72,22 +72,22 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitTicker>> GetTickerAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitTicker>> GetTickerAsync(string symbol, CancellationToken ct = default)
         {
             var result = await GetTickersAsync([symbol], ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<UpbitTicker>(default);
+            if (!result.Success)
+                return HttpResult.Fail<UpbitTicker>(result);
 
             if (!result.Data.Any())
-                return result.AsError<UpbitTicker>(new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "Invalid ticker request")));
+                return HttpResult.Fail<UpbitTicker>(result, new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "Invalid ticker request")));
 
-            return result.As(result.Data.Single());
+            return HttpResult.Ok(result, result.Data.Single());
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitTicker[]>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitTicker[]>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("markets", string.Join(",", symbols));
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/ticker", UpbitExchange.RateLimiter.RestTicker, 1, false);
             var result = await _baseClient.SendAsync<UpbitTicker[]>(request, parameters, ct).ConfigureAwait(false);
@@ -99,9 +99,9 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Tickers By Quote Asset
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(IEnumerable<string> quoteAssets, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(IEnumerable<string> quoteAssets, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("quote_currencies", string.Join(",", quoteAssets));
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/ticker/all", UpbitExchange.RateLimiter.RestTicker, 1, false);
             var result = await _baseClient.SendAsync<UpbitTicker[]>(request, parameters, ct).ConfigureAwait(false);
@@ -113,25 +113,25 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Order Book
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitOrderBook>> GetOrderBookAsync(string symbol, int? levels = null, decimal? aggregation = null, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitOrderBook>> GetOrderBookAsync(string symbol, int? levels = null, decimal? aggregation = null, CancellationToken ct = default)
         {
             var result = await GetOrderBooksAsync([symbol], levels, aggregation, ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<UpbitOrderBook>(default);
+            if (!result.Success)
+                return HttpResult.Fail<UpbitOrderBook>(result);
 
             if (!result.Data.Any())
-                return result.AsError<UpbitOrderBook>(new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "Invalid book request")));
+                return HttpResult.Fail<UpbitOrderBook>(result, new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "Invalid book request")));
 
-            return result.As(result.Data.Single());
+            return HttpResult.Ok(result, result.Data.Single());
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitOrderBook[]>> GetOrderBooksAsync(IEnumerable<string> symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitOrderBook[]>> GetOrderBooksAsync(IEnumerable<string> symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("markets", string.Join(",", symbols));
-            parameters.AddOptional("count", levels);
-            parameters.AddOptional("level", aggregation);
+            parameters.Add("count", levels);
+            parameters.Add("level", aggregation);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v1/orderbook", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitOrderBook[]>(request, parameters, ct).ConfigureAwait(false);
@@ -143,17 +143,17 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitKline[]>> GetKlinesAsync(
+        public async Task<HttpResult<UpbitKline[]>> GetKlinesAsync(
             string symbol,
             KlineInterval interval,
             DateTime? endTime = null,
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("market", symbol);
-            parameters.AddOptional("count", limit);
-            parameters.AddOptional("to", endTime?.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            parameters.Add("count", limit);
+            parameters.Add("to", endTime?.ToString("yyyy-MM-ddTHH:mm:ssZ"));
             var urlPath = "v1/candles/";
             var intInterval = (int)interval;
             if (interval == KlineInterval.OneSecond)
@@ -180,9 +180,9 @@ namespace Upbit.Net.Clients.SpotApi
         #region Get Symbol Config
 
         /// <inheritdoc />
-        public async Task<WebCallResult<UpbitSymbolConfig[]>> GetSymbolConfigAsync(string symbols, CancellationToken ct = default)
+        public async Task<HttpResult<UpbitSymbolConfig[]>> GetSymbolConfigAsync(string symbols, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("markets", symbols);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v1/orderbook/instruments", UpbitExchange.RateLimiter.Upbit, 1, false);
             var result = await _baseClient.SendAsync<UpbitSymbolConfig[]>(request, parameters, ct).ConfigureAwait(false);
