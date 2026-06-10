@@ -15,7 +15,6 @@ namespace Upbit.Net.Clients.SpotApi
     {
         private const string _exchange = "Upbit";
         private const string _topicId = "UpbitSpot";
-        public string Exchange => "Upbit";
 
         public bool Authenticated => false;
 
@@ -23,6 +22,7 @@ namespace Upbit.Net.Clients.SpotApi
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
 
         #region Klines Client
 
@@ -68,8 +68,8 @@ namespace Upbit.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
-        EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient> ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
-            = new EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient>(_exchange, false);
+        GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
+            = new GetSpotSymbolsOptions(_exchange, false);
 
         async Task<HttpResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
@@ -264,8 +264,8 @@ namespace Upbit.Net.Clients.SpotApi
 
         #region Book Ticker client
 
-        EndpointOptions<GetBookTickerRequest, IBookTickerRestClient> IBookTickerRestClient.GetBookTickerOptions { get; } 
-            = new EndpointOptions<GetBookTickerRequest, IBookTickerRestClient>(_exchange, false);
+        GetBookTickerOptions IBookTickerRestClient.GetBookTickerOptions { get; } 
+            = new GetBookTickerOptions(_exchange, false);
         async Task<HttpResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetBookTickerOptions.ValidateRequest(request, this);

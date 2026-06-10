@@ -32,7 +32,7 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("is_details", includeNotifications);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/market/all", UpbitExchange.RateLimiter.Upbit, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v1/market/all", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitSymbol[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -61,7 +61,7 @@ namespace Upbit.Net.Clients.SpotApi
             }
             parameters.Add("count", limit);
             parameters.Add("cursor", cursor);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/trades/ticks", UpbitExchange.RateLimiter.Upbit, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v1/trades/ticks", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitTrade[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -89,7 +89,7 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("markets", string.Join(",", symbols));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/ticker", UpbitExchange.RateLimiter.RestTicker, 1, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v1/ticker", UpbitExchange.RateLimiter.RestTicker, 1, false);
             var result = await _baseClient.SendAsync<UpbitTicker[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -103,7 +103,7 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("quote_currencies", string.Join(",", quoteAssets));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v1/ticker/all", UpbitExchange.RateLimiter.RestTicker, 1, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v1/ticker/all", UpbitExchange.RateLimiter.RestTicker, 1, false);
             var result = await _baseClient.SendAsync<UpbitTicker[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -132,7 +132,7 @@ namespace Upbit.Net.Clients.SpotApi
             parameters.Add("markets", string.Join(",", symbols));
             parameters.Add("count", levels);
             parameters.Add("level", aggregation);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v1/orderbook", UpbitExchange.RateLimiter.Upbit, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v1/orderbook", UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitOrderBook[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -169,7 +169,7 @@ namespace Upbit.Net.Clients.SpotApi
             else if (interval == KlineInterval.OneYear)
                 urlPath += "years";
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, urlPath, UpbitExchange.RateLimiter.Upbit, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, urlPath, UpbitExchange.RateLimiter.Upbit, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<UpbitKline[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -184,7 +184,7 @@ namespace Upbit.Net.Clients.SpotApi
         {
             var parameters = new Parameters(UpbitExchange._parameterSerializationSettings);
             parameters.Add("markets", symbols);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v1/orderbook/instruments", UpbitExchange.RateLimiter.Upbit, 1, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v1/orderbook/instruments", UpbitExchange.RateLimiter.Upbit, 1, false);
             var result = await _baseClient.SendAsync<UpbitSymbolConfig[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }

@@ -15,13 +15,13 @@ namespace Upbit.Net.Clients.SpotApi
     {
         private const string _exchange = "Upbit";
         private const string _topicId = "UpbitSpot";
-        public string Exchange => "Upbit";
         public bool Authenticated => false;
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
 
         #region Order Book client
         SubscribeOrderBookOptions IOrderBookSocketClient.SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(_exchange, false, new[] { 1, 5, 15, 30 })
@@ -79,8 +79,8 @@ namespace Upbit.Net.Clients.SpotApi
 
         #region Book Ticker client
 
-        EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient> IBookTickerSocketClient.SubscribeBookTickerOptions { get; }
-            = new EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient>(_exchange, false)
+        SubscribeBookTickerOptions IBookTickerSocketClient.SubscribeBookTickerOptions { get; }
+            = new SubscribeBookTickerOptions(_exchange, false)
         {
             SupportsMultipleSymbols = true
         };
@@ -107,7 +107,7 @@ namespace Upbit.Net.Clients.SpotApi
 
         #region Trade client
 
-        EndpointOptions<SubscribeTradeRequest, ITradeSocketClient> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest, ITradeSocketClient>(_exchange, false)
+        SubscribeTradeOptions ITradeSocketClient.SubscribeTradeOptions { get; } = new SubscribeTradeOptions(_exchange, false)
         {
             SupportsMultipleSymbols = true
         };

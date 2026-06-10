@@ -27,7 +27,7 @@ namespace Upbit.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetSymbolConfigAsync("123"), "GetSymbolConfig");
         }
 
-        private bool IsAuthenticated(WebCallResult result)
+        private bool IsAuthenticated(IHttpResult result)
         {
             return false;
         }
