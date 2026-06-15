@@ -41,7 +41,7 @@ namespace Upbit.Net.Clients
         {
             Initialize(options.Value);
             
-            SpotApi = AddApiClient(new UpbitSocketClientSpotApi(_logger, options.Value));
+            SpotApi = AddApiClient(new UpbitSocketClientSpotApi(loggerFactory, options.Value));
         }
         #endregion
 

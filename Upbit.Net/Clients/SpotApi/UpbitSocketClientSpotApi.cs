@@ -43,8 +43,8 @@ namespace Upbit.Net.Clients.SpotApi
         /// <summary>
         /// ctor
         /// </summary>
-        internal UpbitSocketClientSpotApi(ILogger logger, UpbitSocketOptions options) :
-            base(logger, UpbitExchange.ExchangeName, options.Environment.SocketClientAddress!, options, options.SpotOptions)
+        internal UpbitSocketClientSpotApi(ILoggerFactory? loggerFactory, UpbitSocketOptions options) :
+            base(loggerFactory, UpbitExchange.ExchangeName, options.Environment.SocketClientAddress!, options, options.SpotOptions)
         {
             _waitForErrorTimeout = options.SubscribeMaxWaitForError;
 

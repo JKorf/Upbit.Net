@@ -36,10 +36,10 @@ namespace Upbit.Net.Clients.SpotApi
         #endregion
 
         #region constructor/destructor
-        internal UpbitRestClientSpotApi(ILogger logger, HttpClient? httpClient, UpbitRestOptions options)
-            : base(logger, UpbitExchange.ExchangeName, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
+        internal UpbitRestClientSpotApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, UpbitRestOptions options)
+            : base(loggerFactory, UpbitExchange.ExchangeName, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
         {
-            ExchangeData = new UpbitRestClientSpotApiExchangeData(logger, this);
+            ExchangeData = new UpbitRestClientSpotApiExchangeData(_logger, this);
         }
         #endregion
 
