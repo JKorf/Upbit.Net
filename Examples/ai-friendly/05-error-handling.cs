@@ -12,7 +12,8 @@ using Upbit.Net.Objects.Models;
 var client = new UpbitRestClient();
 
 // ---- 1. THE BASIC PATTERN ----
-// Every REST method returns HttpResult<T>.
+// Direct and SharedApis REST methods return HttpResult<T> or HttpResult.
+// Direct and SharedApis WebSocket subscriptions return WebSocketResult<UpdateSubscription>.
 // .Success is true/false. .Data is the payload, valid only when .Success is true.
 // .Error contains structured error info when .Success is false.
 // .Error.IsTransient hints if retry may succeed, for example after network or server issues.

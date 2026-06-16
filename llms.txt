@@ -30,6 +30,8 @@ Important scope: this repository currently supports public Spot quotation APIs o
 - Do not generate account, wallet, withdrawal, deposit, or order placement code. There is no `SpotApi.Account` or `SpotApi.Trading`.
 - Upbit symbols use `QUOTE-BASE`, for example `USDT-ETH`, `KRW-BTC`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC`.
 - Always check `.Success` before reading `.Data`.
+- Direct and shared REST methods return `HttpResult<T>` / `HttpResult`; direct and shared socket subscriptions return `WebSocketResult<UpdateSubscription>`.
+- Use `SharedClient.Discover()` when code needs to inspect implemented shared interfaces and endpoint options at runtime.
 - Use regional environments from `UpbitEnvironment`: `Live`, `Singapore`, `Indonesia`, `Thailand`.
 
 ## Reference

@@ -33,7 +33,7 @@ var restClient = new UpbitRestClient();
 
 ## Core Pattern: Result Handling
 
-REST methods return `HttpResult<T>` and WebSocket subscription methods return `WebSocketResult<T>`. Always check `.Success` before accessing `.Data`.
+Direct REST and SharedApis REST methods return `HttpResult<T>` or `HttpResult`. Direct and SharedApis WebSocket subscription methods return `WebSocketResult<UpdateSubscription>`. Always check `.Success` before accessing `.Data`.
 
 ```csharp
 var ticker = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
@@ -145,6 +145,8 @@ Upbit.Net shared REST interfaces include `ISpotTickerRestClient`, `ISpotSymbolRe
 Upbit.Net shared socket interfaces include `ITickerSocketClient`, `ITradeSocketClient`, `IBookTickerSocketClient`, `IKlineSocketClient`, and `IOrderBookSocketClient`.
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
+
+Use `SharedClient.Discover()` on any shared client root when code needs runtime metadata about supported shared interfaces and endpoint options.
 
 ## Dependency Injection
 

@@ -22,8 +22,9 @@ Primary documentation:
 - Do not configure credentials. Current Upbit.Net does not expose authenticated endpoints and credentials are not part of the options surface.
 - Do not generate order placement, order querying, balances, deposits, withdrawals, private streams, margin, or futures code. This library exposes public Spot quotation data only.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `HttpResult<T>`.
-- WebSocket subscription methods return `WebSocketResult<UpdateSubscription>`.
+- Direct REST and SharedApis REST methods return `HttpResult<T>` or `HttpResult`.
+- Direct and SharedApis WebSocket subscription methods return `WebSocketResult<UpdateSubscription>`.
+- SharedApis helper methods that do not perform HTTP/socket I/O can return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -31,6 +32,7 @@ Primary documentation:
 - Do not invent endpoint names. If unsure, inspect `Upbit.Net/Interfaces/Clients/**`.
 - Use Upbit symbol format `QUOTE-BASE`, for example `USDT-ETH` or `KRW-BTC`.
 - For multi-exchange market-data code, use `CryptoExchange.Net.SharedApis` interfaces from `.SharedClient`.
+- Use `SharedClient.Discover()` when tooling or exchange-agnostic code needs runtime metadata about implemented shared interfaces and endpoint options.
 
 ## Installation
 

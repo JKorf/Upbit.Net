@@ -81,6 +81,7 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 | Shared book ticker socket | `IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(new SubscribeBookTickerRequest(symbol), handler)` |
 | Shared kline socket | `IKlineSocketClient.SubscribeToKlineUpdatesAsync(new SubscribeKlineRequest(symbol, interval), handler)` |
 | Shared socket unsubscribe | Keep concrete `UpbitSocketClient` and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+| Discover shared capabilities | `client.SpotApi.SharedClient.Discover()` or `socketClient.SpotApi.SharedClient.Discover()` |
 
 ## Kline Intervals
 
@@ -116,9 +117,10 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 
 | Situation | Pattern |
 |---|---|
-| REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
-| Read REST data | Read `result.Data` only after `result.Success` |
+| REST success check | Direct and shared REST methods return `HttpResult<T>` / `HttpResult` |
+| Socket subscription success check | Direct and shared subscriptions return `WebSocketResult<UpdateSubscription>` |
+| Generic success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
+| Read result data | Read `result.Data` only after `result.Success` |
 | Retry decision | Retry only when `result.Error?.IsTransient == true` |
 | Cancellation | Pass `ct: cancellationToken` |
 | Socket teardown | `await socketClient.UnsubscribeAsync(sub.Data)` |
