@@ -1,6 +1,6 @@
 // 05-error-handling.cs
 //
-// Demonstrates: WebCallResult patterns, retry logic, and common Upbit.Net pitfalls.
+// Demonstrates: HttpResult patterns, retry logic, and common Upbit.Net pitfalls.
 //
 // Setup: dotnet add package JKorf.Upbit.Net
 
@@ -12,7 +12,7 @@ using Upbit.Net.Objects.Models;
 var client = new UpbitRestClient();
 
 // ---- 1. THE BASIC PATTERN ----
-// Every REST method returns WebCallResult<T>.
+// Every REST method returns HttpResult<T>.
 // .Success is true/false. .Data is the payload, valid only when .Success is true.
 // .Error contains structured error info when .Success is false.
 // .Error.IsTransient hints if retry may succeed, for example after network or server issues.
@@ -34,11 +34,11 @@ else
 // ---- 2. SIMPLE RETRY WITH BACKOFF ----
 // Retry only on transient errors. Do not retry invalid symbols or unsupported features.
 
-async Task<WebCallResult<T>> WithRetry<T>(
-    Func<Task<WebCallResult<T>>> call,
+async Task<HttpResult<T>> WithRetry<T>(
+    Func<Task<HttpResult<T>>> call,
     int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
@@ -118,7 +118,7 @@ var recentCandles = await GetRecentCandlesOrEmptyAsync("USDT-ETH");
 Console.WriteLine($"Candles loaded: {recentCandles.Length}");
 
 // ---- 6. EXCEPTIONS VS ERROR RESULTS ----
-// Upbit.Net returns normal API/network/rate-limit failures via WebCallResult.Error.
+// Upbit.Net returns normal API/network/rate-limit failures via HttpResult.Error.
 // Exceptions are reserved for disposal, cancellation, invalid local arguments, or
 // other programming/misconfiguration issues.
 

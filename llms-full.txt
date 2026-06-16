@@ -22,8 +22,8 @@ Primary documentation:
 - Do not configure credentials. Current Upbit.Net does not expose authenticated endpoints and credentials are not part of the options surface.
 - Do not generate order placement, order querying, balances, deposits, withdrawals, private streams, margin, or futures code. This library exposes public Spot quotation data only.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `WebCallResult<T>`.
-- WebSocket subscription methods return `CallResult<UpdateSubscription>`.
+- REST methods return `HttpResult<T>`.
+- WebSocket subscription methods return `WebSocketResult<UpdateSubscription>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -162,9 +162,9 @@ var price = result.Data.LastPrice;
 For retry logic, only retry transient errors:
 
 ```csharp
-async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+async Task<HttpResult<T>> WithRetry<T>(Func<Task<HttpResult<T>>> call, int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
@@ -437,7 +437,7 @@ Examples/ai-friendly/04-multi-exchange.cs
   CryptoExchange.Net.SharedApis REST and socket market-data patterns.
 
 Examples/ai-friendly/05-error-handling.cs
-  WebCallResult pattern, transient retry, Upbit-specific mistakes, symbol validation.
+  HttpResult pattern, transient retry, Upbit-specific mistakes, symbol validation.
 ```
 
 These files are intended to be copied into a console `Program.cs` after `dotnet add package JKorf.Upbit.Net`.

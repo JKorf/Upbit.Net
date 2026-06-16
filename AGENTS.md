@@ -33,7 +33,7 @@ var restClient = new UpbitRestClient();
 
 ## Core Pattern: Result Handling
 
-REST methods return `WebCallResult<T>` and WebSocket subscription methods return `CallResult<T>`. Always check `.Success` before accessing `.Data`.
+REST methods return `HttpResult<T>` and WebSocket subscription methods return `WebSocketResult<T>`. Always check `.Success` before accessing `.Data`.
 
 ```csharp
 var ticker = await restClient.SpotApi.ExchangeData.GetTickerAsync("USDT-ETH");
