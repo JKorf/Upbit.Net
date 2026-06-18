@@ -98,7 +98,7 @@ namespace Upbit.Net
         /// <summary>
         /// Rate limiter configuration for the Upbit API
         /// </summary>
-        public static UpbitRateLimiters RateLimiter { get; } = new UpbitRateLimiters();
+        public static UpbitRateLimiters RateLimiter { get; set; } = new UpbitRateLimiters();
     }
 
     /// <summary>
@@ -116,13 +116,19 @@ namespace Upbit.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal UpbitRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public UpbitRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             Upbit = new RateLimitGate("Endpoint");
 
