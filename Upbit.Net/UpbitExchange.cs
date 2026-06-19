@@ -27,7 +27,8 @@ namespace Upbit.Net
                 "https://www.upbit.com",
                 ["https://global-docs.upbit.com/reference"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                UpbitEnvironment.All
                 );
 
         /// <summary>
