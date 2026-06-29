@@ -43,8 +43,8 @@ namespace Upbit.Net.Clients.SpotApi
         /// <summary>
         /// ctor
         /// </summary>
-        internal UpbitSocketClientSpotApi(ILogger logger, UpbitSocketOptions options) :
-            base(logger, options.Environment.SocketClientAddress!, options, options.SpotOptions)
+        internal UpbitSocketClientSpotApi(ILoggerFactory? loggerFactory, UpbitSocketOptions options) :
+            base(loggerFactory, UpbitExchange.ExchangeName, options.Environment.SocketClientAddress!, options, options.SpotOptions)
         {
             _waitForErrorTimeout = options.SubscribeMaxWaitForError;
 
@@ -61,11 +61,11 @@ namespace Upbit.Net.Clients.SpotApi
 
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync([symbol], onMessage, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTradeUpdate>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, UpbitTradeUpdate>((receiveTime, originalData, data) =>
             {
@@ -85,11 +85,11 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<UpbitTickerUpdate>> onMessage, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<UpbitTickerUpdate>> onMessage, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync([symbol], onMessage, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTickerUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<UpbitTickerUpdate>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, UpbitTickerUpdate>((receiveTime, originalData, data) =>
             {
@@ -109,11 +109,11 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int levels, Action<DataEvent<UpbitOrderBookUpdate>> onMessage, decimal? aggregation = null, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int levels, Action<DataEvent<UpbitOrderBookUpdate>> onMessage, decimal? aggregation = null, CancellationToken ct = default)
             => SubscribeToOrderBookUpdatesAsync([symbol], levels, onMessage, aggregation, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int levels, Action<DataEvent<UpbitOrderBookUpdate>> onMessage, decimal? aggregation = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int levels, Action<DataEvent<UpbitOrderBookUpdate>> onMessage, decimal? aggregation = null, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, UpbitOrderBookUpdate>((receiveTime, originalData, data) =>
             {
@@ -133,11 +133,11 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<UpbitKlineUpdate>> onMessage, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<UpbitKlineUpdate>> onMessage, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync([symbol], interval, onMessage, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<UpbitKlineUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<UpbitKlineUpdate>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, UpbitKlineUpdate>((receiveTime, originalData, data) =>
             {

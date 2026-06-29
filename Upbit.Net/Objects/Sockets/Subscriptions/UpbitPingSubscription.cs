@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Sockets.Default;
 using CryptoExchange.Net.Sockets.Default.Routing;
@@ -13,7 +14,7 @@ namespace Upbit.Net.Objects.Sockets.Subscriptions
         /// </summary>
         public UpbitPingSubscription(ILogger logger) : base(logger, false)
         {
-            MessageRouter = MessageRouter.CreateWithoutHandler<object>("status");
+            MessageRouter = MessageRouter.CreateVoid<Unit>("status");
         }
     }
 }

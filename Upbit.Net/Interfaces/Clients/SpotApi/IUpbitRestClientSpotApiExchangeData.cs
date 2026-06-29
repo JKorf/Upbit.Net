@@ -24,7 +24,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="includeNotifications">["<c>is_details</c>"] Whether to include events</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitSymbol[]>> GetSymbolsAsync(bool includeNotifications, CancellationToken ct = default);
+        Task<HttpResult<UpbitSymbol[]>> GetSymbolsAsync(bool includeNotifications, CancellationToken ct = default);
 
         /// <summary>
         /// Get trade history
@@ -40,7 +40,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>count</c>"] Max number of results, max 500</param>
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTrade[]>> GetTradeHistoryAsync(string symbol, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<UpbitTrade[]>> GetTradeHistoryAsync(string symbol, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get price ticker info
@@ -53,7 +53,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbol">["<c>markets</c>"] The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<UpbitTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get price ticker info
@@ -66,7 +66,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbols">["<c>markets</c>"] The symbols, for example `USDT-ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTicker[]>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
+        Task<HttpResult<UpbitTicker[]>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
 
         /// <summary>
         /// Get price ticker info
@@ -79,7 +79,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="quoteAssets">["<c>quote_currencies</c>"] The quote assets, for example `KRW`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(IEnumerable<string> quoteAssets, CancellationToken ct = default);
+        Task<HttpResult<UpbitTicker[]>> GetTickersByQuoteAssetsAsync(IEnumerable<string> quoteAssets, CancellationToken ct = default);
 
         /// <summary>
         /// Get order book info
@@ -94,7 +94,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// <param name="levels">["<c>count</c>"] Number of rows</param>
         /// <param name="aggregation">["<c>level</c>"] Aggregation level</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitOrderBook>> GetOrderBookAsync(string symbol, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
+        Task<HttpResult<UpbitOrderBook>> GetOrderBookAsync(string symbol, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order book info
@@ -109,7 +109,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// <param name="levels">["<c>count</c>"] Number of rows</param>
         /// <param name="aggregation">["<c>level</c>"] Aggregation level</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitOrderBook[]>> GetOrderBooksAsync(IEnumerable<string> symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
+        Task<HttpResult<UpbitOrderBook[]>> GetOrderBooksAsync(IEnumerable<string> symbols, int? levels = null, decimal? aggregation = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get kline/candlestick data. Note that entries might be missing if there is no data for an entry
@@ -125,7 +125,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// <param name="endTime">["<c>to</c>"] End time</param>
         /// <param name="limit">["<c>count</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime ? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<UpbitKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime ? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get symbol config
@@ -138,7 +138,7 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbols">["<c>markets</c>"] The symbols, for example `USDT-ETH`, comma separated</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<UpbitSymbolConfig[]>> GetSymbolConfigAsync(string symbols, CancellationToken ct = default);
+        Task<HttpResult<UpbitSymbolConfig[]>> GetSymbolConfigAsync(string symbols, CancellationToken ct = default);
 
     }
 }

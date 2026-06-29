@@ -20,7 +20,7 @@ Important scope: this repository currently supports public Spot quotation APIs o
 - [Market Data](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/02-market-data.cs): Symbols, regional quote assets, tickers, trades, klines, order books, symbol config
 - [WebSocket Streams](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/03-websocket.cs): Ticker, trade, order book, and kline subscriptions with proper teardown
 - [Multi-Exchange Pattern](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/04-multi-exchange.cs): Using CryptoExchange.Net SharedApis for exchange-agnostic market data
-- [Error Handling](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/05-error-handling.cs): WebCallResult pattern, retry logic, common Upbit.Net pitfalls
+- [Error Handling](https://github.com/JKorf/Upbit.Net/blob/main/Examples/ai-friendly/05-error-handling.cs): HttpResult pattern, retry logic, common Upbit.Net pitfalls
 - [Full Examples Repository](https://github.com/JKorf/Upbit.Net/tree/main/Examples): Console, minimal API, order book, and trade tracker examples
 
 ## Critical Usage Rules
@@ -30,6 +30,8 @@ Important scope: this repository currently supports public Spot quotation APIs o
 - Do not generate account, wallet, withdrawal, deposit, or order placement code. There is no `SpotApi.Account` or `SpotApi.Trading`.
 - Upbit symbols use `QUOTE-BASE`, for example `USDT-ETH`, `KRW-BTC`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC`.
 - Always check `.Success` before reading `.Data`.
+- Direct and shared REST methods return `HttpResult<T>` / `HttpResult`; direct and shared socket subscriptions return `WebSocketResult<UpdateSubscription>`.
+- Use `SharedClient.Discover()` when code needs to inspect implemented shared interfaces and endpoint options at runtime.
 - Use regional environments from `UpbitEnvironment`: `Live`, `Singapore`, `Indonesia`, `Thailand`.
 
 ## Reference

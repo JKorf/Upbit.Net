@@ -18,6 +18,7 @@ using CryptoExchange.Net.SharedApis;
 // Upbit.Net implements shared public market-data interfaces such as:
 // ISpotTickerRestClient, ISpotSymbolRestClient, IOrderBookRestClient,
 // IRecentTradeRestClient, IKlineRestClient, ITickerSocketClient, and more.
+// Use SharedClient.Discover() when you need runtime capability metadata.
 
 ISpotTickerRestClient upbitShared = new UpbitRestClient().SpotApi.SharedClient;
 
@@ -53,6 +54,7 @@ if (orderBook.Success)
     Console.WriteLine($"[{orderBookClient.Exchange}] order book received");
 
 // ---- WEBSOCKET EXAMPLE: SHARED SUBSCRIPTION ----
+// Shared socket subscriptions return WebSocketResult<UpdateSubscription>.
 var upbitSocket = new UpbitSocketClient();
 ITickerSocketClient upbitTickerSocket = upbitSocket.SpotApi.SharedClient;
 
