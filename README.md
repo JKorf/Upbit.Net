@@ -79,7 +79,7 @@ Upbit.Net includes AI-oriented documentation and examples for code generation to
 |[`docs/ai-api-map.md`](docs/ai-api-map.md)|Table-style intent-to-method map for Spot REST, WebSocket, regional environments, and SharedApis|
 |[`Examples/ai-friendly`](Examples/ai-friendly)|Compilable single-file examples for common REST, WebSocket, shared API, and error handling workflows|
 
-GitHub Copilot and Cursor instructions are also provided in `.github/copilot-instructions.md` and `.cursor/rules/upbit-net.mdc`; both point back to the root AI context files.
+See [cryptoexchange-skills-hub](https://github.com/JKorf/cryptoexchange-skills-hub) for installable skills.
 
 ## CryptoExchange.Net
 Upbit.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
@@ -180,98 +180,3 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
     * Added setter to UpbitExchange.RateLimiter to allow custom rate limit settings
     * Various small performance improvements
     * Fixed websocket connection attempts counting towards rate limit even when server could not be reached
-
-* Version 2.11.0 - 08 Jun 2026
-    * Updated CryptoExchange.Net to version 11.2.2
-
-* Version 2.10.1 - 28 May 2026
-    * Fixed Shared GetSpotSymbolsAsync implementation failing due to too long URI's
-    * Fixed Shared GetSpotSymbolsAsync potentially returning success on error
-
-* Version 2.10.0 - 26 May 2026
-    * Updated CryptoExchange.Net to version 11.2.0
-
-* Version 2.9.3 - 12 May 2026
-    * Fixed UpbitTradeUpdate model deserialization when best bid or ask contains null
-
-* Version 2.9.2 - 09 Apr 2026
-    * Updated CryptoExchange.Net to version 11.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-
-* Version 2.9.1 - 26 Mar 2026
-    * Updated CryptoExchange.Net to version 11.0.2, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Fixed missing SetOptions on Upbit clients
-
-* Version 2.9.0 - 24 Mar 2026
-    * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Updated Shared order status parsing to default to Unknown value if not parsable
-    * Removed ApiCredentials from options since authentication is not available
-    * Removed UpbitUserClientProvider since authentication is not available
-
-* Version 2.8.0 - 06 Mar 2026
-    * Updated CryptoExchange.Net to version 10.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Improved method XML comments
-
-* Version 2.7.0 - 24 Feb 2026
-    * Updated CryptoExchange.Net to version 10.7.0
-    * Added additional Http settings to client options
-    * Updated Shared REST interfaces pagination logic
-    * Updated HttpClient registration, fixing issue of DNS changes not getting processed
-    * Fixed UserClientProvider using unconfigured HttpClient
-
-* Version 2.6.0 - 16 Feb 2026
-    * Updated CryptoExchange.Net to version 10.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-
-* Version 2.5.0 - 10 Feb 2026
-    * Updated CryptoExchange.Net to version 10.5.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Updated UserClientProvider internal client cache to non-static to prevent cleanup issues
-
-* Version 2.4.0 - 06 Feb 2026
-    * Updated CryptoExchange.Net to version 10.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added additional methods for requesting supported symbols to Shared ISpotSymbolRestClient/IFuturesSymbolRestClient interfaces
-    * Fixed disposed clients getting returned from UserClientProvider
-
-* Version 2.3.0 - 22 Jan 2026
-    * Updated CryptoExchange.Net to version 10.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Removed legacy websocket message handling and the corresponding UseUpdatedDeserialization client option
-    * Added Metadata to AsterExchange
-
-* Version 2.2.1 - 14 Jan 2026
-    * Updated CryptoExchange.Net to version 10.2.3, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-
-* Version 2.2.0 - 13 Jan 2026
-    * Updated CryptoExchange.Net to version 10.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-
-* Version 2.1.0 - 07 Jan 2026
-    * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added DataTimeLocal and DataAge properties to DataEvent object
-    * Added UpdateServerTime, UpdateLocalTime and DataAge properties to (I)SymbolOrderBook
-    * Fixed incorrect Kline endTime parameter serialization
-
-* Version 2.0.0 - 16 Dec 2025
-    * Added Net10.0 target framework
-    * Updated CryptoExchange.Net version to 10.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Improved performance across the board, biggest gains in websocket message processing
-    * Updated REST message response handling
-    * Updated WebSocket message handling
-    * Added UseUpdatedDeserialization socket client options to toggle by new and old message handling
-    * Added SocketIndividualSubscriptionCombineTarget socket client option
-    * Added PreDelisting value to SymbolStatus enum
-    * Updated Shared API's subscription update types from ExchangeEvent to DataEvent
-    * Fixed websocket ratelimiting error
-
-* Version 1.2.0 - 11 Nov 2025
-    * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-
-* Version 1.1.1 - 03 Nov 2025
-    * Fixed UpbitTrackerFactory CanCreateTradeTracker returning inversed
-
-* Version 1.1.0 - 03 Nov 2025
-    * Updated CryptoExchange.Net to version 9.12.0
-    * Added support for using SharedSymbol.UsdOrStable in Shared APIs
-    * Fixed deserialization issue in ticker endpoints
-    * Fixed exception when initial trade snapshot has no items in TradeTracker
-    * Removed some unhelpful verbose logs
-
-* Version 1.0.0 - 27 Oct 2025
-    * Initial release
-
