@@ -58,6 +58,21 @@ namespace Upbit.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("candle_acc_trade_volume")]
         public decimal Volume { get; set; }
+        /// <summary>
+        /// ["<c>prev_closing_price</c>"] Previous day closing price
+        /// </summary>
+        [JsonPropertyName("prev_closing_price")]
+        public decimal PrevClosingPrice { get; set; }
+        /// <summary>
+        /// ["<c>change_price</c>"] Change price
+        /// </summary>
+        [JsonPropertyName("change_price")]
+        public decimal ChangePrice { get; set; }
+        /// <summary>
+        /// ["<c>change_rate</c>"] Change percentage
+        /// </summary>
+        [JsonPropertyName("change_rate")]
+        public decimal ChangePercentage { get; set; }
     }
 
 
