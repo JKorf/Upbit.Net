@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Upbit.Net.Clients;
@@ -44,13 +45,16 @@ namespace Upbit.Net.UnitTests
         [Test]
         public async Task TestSpotExchangeData()
         {
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetSymbolsAsync(true, CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTradeHistoryAsync("KRW-ETH", null, null, null, CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTickerAsync("KRW-ETH", CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTickersByQuoteAssetsAsync(new[] { "KRW" }, CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetOrderBookAsync("KRW-ETH", null, null, CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetKlinesAsync("KRW-ETH", Enums.KlineInterval.OneDay, null, null, CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetSymbolConfigAsync("KRW-ETH", CancellationToken.None), false);
+            var warnings = new List<Exception>();
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetSymbolsAsync(true, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetTradeHistoryAsync("KRW-ETH", null, null, null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetTickerAsync("KRW-ETH", CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetTickersByQuoteAssetsAsync(new[] { "KRW" }, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetOrderBookAsync("KRW-ETH", null, null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetKlinesAsync("KRW-ETH", Enums.KlineInterval.OneDay, null, null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetSymbolConfigAsync("KRW-ETH", CancellationToken.None), false);
+            foreach (var warning in warnings)
+                Assert.Warn(warning.Message);
         }
     }
 }
