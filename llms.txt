@@ -2,7 +2,7 @@
 
 > Strongly typed .NET client library for the public Upbit REST and WebSocket quotation APIs. Supports Spot symbols, tickers, candles, trades, order books, regional live environments, local order books, trade trackers, and CryptoExchange.Net SharedApis. Part of the CryptoExchange.Net ecosystem.
 
-Upbit.Net is a C# client for Upbit public market data with typed REST/WebSocket models, automatic WebSocket reconnection, client-side rate limiting, local order book support, native AOT support, and unified shared interfaces for multi-exchange market-data code. Current version in this repository: 2.10.1. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Upbit.Net is a C# client for Upbit public market data with typed REST/WebSocket models, automatic WebSocket reconnection, client-side rate limiting, local order book support, native AOT support, and unified shared interfaces for multi-exchange market-data code. Current version in this repository: 3.1.0. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 
 Important scope: this repository currently supports public Spot quotation APIs only. It does not expose authenticated account, wallet, deposit, withdrawal, private stream, or order placement endpoints.
 
