@@ -49,7 +49,7 @@ namespace Upbit.Net
         }
 
         /// <inheritdoc />
-        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
+        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IUpbitRestClient>() ?? new UpbitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IUpbitSocketClient>() ?? new UpbitSocketClient();
@@ -64,12 +64,13 @@ namespace Upbit.Net
                 symbol,
                 interval,
                 limit,
-                period
+                period,
+                exchangeParameters
                 );
         }
 
         /// <inheritdoc />
-        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null)
+        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IUpbitRestClient>() ?? new UpbitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IUpbitSocketClient>() ?? new UpbitSocketClient();
@@ -84,7 +85,8 @@ namespace Upbit.Net
                 sharedSocketClient,
                 symbol,
                 limit,
-                period
+                period,
+                exchangeParameters
                 );
         }
     }
