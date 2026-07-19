@@ -124,6 +124,7 @@ namespace Upbit.Net.Clients.SpotApi
             var config = resultConfigs.SingleOrDefault(x => x.Symbol == s.Symbol);
             var result = new SharedSpotSymbol(split[1], split[0], s.Symbol, true)
             {
+                DisplayName = s.Name,
                 PriceStep = config?.TickQuantity,
                 BaseAssetType = SharedAssetType.Crypto
             };
@@ -136,6 +137,10 @@ namespace Upbit.Net.Clients.SpotApi
             {
                 result.QuoteAssetType = SharedAssetType.Crypto;
                 result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
             }
 
             return result;
