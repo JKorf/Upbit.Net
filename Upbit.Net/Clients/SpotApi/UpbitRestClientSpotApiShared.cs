@@ -24,6 +24,8 @@ namespace Upbit.Net.Clients.SpotApi
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(UpbitExchange.Metadata, this);
 
+        private static readonly HashSet<string> _fiatCurrencies = ["KRW", "SGD", "IDR", "THB"];
+
         #region Klines Client
 
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(_exchange, false, true, true, 1000, false, [
@@ -80,6 +82,7 @@ namespace Upbit.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
+        SharedSymbolCatalog? ISpotSymbolRestClient.SpotSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_exchange, _topicId, EnvironmentName, null);
         GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
             = new GetSpotSymbolsOptions(_exchange, false);
 
@@ -107,17 +110,40 @@ namespace Upbit.Net.Clients.SpotApi
                 resultConfigs.AddRange(batchResultConfig.Data);
             }
 
-            var resultData = result.Data.Select(s => {
-                var split = s.Symbol.Split('-');
-                var config = resultConfigs.SingleOrDefault(x => x.Symbol == s.Symbol);
-                return new SharedSpotSymbol(split[1], split[0], s.Symbol, true)
-                {
-                    PriceStep = config?.TickQuantity
-                };
-            }).ToArray();
+            var resultData =
+                 result.Data.Select(x => ParseSymbol(x, resultConfigs))
+                .ToArray();
 
             ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData);
-            return HttpResult.Ok(result, resultData);
+            return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(resultData, request));
+        }
+
+        private SharedSpotSymbol ParseSymbol(UpbitSymbol s, List<UpbitSymbolConfig> resultConfigs)
+        {
+            var split = s.Symbol.Split('-');
+            var config = resultConfigs.SingleOrDefault(x => x.Symbol == s.Symbol);
+            var result = new SharedSpotSymbol(split[1], split[0], s.Symbol, true)
+            {
+                DisplayName = s.Name,
+                PriceStep = config?.TickQuantity,
+                BaseAssetType = SharedAssetType.Crypto
+            };
+
+            if (_fiatCurrencies.Contains(result.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Fiat;
+            }
+            else if(LibraryHelpers.IsStableCoin(result.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+                result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+            }
+
+            return result;
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
