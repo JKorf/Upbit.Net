@@ -126,7 +126,6 @@ namespace Upbit.Net.Clients.SpotApi
             {
                 DisplayName = s.Name,
                 PriceStep = config?.TickQuantity,
-                BaseAssetType = SharedAssetType.Crypto
             };
 
             if (_fiatCurrencies.Contains(result.QuoteAsset))
@@ -141,6 +140,20 @@ namespace Upbit.Net.Clients.SpotApi
             else
             {
                 result.QuoteAssetType = SharedAssetType.Crypto;
+            }
+
+            if (_fiatCurrencies.Contains(result.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Fiat;
+            }
+            else if (LibraryHelpers.IsStableCoin(result.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+                result.BaseAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
             }
 
             return result;
