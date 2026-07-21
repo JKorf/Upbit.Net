@@ -142,6 +142,8 @@ Console.WriteLine(ticker.Data.LastPrice);
 
 Upbit.Net shared REST interfaces include `ISpotTickerRestClient`, `ISpotSymbolRestClient`, `IKlineRestClient`, `IOrderBookRestClient`, `IRecentTradeRestClient`, `ITradeHistoryRestClient`, and `IBookTickerRestClient`.
 
+Shared symbol results honor `GetSymbolsRequest` filters and include display names plus asset metadata: base assets are crypto; `KRW`, `SGD`, `IDR`, and `THB` quotes are fiat; stablecoin quotes are marked with `SharedAssetSubType.StableCoin`. `ISpotSymbolRestClient.SpotSymbolCatalog` exposes the environment-specific cached catalog.
+
 Upbit.Net shared socket interfaces include `ITickerSocketClient`, `ITradeSocketClient`, `IBookTickerSocketClient`, `IKlineSocketClient`, and `IOrderBookSocketClient`.
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.

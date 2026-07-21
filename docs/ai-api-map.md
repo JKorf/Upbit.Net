@@ -64,6 +64,9 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 | Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot tickers REST | `ISpotTickerRestClient.GetSpotTickersAsync(new GetTickersRequest())` |
 | Shared symbols REST | `ISpotSymbolRestClient.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
+| Filter shared symbols | Set filters on `GetSymbolsRequest`; the returned list honors them |
+| Cached shared symbol catalog | `ISpotSymbolRestClient.SpotSymbolCatalog` (environment-specific) |
+| Shared symbol metadata | `SharedSpotSymbol.DisplayName`, `BaseAssetType`, `QuoteAssetType`, `QuoteAssetSubType` (stablecoins use `SharedAssetSubType.StableCoin`) |
 | Shared klines REST | `IKlineRestClient.GetKlinesAsync(new GetKlinesRequest(symbol, interval), pageRequest, ct)` |
 | Shared order book REST | `IOrderBookRestClient.GetOrderBookAsync(new GetOrderBookRequest(symbol), ct)` |
 | Shared recent trades REST | `IRecentTradeRestClient.GetRecentTradesAsync(new GetRecentTradesRequest(symbol), ct)` |

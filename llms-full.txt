@@ -4,8 +4,8 @@
 
 Upbit.Net is a strongly typed .NET client library for Upbit public REST and WebSocket quotation APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 3.1.0.
-CryptoExchange.Net dependency: 11.2.0.
+Current package version in this repository: 3.2.0.
+CryptoExchange.Net dependency: 12.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -336,6 +336,8 @@ if (!ticker.Success)
 
 Console.WriteLine(ticker.Data.LastPrice);
 ```
+
+`ISpotSymbolRestClient.GetSpotSymbolsAsync(...)` honors the filters in `GetSymbolsRequest`. Returned `SharedSpotSymbol` values include `DisplayName`, a crypto `BaseAssetType`, and quote classification: `KRW`, `SGD`, `IDR`, and `THB` are fiat; recognized stablecoins use `SharedAssetSubType.StableCoin`; other quotes are crypto. The interface's `SpotSymbolCatalog` property exposes the cached catalog for the active environment.
 
 Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For shared interface variables, unsubscribe through the concrete socket client:
 

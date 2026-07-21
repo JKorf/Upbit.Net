@@ -57,6 +57,8 @@ Store the returned `UpdateSubscription` and unsubscribe on shutdown via `socketC
 
 For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces (`ISpotTickerRestClient`, `IOrderBookRestClient`, `ITickerSocketClient`, etc.) accessed via `.SharedClient` properties.
 
+Shared symbol queries honor `GetSymbolsRequest` filters and return display names and crypto/fiat/stablecoin asset metadata. `ISpotSymbolRestClient.SpotSymbolCatalog` exposes the cached catalog for the active environment.
+
 ## Avoid
 
 - Raw `HttpClient` calls to Upbit endpoints
