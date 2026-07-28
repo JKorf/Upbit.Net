@@ -75,7 +75,15 @@ namespace Upbit.Net.Clients.SpotApi
             return HttpResult.Ok(result, 
                     ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
                     .Select(x => 
-                        new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
+                        new SharedKline(
+                            request.Symbol, 
+                            symbol,
+                            x.OpenTime,
+                            x.ClosePrice,
+                            x.HighPrice,
+                            x.LowPrice,
+                            x.OpenPrice,
+                            new SharedOrderQuantity(x.Volume, x.QuoteVolume)))
                     .ToArray(), nextPageRequest);
         }
 
@@ -241,7 +249,7 @@ namespace Upbit.Net.Clients.SpotApi
 
             // Return
             return HttpResult.Ok(result, result.Data.Select(x =>
-                new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+                new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
                 {
                     Side = x.OrderSide == Enums.OrderSide.Sell ? SharedOrderSide.Sell : SharedOrderSide.Buy,
                 }).ToArray());
@@ -268,10 +276,9 @@ namespace Upbit.Net.Clients.SpotApi
                     result.Data.LastPrice, 
                     result.Data.HighPrice,
                     result.Data.LowPrice,
-                    result.Data.Volume24h,
+                    new SharedOrderQuantity(result.Data.Volume24h, result.Data.QuoteVolume24h),
                     result.Data.ChangeRate * 100)
             {
-                    QuoteVolume = result.Data.QuoteVolume24h
             });
         }
 
@@ -304,10 +311,9 @@ namespace Upbit.Net.Clients.SpotApi
                     x.LastPrice, 
                     x.HighPrice,
                     x.LowPrice,
-                    x.Volume24h,
+                    new SharedOrderQuantity(x.Volume24h, x.QuoteVolume24h),
                     x.ChangeRate * 100)
                 {
-                    QuoteVolume = x.QuoteVolume24h
                 }).ToArray());
         }
 
@@ -373,7 +379,7 @@ namespace Upbit.Net.Clients.SpotApi
             return HttpResult.Ok(result,
                     ExchangeHelpers.ApplyFilter(result.Data, x => x.Timestamp, request.StartTime, request.EndTime, direction)
                     .Select(x => 
-                        new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+                        new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
                         {
                             Side = x.OrderSide == Enums.OrderSide.Sell ? SharedOrderSide.Sell : SharedOrderSide.Buy,
                         })

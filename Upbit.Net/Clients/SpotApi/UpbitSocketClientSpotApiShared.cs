@@ -61,17 +61,21 @@ namespace Upbit.Net.Clients.SpotApi
         };
         async Task<WebSocketResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
-            //var interval = (Enums.KlineInterval)request.Interval;
-            //if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-            //    return new WebSocketResult<UpdateSubscription>(Exchange, ArgumentError.Invalid(nameof(SubscribeKlineRequest.Interval), "Interval not supported"));
-
             var validationError = SharedClient.SubscribeKlineOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await SubscribeToKlineUpdatesAsync(symbols, (Enums.KlineInterval)request.Interval, update => handler(update.ToType(
-                new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol, update.Data.OpenTime, update.Data.ClosePrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.OpenPrice, update.Data.Volume))), ct).ConfigureAwait(false);
+                new SharedKline(
+                    ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol),
+                    update.Data.Symbol,
+                    update.Data.OpenTime,
+                    update.Data.ClosePrice,
+                    update.Data.HighPrice,
+                    update.Data.LowPrice,
+                    update.Data.OpenPrice,
+                    new SharedOrderQuantity(update.Data.Volume, update.Data.QuoteVolume)))), ct).ConfigureAwait(false);
 
             return result;
         }
@@ -119,7 +123,11 @@ namespace Upbit.Net.Clients.SpotApi
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await SubscribeToTradeUpdatesAsync(symbols, update => handler(update.ToType(new[] {
-                new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol,update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
+                new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol), 
+                update.Data.Symbol,
+                new SharedOrderQuantity(update.Data.Quantity), 
+                update.Data.Price, 
+                update.Data.TradeTime)
             {
                 Side = update.Data.OrderSide == Enums.OrderSide.Sell ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             } })), ct).ConfigureAwait(false);
@@ -141,9 +149,16 @@ namespace Upbit.Net.Clients.SpotApi
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume24h, update.Data.ChangeRate * 100)
+            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol),
+                    update.Data.Symbol, 
+                    update.Data.LastPrice,
+                    update.Data.HighPrice,
+                    update.Data.LowPrice, 
+                    new SharedOrderQuantity(update.Data.Volume24h, update.Data.QuoteVolume24h),
+                    update.Data.ChangeRate * 100)
             {
-                QuoteVolume = update.Data.QuoteVolume24h
             })), ct).ConfigureAwait(false);
 
             return result;
