@@ -39,7 +39,7 @@ namespace Upbit.Net.Clients.SpotApi
             {
                 var bids = update.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.BidPrice, Quantity = x.BidQuantity }).ToArray();
                 var asks = update.Data.Entries.Select(x => new UpbitOrderBookItem { Price = x.AskPrice, Quantity = x.AskQuantity }).ToArray();
-                handler(update.ToType(new SharedOrderBook(asks, bids)));
+                handler(update.ToType(new SharedOrderBook(SharedQuantityType.BaseAsset, asks, bids)));
             }, null, ct).ConfigureAwait(false);
 
             return result;
@@ -100,9 +100,9 @@ namespace Upbit.Net.Clients.SpotApi
                     ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol),
                     update.Data.Symbol,
                     update.Data.Entries[0].AskPrice,
-                    update.Data.Entries[0].AskQuantity,
+                    new SharedOrderQuantity(update.Data.Entries[0].AskQuantity),
                     update.Data.Entries[0].BidPrice,
-                    update.Data.Entries[0].BidQuantity))), null, ct).ConfigureAwait(false);
+                    new SharedOrderQuantity(update.Data.Entries[0].BidQuantity)))), null, ct).ConfigureAwait(false);
 
             return result;
         }
