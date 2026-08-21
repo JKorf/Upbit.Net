@@ -2,14 +2,14 @@
 
 > Strongly typed .NET client library for the public Upbit REST and WebSocket quotation APIs. Supports Spot symbols, tickers, candles, trades, order books, regional live environments, local order books, trade trackers, and CryptoExchange.Net SharedApis. Part of the CryptoExchange.Net ecosystem.
 
-Upbit.Net is a C# client for Upbit public market data with typed REST/WebSocket models, automatic WebSocket reconnection, client-side rate limiting, local order book support, native AOT support, and unified shared interfaces for multi-exchange market-data code. Current version in this repository: 3.3.0. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Upbit.Net is a C# client for Upbit public market data with typed REST/WebSocket models, automatic WebSocket reconnection, client-side rate limiting, local order book support, native AOT support, and unified shared interfaces for multi-exchange market-data code. Current version in this repository: 3.4.0. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 
 Important scope: this repository currently supports public Spot quotation APIs only. It does not expose authenticated account, wallet, deposit, withdrawal, private stream, or order placement endpoints.
 
 ## Documentation
 
 - [README](https://github.com/JKorf/Upbit.Net/blob/main/README.md): Overview, installation, supported features, basic usage examples, release notes
-- [Documentation Site](https://cryptoexchange.jkorf.dev/Upbit.Net/): Full documentation hub including client reference, WebSocket subscriptions, dependency injection, and shared interfaces
+- [Documentation Site](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Upbit.Net): Full documentation hub including client reference, WebSocket subscriptions, dependency injection, and shared interfaces
 - [AI API Quick Map](https://github.com/JKorf/Upbit.Net/blob/main/docs/ai-api-map.md): Quick intent-to-method map for routing common user requests to the correct client member
 - [Full LLM Context](https://github.com/JKorf/Upbit.Net/blob/main/llms-full.txt): Detailed AI/LLM guide with code patterns, endpoint map, common mistakes, and anti-hallucination rules
 
