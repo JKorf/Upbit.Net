@@ -23,6 +23,8 @@ namespace Upbit.Net.Clients.SpotApi
     internal partial class UpbitRestClientSpotApi : RestApiClient<UpbitEnvironment>, IUpbitRestClientSpotApi
     {
         #region fields 
+        private readonly UpbitRestClientSpotSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
         protected override IRestMessageHandler MessageHandler { get; } = new UpbitRestMessageHandler(UpbitErrors.Errors);
         public new UpbitRestOptions ClientOptions => (UpbitRestOptions)base.ClientOptions;
@@ -40,6 +42,8 @@ namespace Upbit.Net.Clients.SpotApi
             : base(loggerFactory, UpbitExchange.ExchangeName, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
         {
             ExchangeData = new UpbitRestClientSpotApiExchangeData(_logger, this);
+
+            _sharedApi = new UpbitRestClientSpotSharedApi(this);
         }
         #endregion
 
@@ -61,7 +65,9 @@ namespace Upbit.Net.Clients.SpotApi
             => UpbitExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverDate);
 
         /// <inheritdoc />
-        public IUpbitRestClientSpotApiShared SharedClient => this;
+        public IUpbitRestClientSpotApiShared SharedClient => _sharedApi;
+        /// <inheritdoc />
+        public IUpbitRestClientSpotSharedApi SharedApi => _sharedApi;
 
     }
 }

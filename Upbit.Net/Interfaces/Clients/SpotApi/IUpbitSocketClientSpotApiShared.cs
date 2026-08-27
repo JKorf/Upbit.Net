@@ -13,4 +13,18 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         IOrderBookSocketClient
     {
     }
+
+    /// <summary>
+    /// Shared API interface. Shared APIs provide a common,
+    /// exchange-independent contract for accessing functionality across different
+    /// exchange client libraries.
+    /// </summary>
+    public interface IUpbitSocketClientSpotSharedApi :
+        ISubscribeTickerOperation,
+        ISubscribeTradesOperation,
+        ISubscribeBookTickerOperation,
+        ISubscribeKlinesOperation,
+        ISubscribeOrderBookOperation
+    {
+    }
 }
