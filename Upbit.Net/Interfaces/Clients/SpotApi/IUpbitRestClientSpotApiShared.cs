@@ -22,14 +22,14 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
     /// exchange client libraries.
     /// </summary>
     public interface IUpbitRestClientSpotSharedApi :
-        IGetKlinesEndpoint,
-        IGetOrderBookEndpoint,
-        IGetRecentTradesEndpoint,
-        IGetSpotSymbolsEndpoint,
-        IGetSpotTickerEndpoint,
-        IGetAllSpotTickersEndpoint,
-        IGetTradeHistoryEndpoint,
-        IGetBookTickerEndpoint
+        IGetKlinesRest,
+        IGetOrderBookRest,
+        IGetRecentTradesRest,
+        IGetSpotSymbolsRest,
+        IGetSpotTickerRest,
+        IGetAllSpotTickersRest,
+        IGetTradeHistoryRest,
+        IGetBookTickerRest
     {
     }
 }

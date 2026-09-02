@@ -20,11 +20,11 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
     /// exchange client libraries.
     /// </summary>
     public interface IUpbitSocketClientSpotSharedApi :
-        ISubscribeTickerOperation,
-        ISubscribeTradesOperation,
-        ISubscribeBookTickerOperation,
-        ISubscribeKlinesOperation,
-        ISubscribeOrderBookOperation
+        ISubscribeTickerSocket,
+        ISubscribeTradesSocket,
+        ISubscribeBookTickerSocket,
+        ISubscribeKlinesSocket,
+        ISubscribeOrderBookSocket
     {
     }
 }
