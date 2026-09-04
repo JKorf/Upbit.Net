@@ -13,7 +13,11 @@ namespace Upbit.Net.Clients.SpotApi
 {
     internal partial class UpbitRestClientSpotSharedApi
     {
-        #region Recent Trades client
+        #region Get Recent Trades
+
+        async Task<ICallResult<SharedTrade[]>> IGetRecentTrades.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
+            => await GetRecentTradesAsync(request, ct).ConfigureAwait(false);
+
         public GetRecentTradesOptions GetRecentTradesOptions { get; } = new GetRecentTradesOptions(_exchange, 500, false);
 
         public async Task<HttpResult<SharedTrade[]>> GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
@@ -38,6 +42,7 @@ namespace Upbit.Net.Clients.SpotApi
                     Side = x.OrderSide == Enums.OrderSide.Sell ? SharedOrderSide.Sell : SharedOrderSide.Buy,
                 }).ToArray());
         }
+
         #endregion
     }
 }

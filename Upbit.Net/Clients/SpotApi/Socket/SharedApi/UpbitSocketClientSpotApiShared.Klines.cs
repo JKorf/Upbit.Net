@@ -13,7 +13,8 @@ namespace Upbit.Net.Clients.SpotApi
 {
     internal partial class UpbitSocketClientSpotSharedApi
     {
-        #region Kline client
+        #region Subscribe Klines
+
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchange, false, [
                 SharedKlineInterval.OneMinute,
                 SharedKlineInterval.ThreeMinutes,
@@ -46,6 +47,7 @@ namespace Upbit.Net.Clients.SpotApi
 
             return result;
         }
+
         #endregion
     }
 }

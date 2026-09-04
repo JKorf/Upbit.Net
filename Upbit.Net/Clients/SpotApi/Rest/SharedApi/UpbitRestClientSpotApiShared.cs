@@ -28,6 +28,7 @@ namespace Upbit.Net.Clients.SpotApi
 
         public UpbitRestClientSpotSharedApi(UpbitRestClientSpotApi api)
             : base(
+                  SharedTransport.Rest,
                   api.Exchange,
                   [TradingMode.Spot],
                   () => false,

@@ -13,7 +13,8 @@ namespace Upbit.Net.Clients.SpotApi
 {
     internal partial class UpbitSocketClientSpotSharedApi
     {
-        #region Book Ticker client
+
+        #region Subscribe Book Ticker
 
         public SubscribeBookTickerOptions SubscribeBookTickerOptions { get; }
             = new SubscribeBookTickerOptions(_exchange, false)
@@ -40,5 +41,6 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         #endregion
+
     }
 }

@@ -13,7 +13,11 @@ namespace Upbit.Net.Clients.SpotApi
 {
     internal partial class UpbitRestClientSpotSharedApi
     {
-        #region Book Ticker client
+
+        #region Get Book Ticker
+
+        async Task<ICallResult<SharedBookTicker>> IGetBookTicker.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+            => await GetBookTickerAsync(request, ct).ConfigureAwait(false);
 
         public GetBookTickerOptions GetBookTickerOptions { get; } 
             = new GetBookTickerOptions(_exchange, false);
@@ -37,5 +41,6 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         #endregion
+
     }
 }

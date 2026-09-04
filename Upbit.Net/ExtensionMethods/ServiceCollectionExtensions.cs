@@ -109,6 +109,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ITrackerFactory, UpbitTrackerFactory>();
             services.AddTransient<IUpbitTrackerFactory, UpbitTrackerFactory>();
 
+            services.AddTransient<IUpbitSharedApiClient, UpbitSharedApiClient>();
+
+            services.RegisterSharedApi(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedApi);
+
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedClient);
 

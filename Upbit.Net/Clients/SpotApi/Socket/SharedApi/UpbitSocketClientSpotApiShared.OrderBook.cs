@@ -13,7 +13,8 @@ namespace Upbit.Net.Clients.SpotApi
 {
     internal partial class UpbitSocketClientSpotSharedApi
     {
-        #region Order Book client
+        #region Subscribe Order Book
+
         public SubscribeOrderBookOptions SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(_exchange, false, new[] { 1, 5, 15, 30 })
         {
             SupportsMultipleSymbols = true
@@ -34,6 +35,7 @@ namespace Upbit.Net.Clients.SpotApi
 
             return result;
         }
+
         #endregion
     }
 }
