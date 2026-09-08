@@ -41,8 +41,8 @@ namespace Upbit.Net.Clients.SpotApi
                 GetSpotSymbolsOptions,
                 GetOrderBookOptions,
                 GetRecentTradesOptions,
-                GetSpotTickerOptions,
-                GetAllSpotTickersOptions,
+                GetTickerOptions,
+                GetAllTickersOptions,
                 GetBookTickerOptions,
                 GetTradeHistoryOptions
                 );

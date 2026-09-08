@@ -26,8 +26,8 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         IGetOrderBookRest,
         IGetRecentTradesRest,
         IGetSpotSymbolsRest,
-        IGetSpotTickerRest,
-        IGetAllSpotTickersRest,
+        IGetTickerRest,
+        IGetAllTickersRest,
         IGetTradeHistoryRest,
         IGetBookTickerRest
     {
