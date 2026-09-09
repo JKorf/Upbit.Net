@@ -1,6 +1,7 @@
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Testing;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -36,5 +37,23 @@ namespace Upbit.Net.UnitTests
             Assert.That(missingOptions, Is.Empty);
             Assert.That(missingInterfaces, Is.Empty);
         }
+
+
+        [Test]
+        public void TestSpotRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new UpbitRestClient().SpotApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestSpotSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new UpbitSocketClient().SpotApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
     }
 }
