@@ -56,9 +56,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Rest.Environment = UpbitEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
             options.Socket.Environment = UpbitEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
 
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddUpbitCore(services, options.SocketClientLifeTime);
         }
@@ -84,8 +84,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? UpbitEnvironment.Live;
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? UpbitEnvironment.Live;
 
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddUpbitCore(services, options.SocketClientLifeTime);
         }
@@ -113,6 +114,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.RegisterSharedApi(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedApi);
             services.RegisterSharedApi(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedApi);
+
+            services.RegisterSharedApiClientCapabilities<IUpbitSharedApiClient>();
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedClient);
