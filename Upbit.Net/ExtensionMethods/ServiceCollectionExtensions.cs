@@ -2,6 +2,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -110,15 +111,15 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ITrackerFactory, UpbitTrackerFactory>();
             services.AddTransient<IUpbitTrackerFactory, UpbitTrackerFactory>();
 
-            services.AddTransient<IUpbitSharedApiClient, UpbitSharedApiClient>();
-
-            services.RegisterSharedApi(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedApi);
-
-            services.RegisterSharedApiClientCapabilities<IUpbitSharedApiClient>();
-
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IUpbitRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IUpbitSocketClient>().SpotApi.SharedClient);
+
+            services.RegisterSharedApiClient<
+                IUpbitSharedApiClient,
+                UpbitSharedApiClient>(sharedApis => sharedApis
+                    .Add(client => client.SpotRest)
+                    .Add(client => client.SpotSocket)
+                    );
 
             return services;
         }
