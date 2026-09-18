@@ -15,7 +15,7 @@ namespace Upbit.Net.Clients.SpotApi
     {
         #region Get Trade History
 
-        async Task<ICallResult<SharedTrade[]>> IGetTradeHistory.GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedTrade[]>> IGetTradeHistory.GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
             => await GetTradeHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetTradeHistoryOptions GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(_exchange, false, true, true, 500, false);

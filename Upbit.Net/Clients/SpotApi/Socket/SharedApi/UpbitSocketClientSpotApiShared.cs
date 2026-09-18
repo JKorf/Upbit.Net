@@ -26,7 +26,7 @@ namespace Upbit.Net.Clients.SpotApi
         public UpbitSocketClientSpotSharedApi(UpbitSocketClientSpotApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   [TradingMode.Spot],
                   () => false,
                   api.FormatSymbol)
