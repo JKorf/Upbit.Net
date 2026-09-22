@@ -15,7 +15,7 @@ namespace Upbit.Net.Clients.SpotApi
     {
         #region Get Spot Symbols
 
-        async Task<ICallResult<SharedSpotSymbol[]>> IGetSpotSymbols.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedSpotSymbol[]>> IGetSpotSymbols.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
             => await GetSpotSymbolsAsync(request, ct).ConfigureAwait(false);
 
         public SharedSymbolCatalog? SpotSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_exchange, _topicId, _api.EnvironmentName, null);
