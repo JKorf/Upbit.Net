@@ -30,9 +30,9 @@ REST methods return `WebCallResult<T>` and WebSocket subscriptions return `CallR
 ## API Structure
 
 - `restClient.SpotApi.ExchangeData`: public symbols, tickers, trades, order books, candles, symbol config
-- `restClient.SpotApi.SharedClient`: shared REST market-data interfaces
+- `restClient.SpotApi.SharedApi`: shared REST market-data interfaces
 - `socketClient.SpotApi`: public ticker, trade, order book, and kline streams
-- `socketClient.SpotApi.SharedClient`: shared socket market-data interfaces
+- `socketClient.SpotApi.SharedApi`: shared socket market-data interfaces
 
 There is no `SpotApi.Account`, `SpotApi.Trading`, futures API, or private socket API.
 
@@ -55,9 +55,9 @@ Store the returned `UpdateSubscription` and unsubscribe on shutdown via `socketC
 
 ## Cross-Exchange
 
-For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces (`ISpotTickerRestClient`, `IOrderBookRestClient`, `ITickerSocketClient`, etc.) accessed via `.SharedClient` properties.
+For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces (`IGetTickerRest`, `IGetOrderBookRest`, `ISubscribeTickerSocket`, etc.) accessed via `.SharedApi` properties.
 
-Shared symbol queries honor `GetSymbolsRequest` filters and return display names and crypto/fiat/stablecoin asset metadata. `ISpotSymbolRestClient.SpotSymbolCatalog` exposes the cached catalog for the active environment.
+Shared symbol queries honor `GetSymbolsRequest` filters and return display names and crypto/fiat/stablecoin asset metadata. `IGetSpotSymbolsRest.SpotSymbolCatalog` exposes the cached catalog for the active environment.
 
 ## Avoid
 

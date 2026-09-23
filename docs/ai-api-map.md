@@ -60,31 +60,31 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 
 | User intent | Upbit.Net member or interface |
 |---|---|
-| Shared spot REST client | `new UpbitRestClient().SpotApi.SharedClient` |
-| Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot tickers REST | `ISpotTickerRestClient.GetSpotTickersAsync(new GetTickersRequest())` |
-| Shared symbols REST | `ISpotSymbolRestClient.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
+| Shared spot REST client | `new UpbitRestClient().SpotApi.SharedApi` |
+| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
+| Shared spot tickers REST | `IGetAllTickersRest.GetAllTickersAsync(new GetTickersRequest())` |
+| Shared symbols REST | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
 | Filter shared symbols | Set filters on `GetSymbolsRequest`; the returned list honors them |
-| Cached shared symbol catalog | `ISpotSymbolRestClient.SpotSymbolCatalog` (environment-specific) |
+| Cached shared symbol catalog | `IGetSpotSymbolsRest.SpotSymbolCatalog` (environment-specific) |
 | Shared symbol metadata | `SharedSpotSymbol.DisplayName`, `BaseAssetType`, `QuoteAssetType`, `QuoteAssetSubType` (stablecoins use `SharedAssetSubType.StableCoin`) |
-| Shared klines REST | `IKlineRestClient.GetKlinesAsync(new GetKlinesRequest(symbol, interval), pageRequest, ct)` |
-| Shared order book REST | `IOrderBookRestClient.GetOrderBookAsync(new GetOrderBookRequest(symbol), ct)` |
-| Shared recent trades REST | `IRecentTradeRestClient.GetRecentTradesAsync(new GetRecentTradesRequest(symbol), ct)` |
-| Shared trade history REST | `ITradeHistoryRestClient.GetTradeHistoryAsync(new GetTradeHistoryRequest(symbol), pageRequest, ct)` |
-| Shared book ticker REST | `IBookTickerRestClient.GetBookTickerAsync(new GetBookTickerRequest(symbol), ct)` |
+| Shared klines REST | `IGetKlinesRest.GetKlinesAsync(new GetKlinesRequest(symbol, interval), pageRequest, ct)` |
+| Shared order book REST | `IGetOrderBookRest.GetOrderBookAsync(new GetOrderBookRequest(symbol), ct)` |
+| Shared recent trades REST | `IGetRecentTradesRest.GetRecentTradesAsync(new GetRecentTradesRequest(symbol), ct)` |
+| Shared trade history REST | `IGetTradeHistoryRest.GetTradeHistoryAsync(new GetTradeHistoryRequest(symbol), pageRequest, ct)` |
+| Shared book ticker REST | `IGetBookTickerRest.GetBookTickerAsync(new GetBookTickerRequest(symbol), ct)` |
 
 ## SharedApis WebSocket
 
 | User intent | Upbit.Net member or interface |
 |---|---|
-| Shared spot socket client | `new UpbitSocketClient().SpotApi.SharedClient` |
-| Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(new SubscribeTickerRequest(symbol), handler)` |
-| Shared trade socket | `ITradeSocketClient.SubscribeToTradeUpdatesAsync(new SubscribeTradeRequest(symbol), handler)` |
-| Shared order book socket | `IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(new SubscribeOrderBookRequest(symbol), handler)` |
-| Shared book ticker socket | `IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(new SubscribeBookTickerRequest(symbol), handler)` |
-| Shared kline socket | `IKlineSocketClient.SubscribeToKlineUpdatesAsync(new SubscribeKlineRequest(symbol, interval), handler)` |
+| Shared spot socket client | `new UpbitSocketClient().SpotApi.SharedApi` |
+| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(new SubscribeTickerRequest(symbol), handler)` |
+| Shared trade socket | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync(new SubscribeTradeRequest(symbol), handler)` |
+| Shared order book socket | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync(new SubscribeOrderBookRequest(symbol), handler)` |
+| Shared book ticker socket | `ISubscribeBookTickerSocket.SubscribeToBookTickerUpdatesAsync(new SubscribeBookTickerRequest(symbol), handler)` |
+| Shared kline socket | `ISubscribeKlinesSocket.SubscribeToKlineUpdatesAsync(new SubscribeKlineRequest(symbol, interval), handler)` |
 | Shared socket unsubscribe | Keep concrete `UpbitSocketClient` and call `socketClient.UnsubscribeAsync(subscription.Data)` |
-| Discover shared capabilities | `client.SpotApi.SharedClient.Discover()` or `socketClient.SpotApi.SharedClient.Discover()` |
+| Resolve a runtime-selected Shared API capability | `IUpbitSharedApiClient.GetCapability(...)` |
 
 ## Kline Intervals
 
@@ -140,4 +140,4 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 | `ETHUSDT` | `USDT-ETH` |
 | Testnet environment | Regional live environments only |
 | `.Data` without `.Success` check | Check `.Success` first |
-| `ITickerSocketClient.UnsubscribeAsync(...)` | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |

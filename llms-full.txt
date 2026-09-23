@@ -31,8 +31,8 @@ Primary documentation:
 - Do not call `.Result` or `.Wait()` on async methods.
 - Do not invent endpoint names. If unsure, inspect `Upbit.Net/Interfaces/Clients/**`.
 - Use Upbit symbol format `QUOTE-BASE`, for example `USDT-ETH` or `KRW-BTC`.
-- For multi-exchange market-data code, use `CryptoExchange.Net.SharedApis` interfaces from `.SharedClient`.
-- Use `SharedClient.Discover()` when tooling or exchange-agnostic code needs runtime metadata about implemented shared interfaces and endpoint options.
+- For multi-exchange market-data code, use `CryptoExchange.Net.SharedApis` interfaces from `.SharedApi`.
+- Use the exchange-level `IUpbitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -201,7 +201,7 @@ UpbitRestClient
       .GetOrderBooksAsync(...)
       .GetKlinesAsync(...)
       .GetSymbolConfigAsync(...)
-    .SharedClient
+    .SharedApi
 ```
 
 WebSocket:
@@ -213,7 +213,7 @@ UpbitSocketClient
     .SubscribeToTradeUpdatesAsync(...)
     .SubscribeToOrderBookUpdatesAsync(...)
     .SubscribeToKlineUpdatesAsync(...)
-    .SharedClient
+    .SharedApi
 ```
 
 Important: there is no `SpotApi.Account`, `SpotApi.Trading`, futures API, margin API, wallet API, or authenticated user data stream in this library.
@@ -324,10 +324,10 @@ Use CryptoExchange.Net.SharedApis when the user asks for code that can work agai
 using Upbit.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-ISpotTickerRestClient tickerClient = new UpbitRestClient().SpotApi.SharedClient;
+IGetTickerRest tickerClient = new UpbitRestClient().SpotApi.SharedApi;
 var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
 
-var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await tickerClient.GetTickerAsync(new GetTickerRequest(symbol));
 if (!ticker.Success)
 {
     Console.WriteLine(ticker.Error);
@@ -337,13 +337,13 @@ if (!ticker.Success)
 Console.WriteLine(ticker.Data.LastPrice);
 ```
 
-`ISpotSymbolRestClient.GetSpotSymbolsAsync(...)` honors the filters in `GetSymbolsRequest`. Returned `SharedSpotSymbol` values include `DisplayName`, a crypto `BaseAssetType`, and quote classification: `KRW`, `SGD`, `IDR`, and `THB` are fiat; recognized stablecoins use `SharedAssetSubType.StableCoin`; other quotes are crypto. The interface's `SpotSymbolCatalog` property exposes the cached catalog for the active environment.
+`IGetSpotSymbolsRest.GetSpotSymbolsAsync(...)` honors the filters in `GetSymbolsRequest`. Returned `SharedSpotSymbol` values include `DisplayName`, a crypto `BaseAssetType`, and quote classification: `KRW`, `SGD`, `IDR`, and `THB` are fiat; recognized stablecoins use `SharedAssetSubType.StableCoin`; other quotes are crypto. The interface's `SpotSymbolCatalog` property exposes the cached catalog for the active environment.
 
 Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For shared interface variables, unsubscribe through the concrete socket client:
 
 ```csharp
 var socketClient = new UpbitSocketClient();
-ITickerSocketClient tickerSocket = socketClient.SpotApi.SharedClient;
+ISubscribeTickerSocket tickerSocket = socketClient.SpotApi.SharedApi;
 
 var sub = await tickerSocket.SubscribeToTickerUpdatesAsync(
     new SubscribeTickerRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT")),
@@ -360,7 +360,7 @@ Console.ReadLine();
 await socketClient.UnsubscribeAsync(sub.Data);
 ```
 
-Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
+Do not call `tickerSocket.UnsubscribeAsync(...)` on `ISubscribeTickerSocket`; that shared interface does not expose the method.
 
 ## Symbol And Region Handling
 
@@ -381,7 +381,7 @@ For all tickers, use quote assets that fit the selected environment:
 var koreaTickers = await client.SpotApi.ExchangeData.GetTickersByQuoteAssetsAsync(new[] { "KRW", "BTC", "USDT" });
 ```
 
-The shared REST client uses environment-aware quote assets for `GetSpotTickersAsync`: Korea uses `KRW`, Singapore `SGD`, Indonesia `IDR`, Thailand `THB`, plus `BTC` and `USDT`.
+The shared REST client uses environment-aware quote assets for `GetAllTickersAsync`: Korea uses `KRW`, Singapore `SGD`, Indonesia `IDR`, Thailand `THB`, plus `BTC` and `USDT`.
 
 ## Local Order Book
 

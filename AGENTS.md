@@ -52,14 +52,14 @@ The REST client exposes public Spot quotation endpoints under one branch:
 
 ```csharp
 restClient.SpotApi.ExchangeData       // symbols, tickers, klines, order books, trades, symbol config
-restClient.SpotApi.SharedClient       // CryptoExchange.Net shared REST interfaces
+restClient.SpotApi.SharedApi       // CryptoExchange.Net shared REST interfaces
 ```
 
 The socket client exposes public Spot stream subscriptions:
 
 ```csharp
 socketClient.SpotApi                  // ticker, trade, order book, kline streams
-socketClient.SpotApi.SharedClient     // CryptoExchange.Net shared socket interfaces
+socketClient.SpotApi.SharedApi     // CryptoExchange.Net shared socket interfaces
 ```
 
 There is no `SpotApi.Account`, `SpotApi.Trading`, futures API, or private WebSocket API in Upbit.Net.
@@ -126,10 +126,10 @@ For exchange-agnostic market-data code, use the unified shared interfaces. Same 
 using Upbit.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-var upbitShared = new UpbitRestClient().SpotApi.SharedClient;
+var upbitShared = new UpbitRestClient().SpotApi.SharedApi;
 
 var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
-var ticker = await upbitShared.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await upbitShared.GetTickerAsync(new GetTickerRequest(symbol));
 
 if (!ticker.Success)
 {
@@ -140,15 +140,15 @@ if (!ticker.Success)
 Console.WriteLine(ticker.Data.LastPrice);
 ```
 
-Upbit.Net shared REST interfaces include `ISpotTickerRestClient`, `ISpotSymbolRestClient`, `IKlineRestClient`, `IOrderBookRestClient`, `IRecentTradeRestClient`, `ITradeHistoryRestClient`, and `IBookTickerRestClient`.
+Upbit.Net shared REST interfaces include `IGetTickerRest`, `IGetSpotSymbolsRest`, `IGetKlinesRest`, `IGetOrderBookRest`, `IGetRecentTradesRest`, `IGetTradeHistoryRest`, and `IGetBookTickerRest`.
 
-Shared symbol results honor `GetSymbolsRequest` filters and include display names plus asset metadata: base assets are crypto; `KRW`, `SGD`, `IDR`, and `THB` quotes are fiat; stablecoin quotes are marked with `SharedAssetSubType.StableCoin`. `ISpotSymbolRestClient.SpotSymbolCatalog` exposes the environment-specific cached catalog.
+Shared symbol results honor `GetSymbolsRequest` filters and include display names plus asset metadata: base assets are crypto; `KRW`, `SGD`, `IDR`, and `THB` quotes are fiat; stablecoin quotes are marked with `SharedAssetSubType.StableCoin`. `IGetSpotSymbolsRest.SpotSymbolCatalog` exposes the environment-specific cached catalog.
 
-Upbit.Net shared socket interfaces include `ITickerSocketClient`, `ITradeSocketClient`, `IBookTickerSocketClient`, `IKlineSocketClient`, and `IOrderBookSocketClient`.
+Upbit.Net shared socket interfaces include `ISubscribeTickerSocket`, `ISubscribeTradesSocket`, `ISubscribeBookTickerSocket`, `ISubscribeKlinesSocket`, and `ISubscribeOrderBookSocket`.
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
-Use `SharedClient.Discover()` on any shared client root when code needs runtime metadata about supported shared interfaces and endpoint options.
+Use the exchange-level `IUpbitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Dependency Injection
 
