@@ -33,6 +33,7 @@ namespace Upbit.Net.Clients.SpotApi
     internal partial class UpbitSocketClientSpotApi : SocketApiClient<UpbitEnvironment>, IUpbitSocketClientSpotApi
     {
         #region fields
+        private readonly UpbitSocketClientSpotSharedApi _sharedApi;
         private readonly TimeSpan _waitForErrorTimeout;
 
         protected override ErrorMapping ErrorMapping => UpbitErrors.Errors;
@@ -47,6 +48,7 @@ namespace Upbit.Net.Clients.SpotApi
             base(loggerFactory, UpbitExchange.ExchangeName, options.Environment.SocketClientAddress!, options, options.SpotOptions)
         {
             _waitForErrorTimeout = options.SubscribeMaxWaitForError;
+            _sharedApi = new UpbitSocketClientSpotSharedApi(this);
 
             RateLimiter = UpbitExchange.RateLimiter.Socket;
 
@@ -157,7 +159,9 @@ namespace Upbit.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public IUpbitSocketClientSpotApiShared SharedClient => this;
+        public IUpbitSocketClientSpotApiShared SharedClient => _sharedApi;
+        /// <inheritdoc />
+        public IUpbitSocketClientSpotSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null)

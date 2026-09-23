@@ -15,4 +15,21 @@ namespace Upbit.Net.Interfaces.Clients.SpotApi
         IBookTickerRestClient
     {
     }
+
+    /// <summary>
+    /// Shared API interface. Shared APIs provide a common,
+    /// exchange-independent contract for accessing functionality across different
+    /// exchange client libraries.
+    /// </summary>
+    public interface IUpbitRestClientSpotSharedApi :
+        IGetKlinesRest,
+        IGetOrderBookRest,
+        IGetRecentTradesRest,
+        IGetSpotSymbolsRest,
+        IGetTickerRest,
+        IGetAllTickersRest,
+        IGetTradeHistoryRest,
+        IGetBookTickerRest
+    {
+    }
 }

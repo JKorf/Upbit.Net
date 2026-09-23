@@ -31,8 +31,8 @@ Important scope: this repository currently supports public Spot quotation APIs o
 - Upbit symbols use `QUOTE-BASE`, for example `USDT-ETH`, `KRW-BTC`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC`.
 - Always check `.Success` before reading `.Data`.
 - Direct and shared REST methods return `HttpResult<T>` / `HttpResult`; direct and shared socket subscriptions return `WebSocketResult<UpdateSubscription>`.
-- Shared symbol queries honor `GetSymbolsRequest` filters and return display names and crypto/fiat/stablecoin asset metadata; `ISpotSymbolRestClient.SpotSymbolCatalog` exposes the cached catalog.
-- Use `SharedClient.Discover()` when code needs to inspect implemented shared interfaces and endpoint options at runtime.
+- Shared symbol queries honor `GetSymbolsRequest` filters and return display names and crypto/fiat/stablecoin asset metadata; `IGetSpotSymbolsRest.SpotSymbolCatalog` exposes the cached catalog.
+- Use the exchange-level `IUpbitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 - Use regional environments from `UpbitEnvironment`: `Live`, `Singapore`, `Indonesia`, `Thailand`.
 
 ## Reference

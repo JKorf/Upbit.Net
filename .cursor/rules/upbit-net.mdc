@@ -34,9 +34,9 @@ var price = ticker.Data.LastPrice;
 ## API Surface
 
 - `restClient.SpotApi.ExchangeData`: symbols, tickers, trades, order books, candles, symbol config
-- `restClient.SpotApi.SharedClient`: shared REST market-data interfaces
+- `restClient.SpotApi.SharedApi`: shared REST market-data interfaces
 - `socketClient.SpotApi`: ticker, trade, order book, and kline WebSocket subscriptions
-- `socketClient.SpotApi.SharedClient`: shared socket market-data interfaces
+- `socketClient.SpotApi.SharedApi`: shared socket market-data interfaces
 
 There is no `SpotApi.Account`, `SpotApi.Trading`, futures API, margin API, wallet API, or private stream API.
 
@@ -74,12 +74,12 @@ For exchange-agnostic code, use `CryptoExchange.Net.SharedApis`:
 ```csharp
 using CryptoExchange.Net.SharedApis;
 
-var shared = new UpbitRestClient().SpotApi.SharedClient;
-var ticker = await shared.GetSpotTickerAsync(
+var shared = new UpbitRestClient().SpotApi.SharedApi;
+var ticker = await shared.GetTickerAsync(
     new GetTickerRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT")));
 ```
 
-Shared symbol queries honor `GetSymbolsRequest` filters and include display names plus crypto/fiat/stablecoin asset metadata. Use `ISpotSymbolRestClient.SpotSymbolCatalog` for the cached environment-specific catalog.
+Shared symbol queries honor `GetSymbolsRequest` filters and include display names plus crypto/fiat/stablecoin asset metadata. Use `IGetSpotSymbolsRest.SpotSymbolCatalog` for the cached environment-specific catalog.
 
 ## Hard Rules
 
