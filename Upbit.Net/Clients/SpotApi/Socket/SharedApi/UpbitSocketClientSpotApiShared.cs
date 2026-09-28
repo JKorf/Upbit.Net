@@ -42,5 +42,7 @@ namespace Upbit.Net.Clients.SpotApi
                 );
         }
 
+        /// <inheritdoc />
+        public Task UnsubscribeAllAsync() => _api.UnsubscribeAllAsync();
     }
 }
