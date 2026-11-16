@@ -1,0 +1,4 @@
+interface:
+  display_name: "Upbit.Net"
+  short_description: "Build C# Upbit market data integrations."
+  default_prompt: "Use $upbit-net to implement an Upbit.Net REST, websocket, order book, or SharedApis workflow."

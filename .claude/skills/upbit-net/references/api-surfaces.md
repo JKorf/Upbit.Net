@@ -1,20 +1,19 @@
-# Upbit.Net AI API Quick Map
+# API surfaces
 
-Use this file to route common user intents to the correct Upbit.Net client member. If a method name or parameter is not listed here, inspect `Upbit.Net/Interfaces/Clients/**` before generating code.
+## Clients, regions, and scope
 
-## Client Roots
+| Intent | Entry point |
+| --- | --- |
+| Native REST | `UpbitRestClient.SpotApi.ExchangeData` |
+| Native public streams | `UpbitSocketClient.SpotApi` |
+| Portable REST | `restClient.SpotApi.SharedApi` (`IUpbitRestClientSpotSharedApi`) |
+| Portable streams | `socketClient.SpotApi.SharedApi` (`IUpbitSocketClientSpotSharedApi`) |
+| DI | `services.AddUpbit(...)` |
+| South Korea | `UpbitEnvironment.Live` |
+| Singapore / Indonesia / Thailand | `UpbitEnvironment.Singapore` / `.Indonesia` / `.Thailand` |
+| Custom endpoints | `UpbitEnvironment.CreateCustom(name, restAddress, socketAddress)` |
 
-| Intent | Use |
-|---|---|
-| REST calls | `new UpbitRestClient()` |
-| WebSocket streams | `new UpbitSocketClient()` |
-| API key authentication | Not supported by this library |
-| Live South Korea environment | `UpbitEnvironment.Live` |
-| Live Singapore environment | `UpbitEnvironment.Singapore` |
-| Live Indonesia environment | `UpbitEnvironment.Indonesia` |
-| Live Thailand environment | `UpbitEnvironment.Thailand` |
-| Custom environment | `UpbitEnvironment.CreateCustom(name, restAddress, socketAddress)` |
-| Dependency injection | `services.AddUpbit(options => { ... })` |
+`IUpbitRestClient` and `IUpbitSocketClient` expose the native clients. The library has no authentication/credential type, account/trading branches, margin/futures surface, or private streams. REST and socket clients must use the intended regional environment. Environment names are `live`, `live-singapore`, `live-indonesia`, and `live-thailand`; `UpbitEnvironment.All` lists them.
 
 ## Spot REST
 
@@ -60,7 +59,7 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 
 | User intent | Upbit.Net member or interface |
 |---|---|
-| Shared spot REST client | `new UpbitRestClient().SpotApi.SharedApi` |
+| Shared spot REST client | `restClient.SpotApi.SharedApi` |
 | Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot tickers REST | `IGetAllTickersRest.GetAllTickersAsync(new GetTickersRequest())` |
 | Shared symbols REST | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
@@ -77,7 +76,7 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 
 | User intent | Upbit.Net member or interface |
 |---|---|
-| Shared spot socket client | `new UpbitSocketClient().SpotApi.SharedApi` |
+| Shared spot socket client | `socketClient.SpotApi.SharedApi` |
 | Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(new SubscribeTickerRequest(symbol), handler)` |
 | Shared trade socket | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync(new SubscribeTradeRequest(symbol), handler)` |
 | Shared order book socket | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync(new SubscribeOrderBookRequest(symbol), handler)` |
@@ -104,40 +103,36 @@ Use SharedApis for exchange-agnostic market-data code across Upbit, Binance, OKX
 | 1 month candle | `KlineInterval.OneMonth` |
 | 1 year candle | `KlineInterval.OneYear` |
 
-## Environments And Symbols
+Native symbols use `QUOTE-BASE`: `USDT-ETH`, `KRW-BTC`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC`. Discover listings in the selected region; fiat quote examples do not guarantee a particular market exists.
 
-| User intent | Use |
-|---|---|
-| Korea live markets | `UpbitEnvironment.Live` |
-| Singapore live markets | `UpbitEnvironment.Singapore` |
-| Indonesia live markets | `UpbitEnvironment.Indonesia` |
-| Thailand live markets | `UpbitEnvironment.Thailand` |
-| Symbol format | `QUOTE-BASE`, for example `USDT-ETH`, `KRW-BTC`, `SGD-BTC` |
-| SharedApis symbol | `new SharedSymbol(TradingMode.Spot, "ETH", "USDT")` |
-| List available environment names | `UpbitEnvironment.All` |
+Shared socket order-book options accept levels `1`, `5`, `15`, and `30`. Native order-book aggregation is available on the native REST/socket methods; inspect regional symbol configuration before choosing it. The Shared API does not forward a native aggregation value. REST depth options and socket depth options are distinct; inspect the appropriate capability's options.
 
-## Result Handling
+## Shared API discovery and selection
 
-| Situation | Pattern |
-|---|---|
-| REST success check | Direct and shared REST methods return `HttpResult<T>` / `HttpResult` |
-| Socket subscription success check | Direct and shared subscriptions return `WebSocketResult<UpdateSubscription>` |
-| Generic success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Read result data | Read `result.Data` only after `result.Success` |
-| Retry decision | Retry only when `result.Error?.IsTransient == true` |
-| Cancellation | Pass `ct: cancellationToken` |
-| Socket teardown | `await socketClient.UnsubscribeAsync(sub.Data)` |
+`IUpbitSharedApiClient` implements `ISharedApiClientBase`, exposing `SpotRest` and `SpotSocket` as the typed V2 aggregates above. For a known operation and transport, assign the surface directly to the corresponding narrow interface. For dynamic code, use `GetCapability(SharedCapabilities.Tickers.GetTicker.Rest, TradingMode.Spot)` or `GetCapabilities(...)`; handle a nullable `SharedCapabilityResolution<T>`. `Discover()` returns summary metadata. Descriptors identify contracts, not proof of exchange support.
 
-## Common Routing Pitfalls
+The REST V2 aggregate implements `IGetTickerRest`, `IGetAllTickersRest`, `IGetSpotSymbolsRest`, `IGetKlinesRest`, `IGetOrderBookRest`, `IGetRecentTradesRest`, `IGetTradeHistoryRest`, and `IGetBookTickerRest`. The socket aggregate implements `ISubscribeTickerSocket`, `ISubscribeTradesSocket`, `ISubscribeBookTickerSocket`, `ISubscribeKlinesSocket`, and `ISubscribeOrderBookSocket`. No account or order-execution capability is implemented.
 
-| Do not use | Use instead |
-|---|---|
-| Raw `HttpClient` to Upbit endpoints | `UpbitRestClient` / `UpbitSocketClient` |
-| `ApiCredentials`, `UpbitCredentials`, API key setup | No credentials; public APIs only |
-| `SpotApi.Trading` | Not supported by this library |
-| `SpotApi.Account` | Not supported by this library |
-| Futures, margin, private streams | Not supported by this library |
-| `ETHUSDT` | `USDT-ETH` |
-| Testnet environment | Regional live environments only |
-| `.Data` without `.Success` check | Check `.Success` first |
-| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+A resolution contains `Capability` and `Options`. Inspect `SupportedTradingModes`, request/exchange parameter rules, limits, and notes. `PreferredTransport` influences generic selection; `.Rest` requires REST. `GetCapabilities` returns all matching surfaces. With multiple exchange registrations, select the exchange aggregate or an explicitly chosen capability implementation instead of relying on single-service DI resolution order.
+
+## Symbols, catalogs, and quantities
+
+Native symbols use `QUOTE-BASE`: `KRW-BTC`, `USDT-ETH`, `SGD-BTC`, `IDR-BTC`, or `THB-BTC` are format examples, not a guarantee of listing. Query `GetSymbolsAsync` in the chosen environment. Shared requests normally use `new SharedSymbol(TradingMode.Spot, "ETH", "USDT")`, which the adapter formats.
+
+Shared symbol queries honor `GetSymbolsRequest` filters and populate `IGetSpotSymbolsRest.SpotSymbolCatalog` for the current API/environment. They expose `DisplayName`, base/quote asset classification, and stablecoin subtypes. Fiat quotes include KRW, SGD, IDR, and THB. Treat missing classification as unknown and cached listings as a snapshot.
+
+Shared ticker `Volumes` and book-ticker `BestBidQuantities`/`BestAskQuantities` are `SharedOrderQuantity` values, with nullable base/quote/contracts quantities. Do not treat an absent unit as zero or use obsolete scalar volume fields. Upbit's shared order-book adapter reports `SharedQuantityType.BaseAsset`. Order-request `SharedQuantity` is a different type; Upbit.Net has no order-submission capability.
+
+## Order books, trackers, and constraints
+
+`IUpbitOrderBookFactory` exposes `Spot`, `Create(SharedSymbol, options)`, and `CreateSpot(nativeSymbol, options)`. Start the created book, check its result, then stop/dispose it when its workload ends. `IUpbitTrackerFactory` implements public trade and kline tracking through `ITrackerFactory`.
+
+Shared socket order-book options enumerate supported levels (1, 5, 15, 30). Native order-book aggregation and symbol configuration use exchange-specific values: consult symbol configuration for the selected market rather than assuming any decimal aggregation is accepted. Use operation options for shared interval/limit support; a native enum member does not prove every region supports it.
+
+Checkout-only sources: [public interfaces](../../../../Upbit.Net/Interfaces/Clients), [REST adapters](../../../../Upbit.Net/Clients/SpotApi/Rest/SharedApi), [socket adapters](../../../../Upbit.Net/Clients/SpotApi/Socket/SharedApi), and [environment definitions](../../../../Upbit.Net/UpbitEnvironment.cs).
+
+## Local order books and trackers
+
+`IUpbitOrderBookFactory` exposes `Spot`, `Create(SharedSymbol, options)`, and `CreateSpot(nativeSymbol, options)`. Create a book for the configured environment, check `StartAsync()` success, then call `StopAsync()` and dispose it when finished. `IUpbitTrackerFactory` implements `ITrackerFactory` for public kline/trade tracking; this does not provide private account or order trackers.
+
+Checkout-only source references: [public contracts](../../../../Upbit.Net/Interfaces/Clients), [order-book factory](../../../../Upbit.Net/Interfaces/IUpbitOrderBookFactory.cs), [tracker factory](../../../../Upbit.Net/Interfaces/IUpbitTrackerFactory.cs), and [DI registration](../../../../Upbit.Net/ExtensionMethods/ServiceCollectionExtensions.cs).

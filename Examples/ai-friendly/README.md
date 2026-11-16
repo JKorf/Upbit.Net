@@ -1,30 +1,23 @@
-# AI-Friendly Examples
+# Standalone examples
 
-These examples are optimized for AI coding assistants and quick onboarding. Each file is:
+Each `.cs` file is an independent top-level console program for public Upbit spot market data. Copy one file into `Program.cs` at a time.
 
-- **Compilable**: drop into a console project with `dotnet add package JKorf.Upbit.Net` and it builds.
-- **Self-contained**: single file, no external setup, no shared helpers.
-- **Heavily commented**: explains why each line exists, not just what it does.
-- **Idiomatic**: follows current Upbit.Net 2.x and CryptoExchange.Net 11.x patterns.
+| File | Purpose |
+| --- | --- |
+| [01-spot-quickstart.cs](01-spot-quickstart.cs) | Ticker, symbols, candles, and order book |
+| [02-market-data.cs](02-market-data.cs) | Regional markets, trades, tickers, and configuration |
+| [03-websocket.cs](03-websocket.cs) | Four native streams with cleanup on partial setup or shutdown |
+| [04-multi-exchange.cs](04-multi-exchange.cs) | Shared API V2 REST and socket capabilities |
+| [05-error-handling.cs](05-error-handling.cs) | Error inspection, bounded read retries, and symbol validation |
 
-Important Upbit.Net scope: examples use public Spot market data only. This library does not expose authenticated account, wallet, order placement, futures, or private stream endpoints.
-
-## Files
-
-| File | What it shows |
-|---|---|
-| `01-spot-quickstart.cs` | Client setup, public ticker, supported symbols, candles, order book |
-| `02-market-data.cs` | Symbols, regional quote assets, tickers, trades, klines, order books, symbol config |
-| `03-websocket.cs` | Subscribe to ticker, trade, order book, and kline streams with proper teardown |
-| `04-multi-exchange.cs` | `CryptoExchange.Net.SharedApis` pattern for exchange-agnostic market data |
-| `05-error-handling.cs` | `HttpResult` patterns, retry, common Upbit.Net pitfalls |
-
-## Running
-
-```bash
+```shell
 dotnet new console -n MyUpbitApp
 cd MyUpbitApp
 dotnet add package JKorf.Upbit.Net
-# Copy the example .cs file content into Program.cs
+# Copy ONE example into Program.cs
+dotnet build
+# Optional: run it to contact the exchange
 dotnet run
 ```
+
+Compilation performs no exchange operations. Running the socket examples waits for Enter before unsubscribing. See the [consumer skill](../../.claude/skills/upbit-net/SKILL.md) for routing and conventions, or the [complete projects](../README.md).

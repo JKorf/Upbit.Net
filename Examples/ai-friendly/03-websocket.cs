@@ -8,90 +8,88 @@
 using Upbit.Net.Clients;
 using Upbit.Net.Enums;
 
-var socketClient = new UpbitSocketClient();
-const string symbol = "USDT-ETH";
-
-// ---- 1. TICKER STREAM ----
-var tickerSub = await socketClient.SpotApi.SubscribeToTickerUpdatesAsync(
-    symbol,
-    update =>
-    {
-        Console.WriteLine($"{update.Data.Symbol} ticker: {update.Data.LastPrice}");
-    });
-
-if (!tickerSub.Success)
+using var socketClient = new UpbitSocketClient();
+var subscriptions = new List<CryptoExchange.Net.Objects.Sockets.UpdateSubscription>();
+try
 {
-    Console.WriteLine($"Failed to subscribe ticker: {tickerSub.Error}");
-    return;
-}
+    const string symbol = "USDT-ETH";
 
-// ---- 2. TRADE STREAM ----
-var tradeSub = await socketClient.SpotApi.SubscribeToTradeUpdatesAsync(
-    symbol,
-    update =>
+    // ---- 1. TICKER STREAM ----
+    var tickerSub = await socketClient.SpotApi.SubscribeToTickerUpdatesAsync(
+        symbol,
+        update =>
+        {
+            Console.WriteLine($"{update.Data.Symbol} ticker: {update.Data.LastPrice}");
+        });
+
+    if (!tickerSub.Success)
     {
-        Console.WriteLine($"{update.Data.Symbol} trade: {update.Data.Quantity} @ {update.Data.Price}");
-    });
+        Console.WriteLine($"Failed to subscribe ticker: {tickerSub.Error}");
+        return;
+    }
 
-if (!tradeSub.Success)
-{
-    Console.WriteLine($"Failed to subscribe trades: {tradeSub.Error}");
-    await socketClient.UnsubscribeAsync(tickerSub.Data);
-    return;
-}
+    subscriptions.Add(tickerSub.Data);
 
-// ---- 3. ORDER BOOK STREAM ----
-// Upbit supports 1, 5, 15, or 30 levels for the shared socket order book shape.
-var orderBookSub = await socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(
-    symbol,
-    levels: 15,
-    update =>
+    // ---- 2. TRADE STREAM ----
+    var tradeSub = await socketClient.SpotApi.SubscribeToTradeUpdatesAsync(
+        symbol,
+        update =>
+        {
+            Console.WriteLine($"{update.Data.Symbol} trade: {update.Data.Quantity} @ {update.Data.Price}");
+        });
+
+    if (!tradeSub.Success)
     {
-        var best = update.Data.Entries.FirstOrDefault();
-        if (best != null)
-            Console.WriteLine($"{update.Data.Symbol} bid={best.BidPrice} ask={best.AskPrice}");
-    });
+        Console.WriteLine($"Failed to subscribe trades: {tradeSub.Error}");
 
-if (!orderBookSub.Success)
-{
-    Console.WriteLine($"Failed to subscribe order book: {orderBookSub.Error}");
-    await socketClient.UnsubscribeAsync(tickerSub.Data);
-    await socketClient.UnsubscribeAsync(tradeSub.Data);
-    return;
-}
+        return;
+    }
 
-// ---- 4. KLINE STREAM ----
-var klineSub = await socketClient.SpotApi.SubscribeToKlineUpdatesAsync(
-    symbol,
-    KlineInterval.OneMinute,
-    update =>
+    subscriptions.Add(tradeSub.Data);
+
+    // ---- 3. ORDER BOOK STREAM ----
+    // Upbit supports 1, 5, 15, or 30 levels for the shared socket order book shape.
+    var orderBookSub = await socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(
+        symbol,
+        levels: 15,
+        update =>
+        {
+            var best = update.Data.Entries.FirstOrDefault();
+            if (best != null)
+                Console.WriteLine($"{update.Data.Symbol} bid={best.BidPrice} ask={best.AskPrice}");
+        });
+
+    if (!orderBookSub.Success)
     {
-        Console.WriteLine($"{update.Data.Symbol} 1m close: {update.Data.ClosePrice}");
-    });
+        Console.WriteLine($"Failed to subscribe order book: {orderBookSub.Error}");
 
-if (!klineSub.Success)
-{
-    Console.WriteLine($"Failed to subscribe klines: {klineSub.Error}");
-    await socketClient.UnsubscribeAsync(tickerSub.Data);
-    await socketClient.UnsubscribeAsync(tradeSub.Data);
-    await socketClient.UnsubscribeAsync(orderBookSub.Data);
-    return;
+        return;
+    }
+
+    subscriptions.Add(orderBookSub.Data);
+
+    // ---- 4. KLINE STREAM ----
+    var klineSub = await socketClient.SpotApi.SubscribeToKlineUpdatesAsync(
+        symbol,
+        KlineInterval.OneMinute,
+        update =>
+        {
+            Console.WriteLine($"{update.Data.Symbol} 1m close: {update.Data.ClosePrice}");
+        });
+
+    if (!klineSub.Success)
+    {
+        Console.WriteLine($"Failed to subscribe klines: {klineSub.Error}");
+
+        return;
+    }
+
+    subscriptions.Add(klineSub.Data);
+
+    Console.WriteLine("Subscriptions active. Press Enter to teardown...");
+    Console.ReadLine();
 }
-
-Console.WriteLine("Subscriptions active. Press Enter to teardown...");
-Console.ReadLine();
-
-// ---- 5. TEARDOWN ----
-// Always unsubscribe on shutdown to release resources cleanly.
-await socketClient.UnsubscribeAsync(tickerSub.Data);
-await socketClient.UnsubscribeAsync(tradeSub.Data);
-await socketClient.UnsubscribeAsync(orderBookSub.Data);
-await socketClient.UnsubscribeAsync(klineSub.Data);
-
-Console.WriteLine("Clean shutdown complete.");
-
-// Common variations:
-//   Multiple symbols:  SubscribeToTickerUpdatesAsync(new[] { "USDT-ETH", "USDT-BTC" }, handler)
-//   Aggregation:       SubscribeToOrderBookUpdatesAsync(symbol, 15, handler, aggregation: 0.01m)
-//   All shutdown:      await socketClient.UnsubscribeAllAsync()
-//   Reconnect events:  tickerSub.Data.ConnectionLost / ConnectionRestored
+finally
+{
+    await Task.WhenAll(subscriptions.Select(subscription => socketClient.UnsubscribeAsync(subscription)));
+}

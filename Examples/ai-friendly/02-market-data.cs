@@ -10,7 +10,7 @@ using Upbit.Net.Enums;
 
 // Upbit has regional live environments. Pick the region matching the markets
 // you want to query. Live is the South Korea environment.
-var client = new UpbitRestClient(options =>
+using var client = new UpbitRestClient(options =>
 {
     options.Environment = UpbitEnvironment.Live;
 });

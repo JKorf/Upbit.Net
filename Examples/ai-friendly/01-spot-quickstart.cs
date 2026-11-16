@@ -9,7 +9,7 @@ using Upbit.Net.Enums;
 
 // Upbit.Net currently exposes public quotation data only.
 // Credentials are not configured and there are no account/trading endpoints.
-var client = new UpbitRestClient();
+using var client = new UpbitRestClient();
 
 // Upbit native symbols use QUOTE-BASE format.
 // Examples: KRW-BTC, USDT-ETH, SGD-BTC, IDR-BTC, THB-BTC.

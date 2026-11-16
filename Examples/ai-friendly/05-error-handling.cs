@@ -9,7 +9,7 @@ using Upbit.Net.Clients;
 using Upbit.Net.Enums;
 using Upbit.Net.Objects.Models;
 
-var client = new UpbitRestClient();
+using var client = new UpbitRestClient();
 
 // ---- 1. THE BASIC PATTERN ----
 // Direct and SharedApis REST methods return HttpResult<T> or HttpResult.
@@ -39,6 +39,7 @@ async Task<HttpResult<T>> WithRetry<T>(
     Func<Task<HttpResult<T>>> call,
     int maxAttempts = 3)
 {
+    ArgumentOutOfRangeException.ThrowIfLessThan(maxAttempts, 1);
     HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
@@ -50,7 +51,8 @@ async Task<HttpResult<T>> WithRetry<T>(
         if (last.Error?.IsTransient != true)
             return last;
 
-        await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
+        if (attempt < maxAttempts)
+            await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
     }
 
     return last;

@@ -9,14 +9,7 @@ builder.Services.AddSwaggerGen();
 // Add the Upbit services
 builder.Services.AddUpbit();
 
-// OR to provide API credentials for accessing private endpoints, or setting other options:
-/*
-builder.Services.AddUpbit(options =>
-{
-    options.ApiCredentials = new ApiCredentials("<APIKEY>", "<APISECRET>");
-    options.Rest.RequestTimeout = TimeSpan.FromSeconds(5);
-});
-*/
+// Public data requires no credentials. AddUpbit options can select a region or timeout.
 
 var app = builder.Build();
 app.UseSwagger();
@@ -27,7 +20,9 @@ app.UseHttpsRedirection();
 app.MapGet("/{Symbol}", async ([FromServices] IUpbitRestClient client, string symbol) =>
 {
     var result = await client.SpotApi.ExchangeData.GetTickerAsync(symbol);
-    return result.Data.LastPrice;
+    if (!result.Success)
+        return Results.Problem(detail: result.Error?.ToString(), statusCode: StatusCodes.Status502BadGateway);
+    return Results.Ok(result.Data.LastPrice);
 })
 .WithOpenApi();
 
