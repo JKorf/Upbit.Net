@@ -54,8 +54,8 @@ namespace Upbit.Net
             var restClient = _serviceProvider?.GetRequiredService<IUpbitRestClient>() ?? new UpbitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IUpbitSocketClient>() ?? new UpbitSocketClient();
 
-            var sharedRestClient = restClient.SpotApi.SharedClient;
-            var sharedSocketClient = socketClient.SpotApi.SharedClient;
+            var sharedRestClient = restClient.SpotApi.SharedApi;
+            var sharedSocketClient = socketClient.SpotApi.Shared;
 
             return new KlineTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
@@ -75,8 +75,8 @@ namespace Upbit.Net
             var restClient = _serviceProvider?.GetRequiredService<IUpbitRestClient>() ?? new UpbitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IUpbitSocketClient>() ?? new UpbitSocketClient();
 
-            var sharedRestClient = restClient.SpotApi.SharedClient;
-            var sharedSocketClient = socketClient.SpotApi.SharedClient;
+            var sharedRestClient = restClient.SpotApi.SharedApi;
+            var sharedSocketClient = socketClient.SpotApi.SharedApi;
 
             return new TradeTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
