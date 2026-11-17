@@ -55,7 +55,7 @@ namespace Upbit.Net
             var socketClient = _serviceProvider?.GetRequiredService<IUpbitSocketClient>() ?? new UpbitSocketClient();
 
             var sharedRestClient = restClient.SpotApi.SharedApi;
-            var sharedSocketClient = socketClient.SpotApi.Shared;
+            var sharedSocketClient = socketClient.SpotApi.SharedApi;
 
             return new KlineTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
