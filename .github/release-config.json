@@ -1,0 +1,18 @@
+{
+  "baseBranch": "main",
+  "sdk": "11.0.100",
+  "packages": [
+    {
+      "key": "upbit",
+      "project": "Upbit.Net/Upbit.Net.csproj",
+      "testProjects": [
+        "Upbit.Net.UnitTests/Upbit.Net.UnitTests.csproj"
+      ],
+      "packageId": "JKorf.Upbit.Net",
+      "readme": "README.md",
+      "tagPrefix": "Upbit.Net.",
+      "releaseIntegrationTests": false,
+      "publishToGitHubPackages": true
+    }
+  ]
+}
