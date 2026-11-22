@@ -45,7 +45,7 @@
     </PackageReference>
   </ItemGroup>
   <PropertyGroup>
-    <DocumentationFile>Upbit.Net.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
